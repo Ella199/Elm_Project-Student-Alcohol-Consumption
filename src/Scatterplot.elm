@@ -51,7 +51,14 @@ type alias XYData =
     , yDescription : String
     , data : List Point
     }
-
+main : Program () Model Msg
+main =
+  Browser.element
+        { init = init
+        , update = update
+        , subscriptions = subscriptions
+        , view = view
+        }
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( Loading
