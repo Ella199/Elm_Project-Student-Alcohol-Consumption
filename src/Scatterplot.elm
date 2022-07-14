@@ -64,7 +64,7 @@ getCsv x =
         |> List.map
             (\data ->
                     Http.get
-                        { url = "https://raw.githubusercontent.com/Ella199/Elm_Project-Student-Alcohol-Consumption/main/Data/mergedstudent.csv?token=GHSAT0AAAAAABWALS6SM76NFBHXJHNCGQLKYWNYAPQ"
+                        { url = "https://github.com/Ella199/Elm_Project-Student-Alcohol-Consumption/blob/main/Data/CSV_Daten/" ++ data
                         , expect = Http.expectString x
                         }
                 )
