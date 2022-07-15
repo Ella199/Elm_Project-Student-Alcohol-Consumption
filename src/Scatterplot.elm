@@ -79,7 +79,7 @@ getCsv x =
 
 list : List String 
 list = 
-    [ "mergedstudent_FINAL.csv" ]
+    [ "mergedstudent_Final.csv" ]
 
 csvStringToData : String -> List StudentAcoholConsumption
 csvStringToData csvR =
@@ -100,7 +100,7 @@ decodingStudentAcoholConsumption =
                 |> Csv.Decode.andMap (Csv.Decode.field "thirdperiodGradePort"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "dalc"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "walc"(String.toFloat >> Result.fromMaybe "error parsing string"))
-                )
+            )
             -- hinzufügen update : Msg
 
         
@@ -110,7 +110,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .dalc, yFunction = .thirdperiodGradeMath, xName = "workday alcohol consumption", yName = "third period Grade Math"}, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .thirdperiodGradeMath, yFunction = .dalc, xName = "workday alcohol consumption", yName = "third period Grade Math"}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
@@ -137,7 +137,7 @@ studentAcoholConsumptionList list1 =
 filterReducedStudentAcoholConsumption : List StudentAcoholConsumption -> (StudentAcoholConsumption -> String) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption->Float) -> String -> String -> XYData 
 
 filterReducedStudentAcoholConsumption studentAcoholConsumptionsliste a b c x y =
-    XYData x y (List.map (\n -> pointName n a b c x y)studentAcoholConsumptionsliste)
+    XYData x y (List.map (\n -> pointName n a b c x y) studentAcoholConsumptionsliste)
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
@@ -331,7 +331,7 @@ view model =
                             , Html.button [onClick (ChangeY (.firstperiodGradePort, "second period Grade portuguese"))] [Html.text "second period Grade portuguese"]
                             , Html.button [onClick (ChangeY (.firstperiodGradePort, "third period Grade portuguese"))] [Html.text "third period Grade portuguese"]
                             , Html.button [onClick (ChangeY (.dalc, "workday alcohol consumption"))] [Html.text "workday alcohol consumption"]
-                            , Html.button [onClick (ChangeY (.walc, "weekend alcohol consumption"))] [Html.text "fweekend alcohol consumption"]
+                            , Html.button [onClick (ChangeY (.walc, "weekend alcohol consumption"))] [Html.text "weekend alcohol consumption"]
                        ]
                     ]
                     ,   scatterplot studentAcoholConsumption
