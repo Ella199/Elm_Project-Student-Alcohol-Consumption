@@ -70,10 +70,10 @@ getCsv x =
     list
         |> List.map
             (\data ->
-                    Http.get
-                        { url = "https://raw.githubusercontent.com/Ella199/Elm_Project-Student-Alcohol-Consumption/main/Data/CSV_Daten/" ++ data
-                        , expect = Http.expectString x
-                        }
+                Http.get
+                    { url = "https://raw.githubusercontent.com/Ella199/Elm_Project-Student-Alcohol-Consumption/main/Data/CSV_Daten/" ++ data
+                    , expect = Http.expectString x
+                    }
             )
         |> Cmd.batch
 
