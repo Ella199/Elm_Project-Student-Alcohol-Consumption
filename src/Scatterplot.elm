@@ -29,7 +29,7 @@ type Model
     }
 
 type alias StudentAcoholConsumption =
-    { name : String
+    { sex : String
     , firstperiodGradeMath : Float
     , secondperiodGradeMath : Float
     , thirdperiodGradeMath : Float
@@ -91,7 +91,7 @@ csvStringToData csvR =
 decodingStudentAcoholConsumption : Csv.Decode.Decoder (StudentAcoholConsumption -> a) a
 decodingStudentAcoholConsumption =
         Csv.Decode.map StudentAcoholConsumption
-            (Csv.Decode.field "name" Ok 
+            (Csv.Decode.field "sex" Ok 
                 |> Csv.Decode.andMap (Csv.Decode.field "firstperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "secondperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "thirdperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
