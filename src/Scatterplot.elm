@@ -80,7 +80,7 @@ getCsv x =
 
 list : List String 
 list = 
-    [ "mergedstudent_Final.csv" ]
+    [ "mergedstudent_withoutline.csv" ]
 
 csvStringToData : String -> List StudentAcoholConsumption
 csvStringToData csvR =
@@ -320,7 +320,7 @@ view model =
                             , Html.button [onClick (ChangeX (.firstperiodGradePort, "second period Grade portuguese"))] [Html.text "second period Grade portuguese"]
                             , Html.button [onClick (ChangeX (.firstperiodGradePort, "third period Grade portuguese"))] [Html.text "third period Grade portuguese"]
                             , Html.button [onClick (ChangeX (.dalc, "workday alcohol consumption"))] [Html.text "workday alcohol consumption"]
-                            , Html.button [onClick (ChangeX (.walc, "weekend alcohol consumption"))] [Html.text "fweekend alcohol consumption"]
+                            , Html.button [onClick (ChangeX (.walc, "weekend alcohol consumption"))] [Html.text "weekend alcohol consumption"]
                        ]
                     ]
                     , ul[][
