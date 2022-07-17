@@ -72,3 +72,35 @@ change : List (String, Maybe Float, Maybe Float) -> List (String, Float, Float)
 change TextTwo = 
     List.map (\( a, b, c ) -> (a, b |> Maybe.withDefault 0.0, c |> Maybe.withDefault 0.0)) Text
     
+-- ADD UPDATE 
+renderList : List (String, String, String) -> Html msg
+renderList lst =
+    Html.ul []
+        (List.map (\( a, b, c ) -> Html.li [] [ Html.text <| a ++ ", " ++ b ++ ", " ++ c ]) lst)
+
+type Msg
+    = GotText (Result Http.Error String)
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    let
+        currentList =
+            case model of
+                Success l ->
+                    l
+
+                Failure ->
+                    []
+
+                Loading ->
+                    []
+    in
+    case msg of
+        GotText result ->
+            case result of
+                Ok fullText ->
+                    ( Success <| currentList ++ [ fullText ], Cmd.none )
+
+                Err _ ->
+                    ( model, Cmd.none )
