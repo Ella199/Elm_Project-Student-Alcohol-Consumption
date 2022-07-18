@@ -29,8 +29,7 @@ type Model
     }
 
 type alias StudentAcoholConsumption =
-    { name : String
-    , sex : String
+    { sex : String
     , firstperiodGradeMath : Float
     , secondperiodGradeMath : Float
     , thirdperiodGradeMath : Float
@@ -46,7 +45,7 @@ type Msg
     | ChangeY (StudentAcoholConsumption -> Float, String)
 
 type alias Point = 
-    { pointName : String, x: Float, y : Float }
+    { pointName : String, x : Float, y : Float }
 type alias XYData =
     { xDescription : String
     , yDescription : String
@@ -92,8 +91,8 @@ csvStringToData csvR =
 decodingStudentAcoholConsumption : Csv.Decode.Decoder (StudentAcoholConsumption -> a) a
 decodingStudentAcoholConsumption =
         Csv.Decode.map StudentAcoholConsumption
-            (Csv.Decode.field "name" Ok 
-                |> Csv.Decode.andMap (Csv.Decode.field "sex" Ok)
+            (Csv.Decode.field "sex" Ok 
+                
                 |> Csv.Decode.andMap (Csv.Decode.field "firstperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "secondperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "thirdperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
@@ -305,7 +304,7 @@ view model =
         Success l ->
             let
                 studentAcoholConsumption =
-                    filterReducedStudentAcoholConsumption l.data .name l.xFunction l.yFunction l.xName l.yName
+                    filterReducedStudentAcoholConsumption l.data .sex l.xFunction l.yFunction l.xName l.yName
 
             in 
             Html.div []
