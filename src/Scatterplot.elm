@@ -79,7 +79,7 @@ getCsv x =
 
 list : List String 
 list = 
-    [ "mergedstudent_withoutline.csv" ]
+    [ "mergedstudent_FINAL_NaN.csv" ]
 
 csvStringToData : String -> List StudentAcoholConsumption
 csvStringToData csvR =
