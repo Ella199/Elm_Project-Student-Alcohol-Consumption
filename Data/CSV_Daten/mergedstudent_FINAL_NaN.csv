@@ -1,4 +1,4 @@
-,school,sex,age,address,famsize,Pstatus,Medu,Fedu,Mjob,Fjob,reason,nursery,internet,guardian,traveltime,studytime,failures,schoolsup,famsup,paid,activities,higher,romantic,famrel,freetime,goout,Dalc,Walc,health,absences,firstperiodGradeMath,secondperiodGradeMath,thirdperiodGradeMath,firstperiodGradePort,secondperiodGradePort,thirdperiodGradePort
+,school,sex,age,address,famsize,Pstatus,Medu,Fedu,Mjob,Fjob,reason,nursery,internet,guardian,traveltime,studytime,failures,schoolsup,famsup,paid,activities,higher,romantic,famrel,freetime,goout,dalc,walc,health,absences,firstperiodGradeMath,secondperiodGradeMath,thirdperiodGradeMath,firstperiodGradePort,secondperiodGradePort,thirdperiodGradePort
 0,GP,F,15,R,GT3,T,1,1,at_home,other,home,yes,yes,mother,2,4,1,yes,yes,yes,yes,yes,no,3,1,2,1,1,1,2,7,10,10,13,13,13
 1,GP,F,15,R,GT3,T,1,1,other,other,reputation,no,yes,mother,1,2,2,yes,yes,no,no,yes,yes,3,3,4,2,4,5,2,8,6,5,13,11,11
 2,GP,F,15,R,GT3,T,2,2,at_home,other,reputation,yes,no,mother,1,1,0,yes,yes,yes,yes,yes,no,4,3,1,1,1,2,8,14,13,13,14,13,12
