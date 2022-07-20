@@ -34,6 +34,18 @@ type Model
     , fourthNAME : String
     }
 
+    type alias StudentAcoholConsumption =
+        { sex : String
+        , firstperiodGradeMath : Float
+        , secondperiodGradeMath : Float
+        , thirdperiodGradeMath : Float
+        , firstperiodGradePort : Float
+        , secondperiodGradePort : Float
+        , thirdperiodGradePort : Float
+        , dalc : Float
+        , walc : Float
+        }
+
     
 
 
