@@ -46,13 +46,22 @@ type alias StudentAcoholConsumption =
     , walc : Float
     }
 
-type alias MultiDimData = 
+type alias MultiDimDATA = 
     { dimDescription : List String
     , data : List (ListMultiDimPoint)
     }
 
-type alias MultiDimData =
-    { pointName : String String, value : List Float }
+type alias MultiDimPOINT =
+    { pointName : String, value : List Float }
+
+main =
+  Browser.element
+        { init = init
+        , update = update
+        , subscriptions = subscriptions
+        , view = view
+        }
+
         
 
     
