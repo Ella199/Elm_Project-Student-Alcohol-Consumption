@@ -18,6 +18,7 @@ import TypedSvg.Attributes.InPx exposing (x, y)
 import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Transform(..))
 import Tuple exposing (second)
+import Scatterplot exposing (Msg(..))
 
 type Model
   = Error
@@ -83,7 +84,14 @@ list : List String
 list = 
     [ "mergedstudent_FINAL_NaN.csv" ]
 
-        
+
+type MSG 
+    = GotText (Result Http.Error String)   
+    | ChangONE (StudentAcoholConsumption -> Float,String)     
+    | ChangeTWO (StudentAcoholConsumption -> Float,String) 
+    | ChangeTHREE (StudentAcoholConsumption -> Float,String)
+    | ChangeFOUR (StudentAcoholConsumption -> Float,String)
+    
 
     
 
