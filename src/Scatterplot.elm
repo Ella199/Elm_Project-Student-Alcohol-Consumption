@@ -264,9 +264,9 @@ scatterplot model =
     in
     svg [ viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ]
         [ style [] [ TypedSvg.Core.text """
-            .point circle { stroke: rgba(0, 0, 0,0.4); fill: rgba(194, 27, 207, 0.8)); }
+            .point circle { stroke: rgba(97, 18, 95, 0.8); fill: rgba(255, 255, 255,0.3)); }
             .point text { display: none; }
-            .point:hover circle { stroke: rgba(0, 0, 0,0.4); fill: rgba(27, 97, 232, 0.73)); }
+            .point:hover circle { stroke: rgba(154, 22, 90, 0.8); fill: rgba(204, 0, 204)); }
             .point:hover text { display: inline; }
           """ ]
         , g [ transform [ Translate 60 390 ] ]
