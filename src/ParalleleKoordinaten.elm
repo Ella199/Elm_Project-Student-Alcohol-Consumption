@@ -61,6 +61,27 @@ main =
         , subscriptions = subscriptions
         , view = view
         }
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( Loading
+    , getCsv GotText
+    )
+
+getCsv : (Result Http.Error String -> Msg) -> Cmd Msg
+getCsv x = 
+    list
+        |> List.map
+            (\data ->
+                Http.get
+                    { url = "https://raw.githubusercontent.com/Ella199/Elm_Project-Student-Alcohol-Consumption/main/Data/CSV_Daten/" ++ data
+                    , expect = Http.expectString x
+                    }
+            )
+        |> Cmd.batch
+
+list : List String 
+list = 
+    [ "mergedstudent_FINAL_NaN.csv" ]
 
         
 
