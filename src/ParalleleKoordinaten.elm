@@ -17,5 +17,24 @@ import TypedSvg.Attributes exposing (d, fill, fontFamily, fontSize, stroke, stro
 import TypedSvg.Attributes.InPx exposing (x, y)
 import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Transform(..))
+import Tuple exposing (second)
+
+type Model
+  = Error
+  | Loading
+  | Success
+    { data : List StudentAcoholConsumption
+    , firstFUNCTION : StudentAcoholConsumption -> Float
+    , secondFUNCTION : StudentAcoholConsumption -> Float
+    , thirdFUNCTION : StudentAcoholConsumption -> Float
+    , fourthFUNCTION : StudentAcoholConsumption -> Float
+    , firstNAME : String
+    , secondNAME : String
+    , thirdNAME : String
+    , fourthNAME : String
+    }
+
+    
+
 
 
