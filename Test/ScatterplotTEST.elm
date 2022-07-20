@@ -42,7 +42,7 @@ init _ =
     )  
 liste : List String 
 liste = 
-    [ "mergedstudent_withoutline.csv" ]
+    [ "mergedstudent_FINAL_NaN.csv" ]
 csvString_to_data : String -> List (String, Maybe Float, Maybe Float)
 csvString_to_data csvR = 
     Csv.parse csvR
@@ -170,9 +170,9 @@ scatterplot model =
     in
     svg [ viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ]
         [ style [] [ TypedSvg.Core.text """
-            .point circle { stroke: rgba(0, 0, 0,0.4); fill: rgba(255, 255, 255,0.3); }
+            .point circle { stroke: rgba(97, 18, 95, 0.8); fill: rgba(255, 255, 255,0.3); }
             .point text { display: none; }
-            .point:hover circle { stroke: rgba(0, 0, 0,1.0); fill: rgb(118, 214, 78); }
+            .point:hover circle { stroke: rgba(154, 22, 90, 0.8); fill: rgb(204, 0, 204); }
             .point:hover text { display: inline; }
           """ ]
         , g [ transform [ Translate 60 390 ] ]
