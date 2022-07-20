@@ -34,17 +34,26 @@ type Model
     , fourthNAME : String
     }
 
-    type alias StudentAcoholConsumption =
-        { sex : String
-        , firstperiodGradeMath : Float
-        , secondperiodGradeMath : Float
-        , thirdperiodGradeMath : Float
-        , firstperiodGradePort : Float
-        , secondperiodGradePort : Float
-        , thirdperiodGradePort : Float
-        , dalc : Float
-        , walc : Float
-        }
+type alias StudentAcoholConsumption =
+    { sex : String
+    , firstperiodGradeMath : Float
+    , secondperiodGradeMath : Float
+    , thirdperiodGradeMath : Float
+    , firstperiodGradePort : Float
+    , secondperiodGradePort : Float
+    , thirdperiodGradePort : Float
+    , dalc : Float
+    , walc : Float
+    }
+
+type alias MultiDimData = 
+    { dimDescription : List String
+    , data : List (ListMultiDimPoint)
+    }
+
+type alias MultiDimData =
+    { pointName : String String, value : List Float }
+        
 
     
 
