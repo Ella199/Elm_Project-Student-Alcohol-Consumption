@@ -19,6 +19,7 @@ import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Transform(..))
 import Tuple exposing (second)
 import Scatterplot exposing (Msg(..))
+import Csv exposing (Csv)
 
 type Model
   = Error
@@ -92,8 +93,28 @@ type MSG
     | ChangeTHREE (StudentAcoholConsumption -> Float,String)
     | ChangeFOUR (StudentAcoholConsumption -> Float,String)
     
+csvStringToData : String -> List StudentAcoholConsumption
+csvStringToData csvR = 
+    Csv.parse csvR
+        |> Csv.Decode.decodeCsv decodingStudentAcoholConsumption
+        |> Result.toMaybe
+        |> Maybe.withDefault []
 
-    
+decodingStudentAcoholConsumption : Csv.Decode.Decoder (StudentAcoholConsumption -> a) a
+decodingStudentAcoholConsumption =
+    Csv.Decode.map StudentAcoholConsumption
+        (Csv.Decode.field "sex" Ok
+            |> Csv.Decode.andMap (Csv.Decode.field "firstperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "secondperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "thirdperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "firstperiodGradePort"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "secondperiodGradePort"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "thirdperiodGradePort"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "dalc"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "walc"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            )
+
+
 
 
 

@@ -7,7 +7,7 @@ import Scale exposing (ContinuousScale)
 import Statistics 
 import TypedSvg exposing (circle, g, style, svg, text_)
 import TypedSvg.Attributes exposing (class, fontFamily, fontSize, textAnchor, transform, viewBox)
-import TypedSvg.Attributes.InPx exposing (cx, cy, r, x, y)
+import TypedSvg.Attributes.InPx exposing (cx, cy, r, x, y, strokeWidth)
 import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment (..), FontWeight(..), Length(..), Transform(..), px)
 import Csv
@@ -264,9 +264,9 @@ scatterplot model =
     in
     svg [ viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ]
         [ style [] [ TypedSvg.Core.text """
-            .point circle { stroke: rgba(97, 18, 95, 0.8); fill: rgba(255, 255, 255,0.3); }
+            .point circle { stroke-opacity: 0.2 ; stroke-width: 2 ; stroke: rgba(2, 19, 100, 0.8); fill: rgba(255, 255, 255,0.3); }
             .point text { display: none; }
-            .point:hover circle { stroke: rgba(154, 22, 90, 0.8); fill: rgb(204, 0, 204); }
+            .point:hover circle { stroke: rgba(154, 22, 90, 0.8); fill: rgb(65, 209, 204); }
             .point:hover text { display: inline; }
           """ ]
         , g [ transform [ Translate 60 390 ] ]
