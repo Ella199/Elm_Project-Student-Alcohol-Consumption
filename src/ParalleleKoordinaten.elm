@@ -4,7 +4,7 @@ import Browser
 import Color
 import Csv.Decode
 import TypedSvg exposing (path)
-import Html.exposing (Html, a, li, ul)
+import Html exposing (Html, a, li, ul)
 import Html.Events exposing (onClick)
 import Http
 import List.Extra
@@ -120,14 +120,15 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = StudentAcoholConsumptionList [ fullText ], firstFUNCTION = .firstperiodGradeMath, secondFUNCTION = .secondperiodGradeMath, thirdFUNCTION = .thirdperiodGradeMath, fourthFUNCTION = firstperiodGradePort, firstNAME = "first period Grade mathematics", secondNAME = "second period Grade mathematics", thirdNAME = "third period Grade mathematics", fourthNAME = "third period Grade portuguese"}, Cmd.none )
+                    ( Success <| { data = StudentAcoholConsumptionList [ fullText ], firstFUNCTION = .firstperiodGradeMath, secondFUNCTION = .secondperiodGradeMath, thirdFUNCTION = .thirdperiodGradeMath, fourthFUNCTION = firstperiodGradePort, firstNAME = "first period Grade mathematics", secondNAME = "second period Grade mathematics", thirdNAME = "third period Grade mathematics", fourthNAME = "first period Grade portuguese"}, Cmd.none )
 
                 Err  _ ->
                     ( model, Cmd.none )
 
         ChangeONE (x, a) ->
             case model of 
-                ( Success <| { data = m.data, firstFUNCTION = x, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = m.fourthFUNCTION, firstNAME = x, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = m.fourthNAME}, Cmd.none )
+                Success m ->
+                    ( Success <| { data = m.data, firstFUNCTION = x, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = m.fourthFUNCTION, firstNAME = x, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = m.fourthNAME}, Cmd.none )
                 _ ->
                     ( model, Cmd.none )
         ChangeTWO (y, a) ->
@@ -152,8 +153,8 @@ update msg model =
                 _ ->
                     ( model, Cmd.none )     
 
- StudentAcoholConsumptionList :List String -> List StudentAcoholConsumption    
- StudentAcoholConsumption List1 =
+studentAcoholConsumptionList :List String -> List StudentAcoholConsumption    
+studentAcoholConsumptionList List1 =
     List.map(\t -> csvStringToData t) list1
         |> List.concat            
 
@@ -301,4 +302,72 @@ parallelCoordinatesPlot w ar model =
                                 (List.map (\a -> drawPoint a.value a.pointName model.dimDescription) dataset)
                         )
                )
+view : Model -> Html Msg
+view model =
+    case model of
+        Error ->
+            Html.text "Unfortunately scatterplot StudentAcoholConsumption can not be open."
 
+        Loading ->
+            Html.text "Loading StudentAcoholConsumption"
+        Success l ->
+                    let
+                        multiDimDaten : List StudentAcoholConsumption -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> String) -> String -> String -> String -> String-> MultiDimData
+                        multiDimDaten listStudentAcoholConsumption a b c d e f g h i=
+                         MultiDimData [f, g, h, i]
+                            [ List.map
+                                (\x ->
+                                    [(a x), (b x), (c x), (d x)]
+                                        |> MultiDimPoint (e x)
+                                )
+                                listStudentAcoholConsumption
+                            ]
+
+                        plotData = 
+                            multiDimDaten l.data l.firstFUNCTION l.secondFUNCTION l.thirdFUNCTION l.fourthFUNCTION .name l.firstNAME l.secondName l.thirdNAME l.fourthNAME
+
+                            in
+                    Html.div []
+                        [
+                            ul[][
+                                li[][
+                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic. "
+                                    , Html.button [onClick (ChangeONE (.firstperiodGradeMath, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
+                                    , Html.button [onClick (ChangeONE (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "second period Grade mathematics"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "third period Grade mathematics"]
+                                    , Html.button [onClick (ChangeONE (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "first period Grade portuguese"]
+                                    , Html.button [onClick (ChangeONE (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "second period Grade portuguese"]
+                                ]
+                            ]
+                            , ul[][
+                                li[][
+                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic. "
+                                    , Html.button [onClick (ChangeTWO (.first period Grade mathematics, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
+                                    , Html.button [onClick (ChangeTWO (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "second period Grade mathematics"]
+                                    , Html.button [onClick (ChangeTWO (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "third period Grade mathematics"]
+                                    , Html.button [onClick (ChangeTWO (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "first period Grade portuguese"]
+                                    , Html.button [onClick (ChangeTWO (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "second period Grade portuguese"]
+                                ]
+                            ]
+                            , ul[][
+                                li[][
+                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic. "
+                                    , Html.button [onClick (ChangeTHREE (.first period Grade mathematics, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
+                                    , Html.button [onClick (ChangeTHREE (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "second period Grade mathematics"]
+                                    , Html.button [onClick (ChangeTHREE (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "third period Grade mathematics"]
+                                    , Html.button [onClick (ChangeTHREE (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "first period Grade portuguese"]
+                                    , Html.button [onClick (ChangeTHREE (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "second period Grade portuguese"]
+                                ]
+                            ]
+                            , ul[][
+                                li[][
+                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic. "
+                                    , Html.button [onClick (ChangeFOUR (.first period Grade mathematics, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
+                                    , Html.button [onClick (ChangeFOUR (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "second period Grade mathematics"]
+                                    , Html.button [onClick (ChangeFOUR (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "third period Grade mathematics"]
+                                    , Html.button [onClick (ChangeFOUR (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "first period Grade portugueser"]
+                                    , Html.button [onClick (ChangeFOUR (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "second period Grade portuguese"]
+                                ]
+                             ]
+                                , parallelCoordinatesPlot 600 2 plotData
+                        ]
