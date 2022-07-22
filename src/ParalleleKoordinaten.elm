@@ -48,12 +48,12 @@ type alias StudentAcoholConsumption =
     , walc : Float
     }
 
-type alias MultiDimDATA = 
+type alias MultiDimData = 
     { dimDescription : List String
-    , data : List (ListMultiDimPoint)
+    , data : List (List MultiDimPoint)
     }
 
-type alias MultiDimPOINT =
+type alias MultiDimPoint =
     { pointName : String, value : List Float }
 
 main =
@@ -86,9 +86,9 @@ list =
     [ "mergedstudent_FINAL_NaN.csv" ]
 
 
-type MSG 
+type Msg 
     = GotText (Result Http.Error String)   
-    | ChangONE (StudentAcoholConsumption -> Float,String)     
+    | ChangeONE (StudentAcoholConsumption -> Float,String)     
     | ChangeTWO (StudentAcoholConsumption -> Float,String) 
     | ChangeTHREE (StudentAcoholConsumption -> Float,String)
     | ChangeFOUR (StudentAcoholConsumption -> Float,String)
@@ -120,7 +120,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = StudentAcoholConsumptionList [ fullText ], firstFUNCTION = .firstperiodGradeMath, secondFUNCTION = .secondperiodGradeMath, thirdFUNCTION = .thirdperiodGradeMath, fourthFUNCTION = firstperiodGradePort, firstNAME = "first period Grade mathematics", secondNAME = "second period Grade mathematics", thirdNAME = "third period Grade mathematics", fourthNAME = "first period Grade portuguese"}, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], firstFUNCTION = .firstperiodGradeMath, secondFUNCTION = .secondperiodGradeMath, thirdFUNCTION = .thirdperiodGradeMath, fourthFUNCTION = .firstperiodGradePort, firstNAME = "first period Grade mathematics", secondNAME = "second period Grade mathematics", thirdNAME = "third period Grade mathematics", fourthNAME = "first period Grade portuguese"}, Cmd.none )
 
                 Err  _ ->
                     ( model, Cmd.none )
@@ -128,13 +128,13 @@ update msg model =
         ChangeONE (x, a) ->
             case model of 
                 Success m ->
-                    ( Success <| { data = m.data, firstFUNCTION = x, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = m.fourthFUNCTION, firstNAME = x, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = m.fourthNAME}, Cmd.none )
+                    ( Success <| { data = m.data, firstFUNCTION = x, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = m.fourthFUNCTION, firstNAME = a, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = m.fourthNAME}, Cmd.none )
                 _ ->
                     ( model, Cmd.none )
         ChangeTWO (y, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, firstFunction = m.firstFUNCTION, secondFUNCTION = y, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = m.fourthFUNCTION , firstNAME = m.firstNAME, secondNAME = a, thirdNAME = m.thirdNAME, fourthNAME = m.fourthNAME}, Cmd.none )
+                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = y, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = m.fourthFUNCTION , firstNAME = m.firstNAME, secondNAME = a, thirdNAME = m.thirdNAME, fourthNAME = m.fourthNAME}, Cmd.none )
 
                 _ ->
                     ( model, Cmd.none )
@@ -148,13 +148,13 @@ update msg model =
         ChangeFOUR (c, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFFUNCTION = c , firstNAME = m.firstNAME, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = a}, Cmd.none )
+                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = c , firstNAME = m.firstNAME, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = a}, Cmd.none )
 
                 _ ->
                     ( model, Cmd.none )     
 
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption    
-studentAcoholConsumptionList List1 =
+studentAcoholConsumptionList list1 =
     List.map(\t -> csvStringToData t) list1
         |> List.concat            
 
@@ -302,6 +302,7 @@ parallelCoordinatesPlot w ar model =
                                 (List.map (\a -> drawPoint a.value a.pointName model.dimDescription) dataset)
                         )
                )
+               
 view : Model -> Html Msg
 view model =
     case model of
@@ -310,9 +311,10 @@ view model =
 
         Loading ->
             Html.text "Loading StudentAcoholConsumption"
+
         Success l ->
                     let
-                        multiDimDaten : List StudentAcoholConsumption -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> String) -> String -> String -> String -> String-> MultiDimData
+                        multiDimDaten : List StudentAcoholConsumption -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> String) -> String -> String -> String -> String -> MultiDimData
                         multiDimDaten listStudentAcoholConsumption a b c d e f g h i=
                          MultiDimData [f, g, h, i]
                             [ List.map
@@ -324,49 +326,60 @@ view model =
                             ]
 
                         plotData = 
-                            multiDimDaten l.data l.firstFUNCTION l.secondFUNCTION l.thirdFUNCTION l.fourthFUNCTION .name l.firstNAME l.secondName l.thirdNAME l.fourthNAME
-
-                            in
+                            multiDimDaten l.data l.firstFUNCTION l.secondFUNCTION l.thirdFUNCTION l.fourthFUNCTION .sex l.firstNAME l.secondNAME l.thirdNAME l.fourthNAME       
+                    in
                     Html.div []
                         [
                             ul[][
                                 li[][
-                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic. "
+                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic."
                                     , Html.button [onClick (ChangeONE (.firstperiodGradeMath, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
                                     , Html.button [onClick (ChangeONE (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "second period Grade mathematics"]
                                     , Html.button [onClick (ChangeONE (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "third period Grade mathematics"]
                                     , Html.button [onClick (ChangeONE (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "first period Grade portuguese"]
                                     , Html.button [onClick (ChangeONE (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "second period Grade portuguese"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "third period Grade portuguese"))][Html.text "third period Grade portuguese"]
+                                    , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workday alcohol consumption"]
+                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekend alcohol consumption"]
                                 ]
                             ]
                             , ul[][
                                 li[][
-                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic. "
-                                    , Html.button [onClick (ChangeTWO (.first period Grade mathematics, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
+                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic."
+                                    , Html.button [onClick (ChangeTWO (.firstperiodGradeMath, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
                                     , Html.button [onClick (ChangeTWO (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "second period Grade mathematics"]
                                     , Html.button [onClick (ChangeTWO (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "third period Grade mathematics"]
                                     , Html.button [onClick (ChangeTWO (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "first period Grade portuguese"]
                                     , Html.button [onClick (ChangeTWO (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "second period Grade portuguese"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "third period Grade portuguese"))][Html.text "third period Grade portuguese"]
+                                    , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workday alcohol consumption"]
+                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekend alcohol consumption"]
                                 ]
                             ]
                             , ul[][
                                 li[][
-                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic. "
-                                    , Html.button [onClick (ChangeTHREE (.first period Grade mathematics, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
+                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic."
+                                    , Html.button [onClick (ChangeTHREE (.firstperiodGradeMath, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
                                     , Html.button [onClick (ChangeTHREE (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "second period Grade mathematics"]
                                     , Html.button [onClick (ChangeTHREE (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "third period Grade mathematics"]
                                     , Html.button [onClick (ChangeTHREE (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "first period Grade portuguese"]
                                     , Html.button [onClick (ChangeTHREE (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "second period Grade portuguese"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "first period Grade portuguese"))][Html.text "third period Grade portuguese"]
+                                    , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workday alcohol consumption"]
+                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekend alcohol consumption"]
                                 ]
                             ]
                             , ul[][
                                 li[][
-                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic. "
-                                    , Html.button [onClick (ChangeFOUR (.first period Grade mathematics, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
+                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic."
+                                    , Html.button [onClick (ChangeFOUR (.firstperiodGradeMath, "first period Grade mathematics"))][Html.text "first period Grade mathematics"]
                                     , Html.button [onClick (ChangeFOUR (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "second period Grade mathematics"]
                                     , Html.button [onClick (ChangeFOUR (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "third period Grade mathematics"]
                                     , Html.button [onClick (ChangeFOUR (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "first period Grade portugueser"]
                                     , Html.button [onClick (ChangeFOUR (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "second period Grade portuguese"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "third period Grade portuguese"))][Html.text "third period Grade portuguese"]
+                                    , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workday alcohol consumption"]
+                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekend alcohol consumption"]
                                 ]
                              ]
                                 , parallelCoordinatesPlot 600 2 plotData
