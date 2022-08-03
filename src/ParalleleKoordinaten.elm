@@ -220,7 +220,7 @@ parallelCoordinatesPlot w ar model =
             Scale.linear ( 0, w ) ( 1, List.length model.dimDescription |> toFloat )
     in
     svg
-        [ viewBox 0 0 (w + 2 * padding) (h + 2 * padding)
+        [ viewBox 0 0 (w + 3 * padding) (h + 2 * padding)
         , TypedSvg.Attributes.width <| TypedSvg.Types.Percent 90
         , TypedSvg.Attributes.height <| TypedSvg.Types.Percent 90
         ]
@@ -234,8 +234,8 @@ parallelCoordinatesPlot w ar model =
                 .parallelPoint:hover text { display: inline; stroke: rgb(0, 0, 0); stroke-width: 0.1; font-size: small; font-family: calibri}  
                 """
             ]
-        , g [ TypedSvg.Attributes.class [ "parallelAxis" ] ]
-            [ g [ transform [ Translate (padding - 1) padding ] ] <|
+        , g []
+            [ g [ transform [ Translate (padding*2)  padding ] ] <|
                 List.indexedMap
                     (\i axis ->
                         g
@@ -246,12 +246,12 @@ parallelCoordinatesPlot w ar model =
                             [ axis ]
                     )
                     listAxis
-            , g [ transform [ Translate (padding - 1) 0 ] ] <|
+            , g [ transform [ Translate (padding*2) 0 ] ] <|
                 List.indexedMap
                     (\i desc ->
                         text_
                             [ fontFamily [ "Times New Roman" ]
-                            , fontSize (Px 12)
+                            , fontSize (Px 10)
                             , x <| Scale.convert xScale (toFloat i + 1)
                             , y <| padding * 7 / 8
                             , textAnchor AnchorMiddle
@@ -287,8 +287,9 @@ parallelCoordinatesPlot w ar model =
                             ]
                             , text_
                                 [ x 300
-                                , y -20
+                                , y -50
                                 , TypedSvg.Attributes.textAnchor AnchorMiddle
+                                , fontSize <| Px 2
                                 ]
                                 [ TypedSvg.Core.text (name++ (String.concat<|(List.map2(\a b-> ", " ++b++ ": "++ (String.fromFloat a))p description)))]
                                 
@@ -298,7 +299,7 @@ parallelCoordinatesPlot w ar model =
                 model.data
                     |> List.map
                         (\dataset ->
-                            g [ transform [ Translate (padding - 1) padding ] ]
+                            g [ transform [ Translate (padding*2) padding ] ]
                                 (List.map (\a -> drawPoint a.value a.pointName model.dimDescription) dataset)
                         )
                )
@@ -338,7 +339,7 @@ view model =
                                     , Html.button [onClick (ChangeONE (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "thirdPeriodGrade Math"]
                                     , Html.button [onClick (ChangeONE (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "firstPeriodGrade Port"]
                                     , Html.button [onClick (ChangeONE (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "secondPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "third period Grade portuguese"))][Html.text "thirdPeriodGrade Porte"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "third period Grade portuguese"))][Html.text "thirdPeriodGrade Port"]
                                     , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workdayAlcoholConsumption"]
                                     , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekendAlcoholConsumption"]
                                 ]
@@ -353,7 +354,7 @@ view model =
                                     , Html.button [onClick (ChangeTWO (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "secondPeriodGrade Port"]
                                     , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "third period Grade portuguese"))][Html.text "thirdPeriodGrade Port"]
                                     , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workdayAlcoholConsumption"]
-                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekendAlcoholConsumptio"]
+                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekendAlcoholConsumption"]
                                 ]
                             ]
                             , ul[][
