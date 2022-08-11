@@ -91,3 +91,43 @@ type alias Point =
 type alias XYData =
     { data : List Point
     }
+getCsv : (Result Http.Error String -> Msg) -> Cmd Msg
+getCsv x = 
+    list
+        |> List.map
+            (\data ->
+                Http.get
+                    { url = "https://raw.githubusercontent.com/Ella199/Elm_Project-Student-Alcohol-Consumption/main/Data/CSV_Daten/" ++ data
+                    , expect = Http.expectString x
+                    }
+            )
+        |> Cmd.batch
+
+list : List String 
+list = 
+    [ "mergedstudent_FINAL_NaN.csv" ]
+    csvStringToData : String -> List StudentAcoholConsumption
+csvStringToData csvR =
+    Csv.parse csvR
+        |> Csv.Decode.decodeCsv decodingStudentAcoholConsumption
+        |> Result.toMaybe
+        |>Maybe.withDefault []
+
+decodingStudentAcoholConsumption : Csv.Decode.Decoder (StudentAcoholConsumption -> a) a
+decodingStudentAcoholConsumption =
+        Csv.Decode.map StudentAcoholConsumption
+            (Csv.Decode.field "sex" Ok 
+                
+                |> Csv.Decode.andMap (Csv.Decode.field "firstperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "secondperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "thirdperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "firstperiodGradePort"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "secondperiodGradePort"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "thirdperiodGradePort"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "dalc"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "walc"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "Medu"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "Fedu"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "freetime"(String.toFloat >> Result.fromMaybe "error parsing string"))
+                |> Csv.Decode.andMap (Csv.Decode.field "absences"(String.toFloat >> Result.fromMaybe "error parsing string"))
+            )
