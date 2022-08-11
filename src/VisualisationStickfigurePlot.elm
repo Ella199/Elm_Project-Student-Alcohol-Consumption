@@ -80,3 +80,14 @@ type alias StudentAcoholConsumption =
     , absences : Float
     , freetime : Float
     }
+    type Msg
+    = GotText (Result Http.Error String)
+    | ChangeLen (String)
+
+
+type alias Point =
+    { pointName : String, x : Float, y : Float, z : Float, a : Float, b : Float , c : Float , d : Float , e : Float , f : Float , g : Float , h : Float , i : Float } 
+
+type alias XYData =
+    { data : List Point
+    }
