@@ -36,3 +36,22 @@ radius =
 tickCount : Int
 tickCount =
     5
+
+    main : Program () Model Msg
+main =
+  Browser.element
+        { init = init
+        , update = update
+        , subscriptions = subscriptions
+        , view = view
+        }
+
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( Loading
+    , getCsv GotText
+    )
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
