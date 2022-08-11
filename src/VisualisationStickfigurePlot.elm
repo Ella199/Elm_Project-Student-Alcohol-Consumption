@@ -55,3 +55,28 @@ init _ =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
+
+type Model
+ = Error
+ | Loading
+ | Success
+    { data : List StudentAcoholConsumption
+    , len : Float
+    }
+
+
+type alias StudentAcoholConsumption =
+    { sex : String
+    , firstperiodGradeMath : Float
+    , secondperiodGradeMath : Float
+    , thirdperiodGradeMath : Float
+    , firstperiodGradePort : Float
+    , secondperiodGradePort : Float
+    , thirdperiodGradePort : Float
+    , dalc : Float
+    , walc : Float
+    , medu : Float
+    , fedu : Float
+    , absences : Float
+    , freetime : Float
+    }
