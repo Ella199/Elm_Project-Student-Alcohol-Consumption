@@ -131,3 +131,13 @@ decodingStudentAcoholConsumption =
                 |> Csv.Decode.andMap (Csv.Decode.field "freetime"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "absences"(String.toFloat >> Result.fromMaybe "error parsing string"))
             )
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        GotText result ->
+            case result of
+                Ok fullText ->
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], len=5 }, Cmd.none )
+
+                Err _ ->
+                    ( model, Cmd.none )
