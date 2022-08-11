@@ -141,3 +141,10 @@ update msg model =
 
                 Err _ ->
                     ( model, Cmd.none )
+        ChangeLen v ->
+                    case model of
+                        Success m ->
+                            (Success <| {data = m.data, len = Maybe.withDefault 0 <| String.toFloat v }, Cmd.none)
+                        _ ->
+                            ( model, Cmd.none )
+                            
