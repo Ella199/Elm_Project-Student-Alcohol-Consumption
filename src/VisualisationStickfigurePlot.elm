@@ -303,3 +303,18 @@ stickfigureplot model len =
             .line:hover polyline { stroke: black; stroke-width:1.5; }
             .line:hover text { display: inline; font-size: small }
           """ ]       
+    -- plot x axis    
+         , g[ transform [ Translate (60) (390)]]
+            [
+                xAxis xValues
+                , text_
+                [ x ( Scale.convert xScaleLocal (labelPositions.x))
+                , y 35
+
+                -- , fontFamily [ "Helvetica", "sans-serif" ]
+                , fontSize (px 15)
+
+                --, fontWeight FontWeightBold
+                ]
+                [ text "Math10" ] -- x -- xmts
+                ]
