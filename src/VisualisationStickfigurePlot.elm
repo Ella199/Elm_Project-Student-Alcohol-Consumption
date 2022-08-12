@@ -147,4 +147,15 @@ update msg model =
                             (Success <| {data = m.data, len = Maybe.withDefault 0 <| String.toFloat v }, Cmd.none)
                         _ ->
                             ( model, Cmd.none )
-                            
+studentAcoholConsumptionList :List String -> List StudentAcoholConsumption
+studentAcoholConsumptionList list1 =
+    List.map(\t -> csvStringToData t) list1
+        |> List.concat
+
+filterReducedStudentAcoholConsumption : List StudentAcoholConsumption -> XYData 
+
+filterReducedStudentAcoholConsumption my_stud =
+    XYData <| List.filterMap stud2point my_stud
+
+andMap : Maybe a -> Maybe (a -> b) -> Maybe b
+andMap = Maybe.map2 (|>)                           
