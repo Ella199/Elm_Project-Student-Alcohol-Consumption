@@ -176,3 +176,11 @@ stud2point stud =
             |> andMap (Just stud.medu)
             |> andMap (Just stud.freetime)
             |> andMap (Just stud.absences)
+pointLabel : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point 
+pointLabel sex firstperiodGradeMath secondperiodGradeMath thirdperiodGradeMath firstperiodGradePort secondperiodGradePort thirdperiodGradePort dalc walc fedu medu freetime absences= 
+    Point (sex ++ " (" ++ String.fromFloat firstperiodGradeMath ++ ", " ++ String.fromFloat firstperiodGradeMath ++ ", "
+        ++ String.fromFloat thirdperiodGradeMath ++ ", " ++ String.fromFloat secondperiodGradePort ++ ", " 
+        ++ String.fromFloat secondperiodGradePort ++ ", " ++ String.fromFloat thirdperiodGradePort ++ ", "
+        ++ String.fromFloat dalc ++ ", " ++ String.fromFloat walc ++ ", " ++ String.fromFloat fedu ++ ", "++ String.fromFloat medu ++ ", " 
+        ++ String.fromFloat freetime ++ ", " ++ String.fromFloat absences ++")") 
+        (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime)
