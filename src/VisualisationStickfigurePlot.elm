@@ -318,7 +318,7 @@ stickfigureplot model len =
                 ]
                 [ text "Math10" ] -- x -- xmts
                 ]
-     -- plot y axis             
+    -- plot y axis             
          ,g[transform [Translate(60) (60)]]
          [
              yAxis yValues
@@ -333,3 +333,16 @@ stickfigureplot model len =
                 ]
                 [ text "Port10" ] -- y -- xmts
              ]
+    -- plot points and description     
+         ,g [ transform [ Translate padding padding ] ]
+            (List.map (stickfigure xScaleLocal yScaleLocal len) 
+                xValues 
+                |> andMapl yValues
+                |> andMapl uDegree 
+                |> andMapl vDegree 
+                |> andMapl pDegree 
+                |> andMapl qDegree 
+                |> andMapl zDegree 
+                |> andMapl model.data
+                
+            )
