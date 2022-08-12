@@ -184,3 +184,10 @@ pointLabel sex firstperiodGradeMath secondperiodGradeMath thirdperiodGradeMath f
         ++ String.fromFloat dalc ++ ", " ++ String.fromFloat walc ++ ", " ++ String.fromFloat fedu ++ ", "++ String.fromFloat medu ++ ", " 
         ++ String.fromFloat freetime ++ ", " ++ String.fromFloat absences ++")") 
         (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime)
+xAxis : List Float -> Svg msg
+xAxis values = 
+    Axis.bottom [ Axis.tickCount tickCount] (xScale values)
+
+yAxis : List Float -> Svg msg 
+yAxis values =
+    Axis.left [ Axis.tickCount tickCount ] ( yScale values 
