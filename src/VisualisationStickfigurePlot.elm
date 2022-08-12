@@ -257,3 +257,10 @@ stickfigureplot model len =
         zValues : List Float
         zValues =
             List.map .g model.data --z
+        xScaleLocal : ContinuousScale Float
+        xScaleLocal =
+            xScale xValues
+
+        yScaleLocal : ContinuousScale Float
+        yScaleLocal =
+            yScale yValues
