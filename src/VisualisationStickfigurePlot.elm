@@ -283,3 +283,13 @@ stickfigureplot model len =
         zDegree : List Float
         zDegree = 
             List.map (\x -> (270 - (x))) (inDegree zValues)
+
+         half : ( Float, Float ) -> Float
+        half t =
+            (Tuple.second t - Tuple.first t) *8/9
+
+        labelPositions : { x : Float, y : Float }
+        labelPositions =
+            { x = (wideExtent xValues |> half) 
+            , y = (wideExtent yValues |> Tuple.second)
+            }
