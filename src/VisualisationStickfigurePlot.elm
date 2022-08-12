@@ -80,7 +80,7 @@ type alias StudentAcoholConsumption =
     , absences : Float
     , freetime : Float
     }
-    type Msg
+type Msg
     = GotText (Result Http.Error String)
     | ChangeLen (String)
 
