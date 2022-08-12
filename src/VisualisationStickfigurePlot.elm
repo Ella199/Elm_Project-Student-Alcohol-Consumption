@@ -226,3 +226,34 @@ wideExtent values =
     in
         result2
 stickfigureplot : XYData -> Float -> Svg msg
+stickfigureplot model len =
+ -- funktionen und parameter deklarieren
+    let
+        
+        xValues : List Float
+        xValues =
+            List.map .x model.data --x -- xmts
+
+        yValues : List Float
+        yValues =
+            List.map .a model.data --y -- xmts
+
+        uValues : List Float
+        uValues =
+            List.map .i model.data --u
+
+        vValues : List Float
+        vValues =
+            List.map .e model.data --v
+
+        pValues : List Float
+        pValues =
+            List.map .f model.data --p
+
+        qValues : List Float
+        qValues =
+            List.map .h model.data --q
+
+        zValues : List Float
+        zValues =
+            List.map .g model.data --z
