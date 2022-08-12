@@ -158,4 +158,21 @@ filterReducedStudentAcoholConsumption my_stud =
     XYData <| List.filterMap stud2point my_stud
 
 andMap : Maybe a -> Maybe (a -> b) -> Maybe b
-andMap = Maybe.map2 (|>)                           
+andMap = Maybe.map2 (|>)
+
+stud2point : StudentAcoholConsumption -> Maybe Point
+stud2point stud =
+    Maybe.map pointLabel 
+        (Just stud.sex) 
+            |> andMap (Just stud.firstperiodGradeMath) 
+            |> andMap (Just stud.secondperiodGradeMath)
+            |> andMap (Just stud.thirdperiodGradeMath)
+            |> andMap (Just stud.firstperiodGradePort)
+            |> andMap (Just stud.secondperiodGradePort)
+            |> andMap (Just stud.thirdperiodGradePort)
+            |> andMap (Just stud.dalc)
+            |> andMap (Just stud.walc)
+            |> andMap (Just stud.fedu)
+            |> andMap (Just stud.medu)
+            |> andMap (Just stud.freetime)
+            |> andMap (Just stud.absences)
