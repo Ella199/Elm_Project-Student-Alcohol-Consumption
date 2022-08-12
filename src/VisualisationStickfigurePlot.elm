@@ -69,6 +69,11 @@ view model =
             let
                 filteredStud =
                     filterReducedStudentAcoholConsumption l.data 
+
+                 numberStudies =
+                    List.length l.data
+                    
+
 inDegree : List Float -> List Float
 inDegree listvalue =
     List.map (\x -> (180 * (x - (Maybe.withDefault 0 (List.minimum listvalue)))/(((Maybe.withDefault 10000 (List.maximum listvalue))) - ((Maybe.withDefault 0 (List.minimum listvalue)))))) listvalue 
