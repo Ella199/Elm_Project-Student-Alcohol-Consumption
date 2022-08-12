@@ -191,3 +191,6 @@ xAxis values =
 yAxis : List Float -> Svg msg 
 yAxis values =
     Axis.left [ Axis.tickCount tickCount ] ( yScale values 
+xScale : List Float -> ContinuousScale Float 
+xScale values = 
+    Scale.linear ( 0, w - 2 * padding ) ( wideExtent values )
