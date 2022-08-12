@@ -190,7 +190,7 @@ xAxis values =
 
 yAxis : List Float -> Svg msg 
 yAxis values =
-    Axis.left [ Axis.tickCount tickCount ] ( yScale values 
+    Axis.left [ Axis.tickCount tickCount ] ( yScale values )
 xScale : List Float -> ContinuousScale Float 
 xScale values = 
     Scale.linear ( 0, w - 2 * padding ) ( wideExtent values )
@@ -284,7 +284,7 @@ stickfigureplot model len =
         zDegree = 
             List.map (\x -> (270 - (x))) (inDegree zValues)
 
-         half : ( Float, Float ) -> Float
+        half : ( Float, Float ) -> Float
         half t =
             (Tuple.second t - Tuple.first t) *8/9
 
@@ -353,7 +353,7 @@ andMapl : List a -> List (a -> b) -> List b
 andMapl = List.map2 (|>)
 
 stickfigure : ContinuousScale Float -> ContinuousScale Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point -> Svg msg
-stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree zDegree 
+stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree zDegree wDegree
 xyPoint  =
         g [ class [ "line"] ]
           [
