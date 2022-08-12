@@ -37,7 +37,7 @@ tickCount : Int
 tickCount =
     5
 
-    main : Program () Model Msg
+main : Program () Model Msg
 main =
   Browser.element
         { init = init
