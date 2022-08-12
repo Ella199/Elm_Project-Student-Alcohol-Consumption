@@ -346,3 +346,8 @@ stickfigureplot model len =
                 |> andMapl model.data
                 
             )
+            -- map data with the defined variables
+        ]
+
+andMapl : List a -> List (a -> b) -> List b
+andMapl = List.map2 (|>)
