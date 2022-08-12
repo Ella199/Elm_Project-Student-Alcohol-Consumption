@@ -318,3 +318,18 @@ stickfigureplot model len =
                 ]
                 [ text "Math10" ] -- x -- xmts
                 ]
+     -- plot y axis             
+         ,g[transform [Translate(60) (60)]]
+         [
+             yAxis yValues
+             , text_
+                [ x -30
+                , y -30
+
+                -- , fontFamily [ "Helvetica", "sans-serif" ]
+                , fontSize (px 15)
+
+                --, fontWeight FontWeightBold
+                ]
+                [ text "Port10" ] -- y -- xmts
+             ]
