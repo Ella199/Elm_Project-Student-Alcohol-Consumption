@@ -207,3 +207,22 @@ adding (min, max) x =
         ( 0, max + x)
     else 
         (min - x, max + x)
+wideExtent : List Float -> ( Float, Float )
+wideExtent values = 
+    let
+        result = 
+            Maybe.withDefault (0, 0)
+            (Statistics.extent values)
+        
+        max =          
+            Maybe.withDefault (0)
+            (List.maximum values)
+            
+        result1 = 
+            adding result (toFloat(tickCount)*max/50)
+        
+        result2 = 
+            adding result1 (0.0)       
+    in
+        result2
+
