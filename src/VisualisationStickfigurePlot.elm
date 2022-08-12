@@ -55,7 +55,9 @@ init _ =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
-
+inDegree : List Float -> List Float
+inDegree listvalue =
+    List.map (\x -> (180 * (x - (Maybe.withDefault 0 (List.minimum listvalue)))/(((Maybe.withDefault 10000 (List.maximum listvalue))) - ((Maybe.withDefault 0 (List.minimum listvalue)))))) listvalue 
 type Model
  = Error
  | Loading
@@ -264,9 +266,7 @@ stickfigureplot model len =
         yScaleLocal : ContinuousScale Float
         yScaleLocal =
             yScale yValues
-inDegree : List Float -> List Float
-inDegree listvalue =
-    List.map (\x -> (180 * (x - (Maybe.withDefault 0 (List.minimum listvalue)))/(((Maybe.withDefault 10000 (List.maximum listvalue))) - ((Maybe.withDefault 0 (List.minimum listvalue)))))) listvalue 
+
         uDegree : List Float
         uDegree = 
             List.map (\x -> (270 - (x))) (inDegree uValues)
