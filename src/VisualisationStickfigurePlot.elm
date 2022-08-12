@@ -264,3 +264,22 @@ stickfigureplot model len =
         yScaleLocal : ContinuousScale Float
         yScaleLocal =
             yScale yValues
+        uDegree : List Float
+        uDegree = 
+            List.map (\x -> (270 - (x))) (inDegree uValues)
+
+        vDegree : List Float
+        vDegree = 
+            List.map (\x -> (270 - (x))) (inDegree vValues)
+
+        pDegree : List Float
+        pDegree = 
+            List.map (\x -> (270 - (x))) (inDegree pValues)
+
+        qDegree : List Float
+        qDegree = 
+            List.map (\x -> (270 - (x))) (inDegree qValues)
+
+        zDegree : List Float
+        zDegree = 
+            List.map (\x -> (270 - (x))) (inDegree zValues)
