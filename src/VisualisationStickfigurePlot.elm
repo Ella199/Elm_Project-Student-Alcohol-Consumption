@@ -264,6 +264,9 @@ stickfigureplot model len =
         yScaleLocal : ContinuousScale Float
         yScaleLocal =
             yScale yValues
+inDegree : List Float -> List Float
+inDegree listvalue =
+    List.map (\x -> (180 * (x - (Maybe.withDefault 0 (List.minimum listvalue)))/(((Maybe.withDefault 10000 (List.maximum listvalue))) - ((Maybe.withDefault 0 (List.minimum listvalue)))))) listvalue 
         uDegree : List Float
         uDegree = 
             List.map (\x -> (270 - (x))) (inDegree uValues)
@@ -353,7 +356,7 @@ andMapl : List a -> List (a -> b) -> List b
 andMapl = List.map2 (|>)
 
 stickfigure : ContinuousScale Float -> ContinuousScale Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point -> Svg msg
-stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree zDegree wDegree
+stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree zDegree
 xyPoint  =
         g [ class [ "line"] ]
           [
