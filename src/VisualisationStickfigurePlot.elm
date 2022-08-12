@@ -293,3 +293,13 @@ stickfigureplot model len =
             { x = (wideExtent xValues |> half) 
             , y = (wideExtent yValues |> Tuple.second)
             }
+    in
+    -- output als svg => scatter plot
+    
+    svg [ viewBox 0 0 w h, TSA.width <| TST.Percent 100, TSA.height <| TST.Percent 100 ]
+        [ style [] [ TypedSvg.Core.text """
+            .line polyline { stroke: lightGrey; fill: rgba(255, 255, 255,0.3); ; stroke-width:1; }
+            .line text { display: none; }
+            .line:hover polyline { stroke: black; stroke-width:1.5; }
+            .line:hover text { display: inline; font-size: small }
+          """ ]       
