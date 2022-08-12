@@ -354,3 +354,46 @@ andMapl = List.map2 (|>)
 
 stickfigure : ContinuousScale Float -> ContinuousScale Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point -> Svg msg
 stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree zDegree 
+xyPoint  =
+        g [ class [ "line"] ]
+          [
+            g  
+                [ transform [ Translate (padding) padding ]
+                ]
+                [ text_ [ x  320, y -100, textAnchor AnchorMiddle ] [ Html.text xyPoint.pointName ]
+                ]
+            , g
+                [   transform
+                    [ Translate
+                        (Scale.convert scaleX xValues) 
+                        (Scale.convert scaleY yValues)  
+                    ]
+                ]
+                
+                [ polyline
+                        [ TSA.points [ ( lange/2*cos(degrees uDegree), lange/2*sin(degrees uDegree) ), ( -lange/2*cos(degrees uDegree), -lange/2*sin(degrees uDegree)) ]
+                        ]
+                        []
+                , polyline
+                        [ TSA.points [ ( (-lange/2)*cos(degrees uDegree), (-lange/2)*sin(degrees uDegree) ), ( (-lange/2)*cos(degrees uDegree) + lange*cos(degrees vDegree), -lange/2*sin(degrees uDegree) - lange*sin(degrees vDegree) ) ]
+                        ]
+                        []
+
+                , polyline
+                        [ TSA.points [ ( (-lange/2)*cos(degrees uDegree), (-lange/2)*sin(degrees uDegree) ), ( -lange/2*cos(degrees uDegree) - lange*cos(degrees pDegree), -lange/2*sin(degrees uDegree) - lange*sin(degrees pDegree) ) ]
+                        ]
+                        []
+
+                , polyline
+                        [ TSA.points [ ( lange/2*cos(degrees uDegree), lange/2*sin(degrees uDegree) ), ( lange/2*cos(degrees uDegree) + lange*cos(degrees qDegree), lange/2*sin(degrees uDegree) + lange*sin(degrees qDegree) ) ]
+                        ]
+                        []
+                    
+                , polyline
+                        [ TSA.points [ ( lange/2*cos(degrees uDegree), lange/2*sin(degrees uDegree) ), ( lange/2*cos(degrees uDegree) - lange*cos(degrees zDegree), lange/2*sin(degrees uDegree) + lange*sin(degrees zDegree) ) ]
+                        ]
+                        []
+                ]
+          ]
+
+
