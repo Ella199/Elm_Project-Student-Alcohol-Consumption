@@ -106,7 +106,7 @@ getCsv x =
 list : List String 
 list = 
     [ "mergedstudent_FINAL_NaN.csv" ]
-    csvStringToData : String -> List StudentAcoholConsumption
+csvStringToData : String -> List StudentAcoholConsumption
 csvStringToData csvR =
     Csv.parse csvR
         |> Csv.Decode.decodeCsv decodingStudentAcoholConsumption
