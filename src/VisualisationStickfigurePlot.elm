@@ -351,3 +351,6 @@ stickfigureplot model len =
 
 andMapl : List a -> List (a -> b) -> List b
 andMapl = List.map2 (|>)
+
+stickfigure : ContinuousScale Float -> ContinuousScale Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point -> Svg msg
+stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree zDegree 
