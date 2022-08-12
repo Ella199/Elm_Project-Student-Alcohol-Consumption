@@ -197,3 +197,13 @@ xScale values =
 yScale : List Float -> ContinuousScale Float
 yScale values =
     Scale.linear ( h - 2 * padding, 0 ) ( wideExtent values )
+defaultExtent : ( number, number1 )
+defaultExtent =
+    ( 0, 100 )
+
+adding : (Float, Float) -> Float-> (Float, Float) 
+adding (min, max) x =
+    if min <= 0 then
+        ( 0, max + x)
+    else 
+        (min - x, max + x)
