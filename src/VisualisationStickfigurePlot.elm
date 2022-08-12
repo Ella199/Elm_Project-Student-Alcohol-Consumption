@@ -225,4 +225,4 @@ wideExtent values =
             adding result1 (0.0)       
     in
         result2
-
+stickfigureplot : XYData -> Float -> Svg msg
