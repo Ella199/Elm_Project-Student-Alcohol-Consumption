@@ -69,9 +69,14 @@ view model =
             let
                 filteredStud =
                     filterReducedStudentAcoholConsumption l.data 
+                    
+                    
+                     ---hinzufügen
+                     
 
-                 numberStudies =
+                numberStudies =
                     List.length l.data
+                    
             --hinzufügen
 
             in
