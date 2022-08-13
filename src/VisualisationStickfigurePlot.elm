@@ -104,7 +104,7 @@ view model =
                             , Html.Events.onInput ChangeLen
                             ]
                             []
-                            , text <| String.fromFloat    
+                            , text <| String.fromFloat l.len 
                     ]        
                  -- slider doesn't work well .-.
                     
