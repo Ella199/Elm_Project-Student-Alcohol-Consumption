@@ -384,7 +384,9 @@ stickfigureplot model len grade =
 
                 --, fontWeight FontWeightBold
                 ]
-                [ text "Math10" ] -- x -- xmts
+                [ text (if grade == "10" then "Math10"
+                else if grade == "11" then "Math11"
+                else "Math12")] -- x -- xmts
                 ]
     -- plot y axis             
          ,g[transform [Translate(60) (60)]]
