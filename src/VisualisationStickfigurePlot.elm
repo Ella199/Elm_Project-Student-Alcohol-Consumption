@@ -401,7 +401,9 @@ stickfigureplot model len grade =
 
                 --, fontWeight FontWeightBold
                 ]
-                [ text "Port10" ] -- y -- xmts
+                [ text (if grade == "10" then "Port10"
+                else if grade == "11" then "Port11"
+                else "Port12") ] -- y -- xmts
              ]
     -- plot points and description     
          ,g [ transform [ Translate padding padding ] ]
