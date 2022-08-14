@@ -115,11 +115,6 @@ view model =
                 , stickfigureplot filteredStud l.len l.gr
                 ]
 
-
-
-inDegree : List Float -> List Float
-inDegree listvalue =
-    List.map (\x -> (180 * (x - (Maybe.withDefault 0 (List.minimum listvalue)))/(((Maybe.withDefault 10000 (List.maximum listvalue))) - ((Maybe.withDefault 0 (List.minimum listvalue)))))) listvalue 
 gr : String
 gr = "12"
 type Model
@@ -128,7 +123,12 @@ type Model
  | Success
     { data : List StudentAcoholConsumption
     , len : Float
+    , gr : String
     }
+
+inDegree : List Float -> List Float
+inDegree listvalue =
+    List.map (\x -> (180 * (x - (Maybe.withDefault 0 (List.minimum listvalue)))/(((Maybe.withDefault 10000 (List.maximum listvalue))) - ((Maybe.withDefault 0 (List.minimum listvalue)))))) listvalue 
 
 
 type alias StudentAcoholConsumption =
