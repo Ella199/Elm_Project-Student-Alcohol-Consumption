@@ -240,10 +240,7 @@ stud2point stud =
             |> andMap (Just stud.absences)
 pointLabel : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point 
 pointLabel sex firstperiodGradeMath secondperiodGradeMath thirdperiodGradeMath firstperiodGradePort secondperiodGradePort thirdperiodGradePort dalc walc fedu medu freetime absences= 
-    Point (sex ++ " (" ++ String.fromFloat firstperiodGradeMath ++ ", " ++ String.fromFloat firstperiodGradeMath ++ ", "
-        ++ String.fromFloat thirdperiodGradeMath ++ ", " ++ String.fromFloat secondperiodGradePort ++ ", " 
-        ++ String.fromFloat secondperiodGradePort ++ ", " ++ String.fromFloat thirdperiodGradePort ++ ", "
-        ++ String.fromFloat dalc ++ ", " ++ String.fromFloat walc ++ ", " ++ String.fromFloat fedu ++ ", "++ String.fromFloat medu ++ ", " 
+    Point (sex ++ " (" ++ "DailyAlcCons: " ++  String.fromFloat dalc  ++ ", " ++ String.fromFloat fedu ++ ", "++ String.fromFloat medu ++ ", " 
         ++ String.fromFloat freetime ++ ", " ++ String.fromFloat absences ++")") 
         (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime)
 xAxis : List Float -> Svg msg
@@ -366,9 +363,9 @@ stickfigureplot model len grade =
     
     svg [ viewBox 0 0 w h, TSA.width <| TST.Percent 100, TSA.height <| TST.Percent 100 ]
         [ style [] [ TypedSvg.Core.text """
-            .line polyline { stroke: lightGrey; fill: rgba(255, 255, 255,0.3); ; stroke-width:1; }
+            .line polyline { stroke: lightBlue; fill: rgba(255, 255, 255,0.3); ; stroke-width:1; }
             .line text { display: none; }
-            .line:hover polyline { stroke: black; stroke-width:1.5; }
+            .line:hover polyline { stroke: blue; stroke-width:1.5; }
             .line:hover text { display: inline; font-size: small }
           """ ]       
     -- plot x axis    
