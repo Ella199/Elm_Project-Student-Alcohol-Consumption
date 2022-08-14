@@ -69,15 +69,9 @@ view model =
             let
                 filteredStud =
                     filterReducedStudentAcoholConsumption l.data 
-                    
-                    
-                     ---hinzufügen
-                     
 
                 numberStudies =
                     List.length l.data
-                    
-            --hinzufügen
 
             in
                 div []
@@ -108,7 +102,6 @@ view model =
                                    
                     , stickfigureplot filteredStud l.len l.gr
                 ]
-
 gr : String
 gr = "12"
 type Model
@@ -119,6 +112,7 @@ type Model
     , len : Float
     , gr : String
     }
+
 
 inDegree : List Float -> List Float
 inDegree listvalue =
@@ -203,18 +197,18 @@ update msg model =
                 Err _ ->
                     ( model, Cmd.none )
         ChangeLen v ->
-                    case model of
-                        Success m ->
-                            (Success <| {data = m.data, len = Maybe.withDefault 0 <| String.toFloat v, gr=m.gr}, Cmd.none)
-                        _ ->
-                            ( model, Cmd.none )
-
+            case model of
+                Success m ->
+                    (Success <| {data = m.data, len = Maybe.withDefault 0 <| String.toFloat v, gr=m.gr}, Cmd.none)
+                _ ->
+                    ( model, Cmd.none )
         ChangeGrade g ->
             case model of
                 Success m ->
                     (Success <| {data = m.data, len = m.len, gr=g}, Cmd.none)
                 _ ->
                     ( model, Cmd.none )
+                   
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption
 studentAcoholConsumptionList list1 =
     List.map(\t -> csvStringToData t) list1
@@ -293,19 +287,24 @@ wideExtent values =
             adding result1 (0.0)       
     in
         result2
-stickfigureplot : XYData -> Float -> Svg msg
-stickfigureplot model len =
+stickfigureplot : XYData -> Float -> String -> Svg msg
+stickfigureplot model len grade =
+
  -- funktionen und parameter deklarieren
     let
         
         xValues : List Float
         xValues =
-            List.map .x model.data --x -- xmts
-
+            case grade of
+                "10" -> List.map .x model.data 
+                "11" -> List.map .y model.data
+                _ -> List.map .z model.data 
         yValues : List Float
         yValues =
-            List.map .a model.data --y -- xmts
-
+            case grade of
+                "10" -> List.map .a model.data 
+                "11" -> List.map .b model.data
+                _ -> List.map .c model.data 
         uValues : List Float
         uValues =
             List.map .i model.data --u
