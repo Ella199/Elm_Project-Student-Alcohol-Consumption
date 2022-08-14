@@ -198,16 +198,23 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], len=5 }, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], len=5, gr="10" }, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
         ChangeLen v ->
                     case model of
                         Success m ->
-                            (Success <| {data = m.data, len = Maybe.withDefault 0 <| String.toFloat v }, Cmd.none)
+                            (Success <| {data = m.data, len = Maybe.withDefault 0 <| String.toFloat v, gr=m.gr}, Cmd.none)
                         _ ->
                             ( model, Cmd.none )
+
+        ChangeGrade g ->
+            case model of
+                Success m ->
+                    (Success <| {data = m.data, len = m.len, gr=g}, Cmd.none)
+                _ ->
+                    ( model, Cmd.none )
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption
 studentAcoholConsumptionList list1 =
     List.map(\t -> csvStringToData t) list1
