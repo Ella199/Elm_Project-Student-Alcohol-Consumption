@@ -86,33 +86,27 @@ view model =
                     [ text "Number of students: "
                     , text <| String.fromInt numberStudies
                     ]
-                , div []
-                [ text <| "Wählen Sie bitte die Attribute für die Achsen: "
-                    , Html.button [] [Html.text "Math10 vs Port10"]
-                    , Html.button [] [Html.text "Math11 vs Port11"]
-                    , Html.button [] [Html.text "Math12 vs Port12"]
-                ]
-                , p [] 
-                        [
-                        text "Please adjust the size of stick figure:"
+                    , p []
+                    [ text <| "Please select the attributes for the axes: "
+                    , Html.button [onClick(ChangeGrade("10"))] [Html.text "Math10 vs Port10"]
+                    , Html.button [onClick(ChangeGrade("11"))] [Html.text "Math11 vs Port11"]
+                    , Html.button [onClick(ChangeGrade("12"))] [Html.text "Math12 vs Port12"]
+                    ]
+                    , text "Please adjust the size of stick figure:"
+                        
+                    , p []
+                    [ Html.input 
+                        [ HA.type_ "range"
+                        , HA.min "2"
+                        , HA.max "15"
+                        , HA.value <| String.fromFloat l.len
+                        , Html.Events.onInput ChangeLen
                         ]
-                , div []
-                    [ Html.input [ HA.type_ "range"
-                            , HA.min "2"
-                            , HA.max "15"
-                            , HA.value <| String.fromFloat l.len
-                            , Html.Events.onInput ChangeLen
-                            ]
-                            []
-                            , text <| String.fromFloat l.len 
-                    ]        
-                 -- slider doesn't work well .-.
-                    
-                    
-                    , stickfigureplot filteredStud l.len 
-                ]
-
-                , stickfigureplot filteredStud l.len l.gr
+                        []
+                    , text <| String.fromFloat l.len    
+                    ] 
+                                   
+                    , stickfigureplot filteredStud l.len l.gr
                 ]
 
 gr : String
@@ -149,6 +143,7 @@ type alias StudentAcoholConsumption =
 type Msg
     = GotText (Result Http.Error String)
     | ChangeLen (String)
+    | ChangeGrade (String)
 
 
 type alias Point =
