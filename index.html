@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Scatterplot</title>
+  <title>VisualisationStickfigurePlot</title>
   <style>body { padding: 0; margin: 0; }</style>
 </head>
 
@@ -5385,10 +5385,10 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Scatterplot$GotText = function (a) {
+var $author$project$VisualisationStickfigurePlot$GotText = function (a) {
 	return {$: 'GotText', a: a};
 };
-var $author$project$Scatterplot$Loading = {$: 'Loading'};
+var $author$project$VisualisationStickfigurePlot$Loading = {$: 'Loading'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -6169,9 +6169,9 @@ var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
 		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $author$project$Scatterplot$list = _List_fromArray(
+var $author$project$VisualisationStickfigurePlot$list = _List_fromArray(
 	['mergedstudent_FINAL_NaN.csv']);
-var $author$project$Scatterplot$getCsv = function (x) {
+var $author$project$VisualisationStickfigurePlot$getCsv = function (x) {
 	return $elm$core$Platform$Cmd$batch(
 		A2(
 			$elm$core$List$map,
@@ -6182,19 +6182,19 @@ var $author$project$Scatterplot$getCsv = function (x) {
 						url: 'https://raw.githubusercontent.com/Ella199/Elm_Project-Student-Alcohol-Consumption/main/Data/CSV_Daten/' + data
 					});
 			},
-			$author$project$Scatterplot$list));
+			$author$project$VisualisationStickfigurePlot$list));
 };
-var $author$project$Scatterplot$init = function (_v0) {
+var $author$project$VisualisationStickfigurePlot$init = function (_v0) {
 	return _Utils_Tuple2(
-		$author$project$Scatterplot$Loading,
-		$author$project$Scatterplot$getCsv($author$project$Scatterplot$GotText));
+		$author$project$VisualisationStickfigurePlot$Loading,
+		$author$project$VisualisationStickfigurePlot$getCsv($author$project$VisualisationStickfigurePlot$GotText));
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Scatterplot$subscriptions = function (model) {
+var $author$project$VisualisationStickfigurePlot$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$none;
 };
-var $author$project$Scatterplot$Success = function (a) {
+var $author$project$VisualisationStickfigurePlot$Success = function (a) {
 	return {$: 'Success', a: a};
 };
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -6315,10 +6315,33 @@ var $ericgj$elm_csv_decode$Csv$Decode$decodeCsv = F2(
 					A2($ericgj$elm_csv_decode$Csv$Decode$decodeRecord, decoder, headers),
 					records)));
 	});
-var $author$project$Scatterplot$StudentAcoholConsumption = F9(
-	function (sex, firstperiodGradeMath, secondperiodGradeMath, thirdperiodGradeMath, firstperiodGradePort, secondperiodGradePort, thirdperiodGradePort, dalc, walc) {
-		return {dalc: dalc, firstperiodGradeMath: firstperiodGradeMath, firstperiodGradePort: firstperiodGradePort, secondperiodGradeMath: secondperiodGradeMath, secondperiodGradePort: secondperiodGradePort, sex: sex, thirdperiodGradeMath: thirdperiodGradeMath, thirdperiodGradePort: thirdperiodGradePort, walc: walc};
-	});
+var $author$project$VisualisationStickfigurePlot$StudentAcoholConsumption = function (sex) {
+	return function (firstperiodGradeMath) {
+		return function (secondperiodGradeMath) {
+			return function (thirdperiodGradeMath) {
+				return function (firstperiodGradePort) {
+					return function (secondperiodGradePort) {
+						return function (thirdperiodGradePort) {
+							return function (dalc) {
+								return function (walc) {
+									return function (medu) {
+										return function (fedu) {
+											return function (absences) {
+												return function (freetime) {
+													return {absences: absences, dalc: dalc, fedu: fedu, firstperiodGradeMath: firstperiodGradeMath, firstperiodGradePort: firstperiodGradePort, freetime: freetime, medu: medu, secondperiodGradeMath: secondperiodGradeMath, secondperiodGradePort: secondperiodGradePort, sex: sex, thirdperiodGradeMath: thirdperiodGradeMath, thirdperiodGradePort: thirdperiodGradePort, walc: walc};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var $ericgj$elm_csv_decode$Csv$Decode$Decoder = function (a) {
 	return {$: 'Decoder', a: a};
 };
@@ -6441,14 +6464,14 @@ var $ericgj$elm_csv_decode$Csv$Decode$map = F2(
 			});
 	});
 var $elm$core$String$toFloat = _String_toFloat;
-var $author$project$Scatterplot$decodingStudentAcoholConsumption = A2(
+var $author$project$VisualisationStickfigurePlot$decodingStudentAcoholConsumption = A2(
 	$ericgj$elm_csv_decode$Csv$Decode$map,
-	$author$project$Scatterplot$StudentAcoholConsumption,
+	$author$project$VisualisationStickfigurePlot$StudentAcoholConsumption,
 	A2(
 		$ericgj$elm_csv_decode$Csv$Decode$andMap,
 		A2(
 			$ericgj$elm_csv_decode$Csv$Decode$field,
-			'walc',
+			'absences',
 			A2(
 				$elm$core$Basics$composeR,
 				$elm$core$String$toFloat,
@@ -6457,7 +6480,7 @@ var $author$project$Scatterplot$decodingStudentAcoholConsumption = A2(
 			$ericgj$elm_csv_decode$Csv$Decode$andMap,
 			A2(
 				$ericgj$elm_csv_decode$Csv$Decode$field,
-				'dalc',
+				'freetime',
 				A2(
 					$elm$core$Basics$composeR,
 					$elm$core$String$toFloat,
@@ -6466,7 +6489,7 @@ var $author$project$Scatterplot$decodingStudentAcoholConsumption = A2(
 				$ericgj$elm_csv_decode$Csv$Decode$andMap,
 				A2(
 					$ericgj$elm_csv_decode$Csv$Decode$field,
-					'thirdperiodGradePort',
+					'Fedu',
 					A2(
 						$elm$core$Basics$composeR,
 						$elm$core$String$toFloat,
@@ -6475,7 +6498,7 @@ var $author$project$Scatterplot$decodingStudentAcoholConsumption = A2(
 					$ericgj$elm_csv_decode$Csv$Decode$andMap,
 					A2(
 						$ericgj$elm_csv_decode$Csv$Decode$field,
-						'secondperiodGradePort',
+						'Medu',
 						A2(
 							$elm$core$Basics$composeR,
 							$elm$core$String$toFloat,
@@ -6484,7 +6507,7 @@ var $author$project$Scatterplot$decodingStudentAcoholConsumption = A2(
 						$ericgj$elm_csv_decode$Csv$Decode$andMap,
 						A2(
 							$ericgj$elm_csv_decode$Csv$Decode$field,
-							'firstperiodGradePort',
+							'walc',
 							A2(
 								$elm$core$Basics$composeR,
 								$elm$core$String$toFloat,
@@ -6493,7 +6516,7 @@ var $author$project$Scatterplot$decodingStudentAcoholConsumption = A2(
 							$ericgj$elm_csv_decode$Csv$Decode$andMap,
 							A2(
 								$ericgj$elm_csv_decode$Csv$Decode$field,
-								'thirdperiodGradeMath',
+								'dalc',
 								A2(
 									$elm$core$Basics$composeR,
 									$elm$core$String$toFloat,
@@ -6502,7 +6525,7 @@ var $author$project$Scatterplot$decodingStudentAcoholConsumption = A2(
 								$ericgj$elm_csv_decode$Csv$Decode$andMap,
 								A2(
 									$ericgj$elm_csv_decode$Csv$Decode$field,
-									'secondperiodGradeMath',
+									'thirdperiodGradePort',
 									A2(
 										$elm$core$Basics$composeR,
 										$elm$core$String$toFloat,
@@ -6511,12 +6534,48 @@ var $author$project$Scatterplot$decodingStudentAcoholConsumption = A2(
 									$ericgj$elm_csv_decode$Csv$Decode$andMap,
 									A2(
 										$ericgj$elm_csv_decode$Csv$Decode$field,
-										'firstperiodGradeMath',
+										'secondperiodGradePort',
 										A2(
 											$elm$core$Basics$composeR,
 											$elm$core$String$toFloat,
 											$elm$core$Result$fromMaybe('error parsing string'))),
-									A2($ericgj$elm_csv_decode$Csv$Decode$field, 'sex', $elm$core$Result$Ok))))))))));
+									A2(
+										$ericgj$elm_csv_decode$Csv$Decode$andMap,
+										A2(
+											$ericgj$elm_csv_decode$Csv$Decode$field,
+											'firstperiodGradePort',
+											A2(
+												$elm$core$Basics$composeR,
+												$elm$core$String$toFloat,
+												$elm$core$Result$fromMaybe('error parsing string'))),
+										A2(
+											$ericgj$elm_csv_decode$Csv$Decode$andMap,
+											A2(
+												$ericgj$elm_csv_decode$Csv$Decode$field,
+												'thirdperiodGradeMath',
+												A2(
+													$elm$core$Basics$composeR,
+													$elm$core$String$toFloat,
+													$elm$core$Result$fromMaybe('error parsing string'))),
+											A2(
+												$ericgj$elm_csv_decode$Csv$Decode$andMap,
+												A2(
+													$ericgj$elm_csv_decode$Csv$Decode$field,
+													'secondperiodGradeMath',
+													A2(
+														$elm$core$Basics$composeR,
+														$elm$core$String$toFloat,
+														$elm$core$Result$fromMaybe('error parsing string'))),
+												A2(
+													$ericgj$elm_csv_decode$Csv$Decode$andMap,
+													A2(
+														$ericgj$elm_csv_decode$Csv$Decode$field,
+														'firstperiodGradeMath',
+														A2(
+															$elm$core$Basics$composeR,
+															$elm$core$String$toFloat,
+															$elm$core$Result$fromMaybe('error parsing string'))),
+													A2($ericgj$elm_csv_decode$Csv$Decode$field, 'sex', $elm$core$Result$Ok))))))))))))));
 var $elm$core$List$drop = F2(
 	function (n, list) {
 		drop:
@@ -6684,26 +6743,26 @@ var $elm$core$Result$toMaybe = function (result) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
-var $author$project$Scatterplot$csvStringToData = function (csvR) {
+var $author$project$VisualisationStickfigurePlot$csvStringToData = function (csvR) {
 	return A2(
 		$elm$core$Maybe$withDefault,
 		_List_Nil,
 		$elm$core$Result$toMaybe(
 			A2(
 				$ericgj$elm_csv_decode$Csv$Decode$decodeCsv,
-				$author$project$Scatterplot$decodingStudentAcoholConsumption,
+				$author$project$VisualisationStickfigurePlot$decodingStudentAcoholConsumption,
 				$lovasoa$elm_csv$Csv$parse(csvR))));
 };
-var $author$project$Scatterplot$studentAcoholConsumptionList = function (list1) {
+var $author$project$VisualisationStickfigurePlot$studentAcoholConsumptionList = function (list1) {
 	return $elm$core$List$concat(
 		A2(
 			$elm$core$List$map,
 			function (t) {
-				return $author$project$Scatterplot$csvStringToData(t);
+				return $author$project$VisualisationStickfigurePlot$csvStringToData(t);
 			},
 			list1));
 };
-var $author$project$Scatterplot$update = F2(
+var $author$project$VisualisationStickfigurePlot$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
 			case 'GotText':
@@ -6711,93 +6770,199 @@ var $author$project$Scatterplot$update = F2(
 				if (result.$ === 'Ok') {
 					var fullText = result.a;
 					return _Utils_Tuple2(
-						$author$project$Scatterplot$Success(
+						$author$project$VisualisationStickfigurePlot$Success(
 							{
-								data: $author$project$Scatterplot$studentAcoholConsumptionList(
+								data: $author$project$VisualisationStickfigurePlot$studentAcoholConsumptionList(
 									_List_fromArray(
 										[fullText])),
-								xFunction: function ($) {
-									return $.thirdperiodGradeMath;
-								},
-								xName: 'workday alcohol consumption',
-								yFunction: function ($) {
-									return $.dalc;
-								},
-								yName: 'third period Grade Math'
+								gr: '10',
+								len: 5
 							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 				}
-			case 'ChangeX':
-				var _v2 = msg.a;
-				var x = _v2.a;
-				var a = _v2.b;
+			case 'ChangeLen':
+				var v = msg.a;
 				if (model.$ === 'Success') {
 					var m = model.a;
 					return _Utils_Tuple2(
-						$author$project$Scatterplot$Success(
-							{data: m.data, xFunction: x, xName: a, yFunction: m.yFunction, yName: m.yName}),
+						$author$project$VisualisationStickfigurePlot$Success(
+							{
+								data: m.data,
+								gr: m.gr,
+								len: A2(
+									$elm$core$Maybe$withDefault,
+									0,
+									$elm$core$String$toFloat(v))
+							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 				}
 			default:
-				var _v4 = msg.a;
-				var y = _v4.a;
-				var a = _v4.b;
+				var g = msg.a;
 				if (model.$ === 'Success') {
 					var m = model.a;
 					return _Utils_Tuple2(
-						$author$project$Scatterplot$Success(
-							{data: m.data, xFunction: m.xFunction, xName: m.xName, yFunction: y, yName: a}),
+						$author$project$VisualisationStickfigurePlot$Success(
+							{data: m.data, gr: g, len: m.len}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 				}
 		}
 	});
-var $author$project$Scatterplot$ChangeX = function (a) {
-	return {$: 'ChangeX', a: a};
+var $author$project$VisualisationStickfigurePlot$ChangeGrade = function (a) {
+	return {$: 'ChangeGrade', a: a};
 };
-var $author$project$Scatterplot$ChangeY = function (a) {
-	return {$: 'ChangeY', a: a};
+var $author$project$VisualisationStickfigurePlot$ChangeLen = function (a) {
+	return {$: 'ChangeLen', a: a};
 };
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $author$project$Scatterplot$XYData = F3(
-	function (xDescription, yDescription, data) {
-		return {data: data, xDescription: xDescription, yDescription: yDescription};
+var $author$project$VisualisationStickfigurePlot$XYData = function (data) {
+	return {data: data};
+};
+var $elm$core$Maybe$map2 = F3(
+	function (func, ma, mb) {
+		if (ma.$ === 'Nothing') {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var a = ma.a;
+			if (mb.$ === 'Nothing') {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var b = mb.a;
+				return $elm$core$Maybe$Just(
+					A2(func, a, b));
+			}
+		}
 	});
-var $author$project$Scatterplot$Point = F3(
-	function (pointName, x, y) {
-		return {pointName: pointName, x: x, y: y};
+var $author$project$VisualisationStickfigurePlot$andMap = $elm$core$Maybe$map2($elm$core$Basics$apR);
+var $elm$core$Maybe$map = F2(
+	function (f, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return $elm$core$Maybe$Just(
+				f(value));
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
 	});
+var $author$project$VisualisationStickfigurePlot$Point = function (pointName) {
+	return function (x) {
+		return function (y) {
+			return function (z) {
+				return function (a) {
+					return function (b) {
+						return function (c) {
+							return function (d) {
+								return function (e) {
+									return function (f) {
+										return function (g) {
+											return function (h) {
+												return function (i) {
+													return {a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, pointName: pointName, x: x, y: y, z: z};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var $elm$core$String$fromFloat = _String_fromNumber;
-var $author$project$Scatterplot$pointName = F6(
-	function (studentAcoholConsumption, u, v, x, y, z) {
-		return A3(
-			$author$project$Scatterplot$Point,
-			u(studentAcoholConsumption) + (', ' + (y + (': ' + ($elm$core$String$fromFloat(
-				v(studentAcoholConsumption)) + (', ' + (z + (': ' + $elm$core$String$fromFloat(
-				x(studentAcoholConsumption))))))))),
-			v(studentAcoholConsumption),
-			x(studentAcoholConsumption));
-	});
-var $author$project$Scatterplot$filterReducedStudentAcoholConsumption = F6(
-	function (studentAcoholConsumptionsliste, a, b, c, x, y) {
-		return A3(
-			$author$project$Scatterplot$XYData,
-			x,
-			y,
+var $author$project$VisualisationStickfigurePlot$pointLabel = function (sex) {
+	return function (firstperiodGradeMath) {
+		return function (secondperiodGradeMath) {
+			return function (thirdperiodGradeMath) {
+				return function (firstperiodGradePort) {
+					return function (secondperiodGradePort) {
+						return function (thirdperiodGradePort) {
+							return function (dalc) {
+								return function (walc) {
+									return function (fedu) {
+										return function (medu) {
+											return function (freetime) {
+												return function (absences) {
+													return $author$project$VisualisationStickfigurePlot$Point(
+														sex + (' (' + ('DailyAlcCons: ' + ($elm$core$String$fromFloat(dalc) + (', ' + ($elm$core$String$fromFloat(fedu) + (', ' + ($elm$core$String$fromFloat(medu) + (', ' + ($elm$core$String$fromFloat(freetime) + (', ' + ($elm$core$String$fromFloat(absences) + ')'))))))))))))(secondperiodGradeMath)(firstperiodGradeMath)(thirdperiodGradeMath)(firstperiodGradePort)(secondperiodGradePort)(thirdperiodGradePort)(dalc)(walc)(medu)(fedu)(absences)(freetime);
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var $author$project$VisualisationStickfigurePlot$stud2point = function (stud) {
+	return A2(
+		$author$project$VisualisationStickfigurePlot$andMap,
+		$elm$core$Maybe$Just(stud.absences),
+		A2(
+			$author$project$VisualisationStickfigurePlot$andMap,
+			$elm$core$Maybe$Just(stud.freetime),
 			A2(
-				$elm$core$List$map,
-				function (n) {
-					return A6($author$project$Scatterplot$pointName, n, a, b, c, x, y);
-				},
-				studentAcoholConsumptionsliste));
+				$author$project$VisualisationStickfigurePlot$andMap,
+				$elm$core$Maybe$Just(stud.medu),
+				A2(
+					$author$project$VisualisationStickfigurePlot$andMap,
+					$elm$core$Maybe$Just(stud.fedu),
+					A2(
+						$author$project$VisualisationStickfigurePlot$andMap,
+						$elm$core$Maybe$Just(stud.walc),
+						A2(
+							$author$project$VisualisationStickfigurePlot$andMap,
+							$elm$core$Maybe$Just(stud.dalc),
+							A2(
+								$author$project$VisualisationStickfigurePlot$andMap,
+								$elm$core$Maybe$Just(stud.thirdperiodGradePort),
+								A2(
+									$author$project$VisualisationStickfigurePlot$andMap,
+									$elm$core$Maybe$Just(stud.secondperiodGradePort),
+									A2(
+										$author$project$VisualisationStickfigurePlot$andMap,
+										$elm$core$Maybe$Just(stud.firstperiodGradePort),
+										A2(
+											$author$project$VisualisationStickfigurePlot$andMap,
+											$elm$core$Maybe$Just(stud.thirdperiodGradeMath),
+											A2(
+												$author$project$VisualisationStickfigurePlot$andMap,
+												$elm$core$Maybe$Just(stud.secondperiodGradeMath),
+												A2(
+													$author$project$VisualisationStickfigurePlot$andMap,
+													$elm$core$Maybe$Just(stud.firstperiodGradeMath),
+													A2(
+														$elm$core$Maybe$map,
+														$author$project$VisualisationStickfigurePlot$pointLabel,
+														$elm$core$Maybe$Just(stud.sex))))))))))))));
+};
+var $author$project$VisualisationStickfigurePlot$filterReducedStudentAcoholConsumption = function (my_stud) {
+	return $author$project$VisualisationStickfigurePlot$XYData(
+		A2($elm$core$List$filterMap, $author$project$VisualisationStickfigurePlot$stud2point, my_stud));
+};
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
 	});
-var $elm$html$Html$li = _VirtualDom_node('li');
+var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
+var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -6815,6 +6980,40 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm_community$typed_svg$TypedSvg$Types$Percent = function (a) {
 	return {$: 'Percent', a: a};
 };
@@ -6822,6 +7021,7 @@ var $elm_community$typed_svg$TypedSvg$Types$Translate = F2(
 	function (a, b) {
 		return {$: 'Translate', a: a, b: b};
 	});
+var $author$project$VisualisationStickfigurePlot$andMapl = $elm$core$List$map2($elm$core$Basics$apR);
 var $gampleman$elm_visualization$Scale$convert = F2(
 	function (_v0, value) {
 		var scale = _v0.a;
@@ -6835,16 +7035,6 @@ var $elm$virtual_dom$VirtualDom$attribute = F2(
 			_VirtualDom_noJavaScriptOrHtmlUri(value));
 	});
 var $elm_community$typed_svg$TypedSvg$Core$attribute = $elm$virtual_dom$VirtualDom$attribute;
-var $elm_community$typed_svg$TypedSvg$Attributes$fontFamily = function (families) {
-	if (!families.b) {
-		return A2($elm_community$typed_svg$TypedSvg$Core$attribute, 'font-family', 'inherit');
-	} else {
-		return A2(
-			$elm_community$typed_svg$TypedSvg$Core$attribute,
-			'font-family',
-			A2($elm$core$String$join, ', ', families));
-	}
-};
 var $elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString = function (length) {
 	switch (length.$) {
 		case 'Cm':
@@ -6897,59 +7087,90 @@ var $elm$virtual_dom$VirtualDom$nodeNS = F2(
 	});
 var $elm_community$typed_svg$TypedSvg$Core$node = $elm$virtual_dom$VirtualDom$nodeNS('http://www.w3.org/2000/svg');
 var $elm_community$typed_svg$TypedSvg$g = $elm_community$typed_svg$TypedSvg$Core$node('g');
-var $author$project$Scatterplot$h = 450;
+var $author$project$VisualisationStickfigurePlot$h = 450;
 var $elm_community$typed_svg$TypedSvg$Attributes$height = function (length) {
 	return A2(
 		$elm_community$typed_svg$TypedSvg$Core$attribute,
 		'height',
 		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
 };
+var $elm$core$List$maximum = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(
+			A3($elm$core$List$foldl, $elm$core$Basics$max, x, xs));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$core$Basics$min = F2(
+	function (x, y) {
+		return (_Utils_cmp(x, y) < 0) ? x : y;
+	});
+var $elm$core$List$minimum = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(
+			A3($elm$core$List$foldl, $elm$core$Basics$min, x, xs));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$VisualisationStickfigurePlot$inDegree = function (listvalue) {
+	return A2(
+		$elm$core$List$map,
+		function (x) {
+			return (180 * (x - A2(
+				$elm$core$Maybe$withDefault,
+				0,
+				$elm$core$List$minimum(listvalue)))) / (A2(
+				$elm$core$Maybe$withDefault,
+				10000,
+				$elm$core$List$maximum(listvalue)) - A2(
+				$elm$core$Maybe$withDefault,
+				0,
+				$elm$core$List$minimum(listvalue)));
+		},
+		listvalue);
+};
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
-var $author$project$Scatterplot$padding = 60;
-var $elm_community$typed_svg$TypedSvg$Types$AnchorMiddle = {$: 'AnchorMiddle'};
+var $author$project$VisualisationStickfigurePlot$padding = 60;
 var $elm_community$typed_svg$TypedSvg$Types$Px = function (a) {
 	return {$: 'Px', a: a};
 };
-var $elm_community$typed_svg$TypedSvg$circle = $elm_community$typed_svg$TypedSvg$Core$node('circle');
+var $elm_community$typed_svg$TypedSvg$Types$px = $elm_community$typed_svg$TypedSvg$Types$Px;
+var $elm_community$typed_svg$TypedSvg$Types$AnchorMiddle = {$: 'AnchorMiddle'};
 var $elm_community$typed_svg$TypedSvg$Attributes$class = function (names) {
 	return A2(
 		$elm_community$typed_svg$TypedSvg$Core$attribute,
 		'class',
 		A2($elm$core$String$join, ' ', names));
 };
-var $elm_community$typed_svg$TypedSvg$Attributes$cx = function (length) {
+var $elm$core$Basics$cos = _Basics_cos;
+var $elm$core$Basics$pi = _Basics_pi;
+var $elm$core$Basics$degrees = function (angleInDegrees) {
+	return (angleInDegrees * $elm$core$Basics$pi) / 180;
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$points = function (pts) {
+	var pointToString = function (_v0) {
+		var xx = _v0.a;
+		var yy = _v0.b;
+		return $elm$core$String$fromFloat(xx) + (', ' + $elm$core$String$fromFloat(yy));
+	};
 	return A2(
 		$elm_community$typed_svg$TypedSvg$Core$attribute,
-		'cx',
-		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+		'points',
+		A2(
+			$elm$core$String$join,
+			' ',
+			A2($elm$core$List$map, pointToString, pts)));
 };
-var $elm_community$typed_svg$TypedSvg$Types$px = $elm_community$typed_svg$TypedSvg$Types$Px;
-var $elm_community$typed_svg$TypedSvg$Attributes$InPx$cx = function (value) {
-	return $elm_community$typed_svg$TypedSvg$Attributes$cx(
-		$elm_community$typed_svg$TypedSvg$Types$px(value));
-};
-var $elm_community$typed_svg$TypedSvg$Attributes$cy = function (length) {
-	return A2(
-		$elm_community$typed_svg$TypedSvg$Core$attribute,
-		'cy',
-		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
-};
-var $elm_community$typed_svg$TypedSvg$Attributes$InPx$cy = function (value) {
-	return $elm_community$typed_svg$TypedSvg$Attributes$cy(
-		$elm_community$typed_svg$TypedSvg$Types$px(value));
-};
-var $elm_community$typed_svg$TypedSvg$Attributes$r = function (length) {
-	return A2(
-		$elm_community$typed_svg$TypedSvg$Core$attribute,
-		'r',
-		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
-};
-var $elm_community$typed_svg$TypedSvg$Attributes$InPx$r = function (value) {
-	return $elm_community$typed_svg$TypedSvg$Attributes$r(
-		$elm_community$typed_svg$TypedSvg$Types$px(value));
-};
+var $elm_community$typed_svg$TypedSvg$polyline = $elm_community$typed_svg$TypedSvg$Core$node('polyline');
+var $elm$core$Basics$sin = _Basics_sin;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm_community$typed_svg$TypedSvg$TypesToStrings$anchorAlignmentToString = function (anchorAlignment) {
@@ -7072,54 +7293,188 @@ var $elm_community$typed_svg$TypedSvg$Attributes$InPx$y = function (value) {
 	return $elm_community$typed_svg$TypedSvg$Attributes$y(
 		$elm_community$typed_svg$TypedSvg$Types$px(value));
 };
-var $author$project$Scatterplot$point = F3(
-	function (scaleX, scaleY, yxPoint) {
-		return A2(
-			$elm_community$typed_svg$TypedSvg$g,
-			_List_fromArray(
-				[
-					$elm_community$typed_svg$TypedSvg$Attributes$class(
-					_List_fromArray(
-						['point'])),
-					$elm_community$typed_svg$TypedSvg$Attributes$fontSize(
-					$elm_community$typed_svg$TypedSvg$Types$Px(15.0)),
-					$elm_community$typed_svg$TypedSvg$Attributes$fontFamily(
-					_List_fromArray(
-						['Times New Roman'])),
-					$elm_community$typed_svg$TypedSvg$Attributes$transform(
-					_List_fromArray(
-						[
-							A2(
-							$elm_community$typed_svg$TypedSvg$Types$Translate,
-							A2($gampleman$elm_visualization$Scale$convert, scaleX, yxPoint.x),
-							A2($gampleman$elm_visualization$Scale$convert, scaleY, yxPoint.y))
-						]))
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm_community$typed_svg$TypedSvg$circle,
-					_List_fromArray(
-						[
-							$elm_community$typed_svg$TypedSvg$Attributes$InPx$cx(0),
-							$elm_community$typed_svg$TypedSvg$Attributes$InPx$cy(0),
-							$elm_community$typed_svg$TypedSvg$Attributes$InPx$r(5)
-						]),
-					_List_Nil),
-					A2(
-					$elm_community$typed_svg$TypedSvg$text_,
-					_List_fromArray(
-						[
-							$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(10),
-							$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(-20),
-							$elm_community$typed_svg$TypedSvg$Attributes$textAnchor($elm_community$typed_svg$TypedSvg$Types$AnchorMiddle)
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text(yxPoint.pointName)
-						]))
-				]));
-	});
+var $author$project$VisualisationStickfigurePlot$stickfigure = function (scaleX) {
+	return function (scaleY) {
+		return function (lange) {
+			return function (xValues) {
+				return function (yValues) {
+					return function (uDegree) {
+						return function (vDegree) {
+							return function (pDegree) {
+								return function (qDegree) {
+									return function (zDegree) {
+										return function (xyPoint) {
+											return A2(
+												$elm_community$typed_svg$TypedSvg$g,
+												_List_fromArray(
+													[
+														$elm_community$typed_svg$TypedSvg$Attributes$class(
+														_List_fromArray(
+															['line']))
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm_community$typed_svg$TypedSvg$g,
+														_List_fromArray(
+															[
+																$elm_community$typed_svg$TypedSvg$Attributes$transform(
+																_List_fromArray(
+																	[
+																		A2($elm_community$typed_svg$TypedSvg$Types$Translate, $author$project$VisualisationStickfigurePlot$padding, $author$project$VisualisationStickfigurePlot$padding)
+																	]))
+															]),
+														_List_fromArray(
+															[
+																A2(
+																$elm_community$typed_svg$TypedSvg$text_,
+																_List_fromArray(
+																	[
+																		$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(320),
+																		$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(-100),
+																		$elm_community$typed_svg$TypedSvg$Attributes$textAnchor($elm_community$typed_svg$TypedSvg$Types$AnchorMiddle)
+																	]),
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text(xyPoint.pointName)
+																	]))
+															])),
+														A2(
+														$elm_community$typed_svg$TypedSvg$g,
+														_List_fromArray(
+															[
+																$elm_community$typed_svg$TypedSvg$Attributes$transform(
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm_community$typed_svg$TypedSvg$Types$Translate,
+																		A2($gampleman$elm_visualization$Scale$convert, scaleX, xValues),
+																		A2($gampleman$elm_visualization$Scale$convert, scaleY, yValues))
+																	]))
+															]),
+														_List_fromArray(
+															[
+																A2(
+																$elm_community$typed_svg$TypedSvg$polyline,
+																_List_fromArray(
+																	[
+																		$elm_community$typed_svg$TypedSvg$Attributes$points(
+																		_List_fromArray(
+																			[
+																				_Utils_Tuple2(
+																				(lange / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree)),
+																				(lange / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree))),
+																				_Utils_Tuple2(
+																				((-lange) / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree)),
+																				((-lange) / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree)))
+																			]))
+																	]),
+																_List_Nil),
+																A2(
+																$elm_community$typed_svg$TypedSvg$polyline,
+																_List_fromArray(
+																	[
+																		$elm_community$typed_svg$TypedSvg$Attributes$points(
+																		_List_fromArray(
+																			[
+																				_Utils_Tuple2(
+																				((-lange) / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree)),
+																				((-lange) / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree))),
+																				_Utils_Tuple2(
+																				(((-lange) / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree))) + (lange * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(vDegree))),
+																				(((-lange) / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree))) - (lange * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(vDegree))))
+																			]))
+																	]),
+																_List_Nil),
+																A2(
+																$elm_community$typed_svg$TypedSvg$polyline,
+																_List_fromArray(
+																	[
+																		$elm_community$typed_svg$TypedSvg$Attributes$points(
+																		_List_fromArray(
+																			[
+																				_Utils_Tuple2(
+																				((-lange) / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree)),
+																				((-lange) / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree))),
+																				_Utils_Tuple2(
+																				(((-lange) / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree))) - (lange * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(pDegree))),
+																				(((-lange) / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree))) - (lange * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(pDegree))))
+																			]))
+																	]),
+																_List_Nil),
+																A2(
+																$elm_community$typed_svg$TypedSvg$polyline,
+																_List_fromArray(
+																	[
+																		$elm_community$typed_svg$TypedSvg$Attributes$points(
+																		_List_fromArray(
+																			[
+																				_Utils_Tuple2(
+																				(lange / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree)),
+																				(lange / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree))),
+																				_Utils_Tuple2(
+																				((lange / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree))) + (lange * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(qDegree))),
+																				((lange / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree))) + (lange * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(qDegree))))
+																			]))
+																	]),
+																_List_Nil),
+																A2(
+																$elm_community$typed_svg$TypedSvg$polyline,
+																_List_fromArray(
+																	[
+																		$elm_community$typed_svg$TypedSvg$Attributes$points(
+																		_List_fromArray(
+																			[
+																				_Utils_Tuple2(
+																				(lange / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree)),
+																				(lange / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree))),
+																				_Utils_Tuple2(
+																				((lange / 2) * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(uDegree))) - (lange * $elm$core$Basics$cos(
+																					$elm$core$Basics$degrees(zDegree))),
+																				((lange / 2) * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(uDegree))) + (lange * $elm$core$Basics$sin(
+																					$elm$core$Basics$degrees(zDegree))))
+																			]))
+																	]),
+																_List_Nil)
+															]))
+													]));
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var $elm_community$typed_svg$TypedSvg$style = $elm_community$typed_svg$TypedSvg$Core$node('style');
 var $elm_community$typed_svg$TypedSvg$svg = $elm_community$typed_svg$TypedSvg$Core$node('svg');
 var $elm_community$typed_svg$TypedSvg$Core$text = $elm$virtual_dom$VirtualDom$text;
@@ -7137,8 +7492,8 @@ var $elm_community$typed_svg$TypedSvg$Attributes$viewBox = F4(
 					_List_fromArray(
 						[minX, minY, vWidth, vHeight]))));
 	});
-var $author$project$Scatterplot$w = 900;
-var $author$project$Scatterplot$adding = F2(
+var $author$project$VisualisationStickfigurePlot$w = 900;
+var $author$project$VisualisationStickfigurePlot$adding = F2(
 	function (_v0, x) {
 		var min = _v0.a;
 		var max = _v0.b;
@@ -7192,18 +7547,8 @@ var $gampleman$elm_visualization$Statistics$extentBy = F2(
 		}
 	});
 var $gampleman$elm_visualization$Statistics$extent = $gampleman$elm_visualization$Statistics$extentBy($elm$core$Basics$identity);
-var $elm$core$List$maximum = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(
-			A3($elm$core$List$foldl, $elm$core$Basics$max, x, xs));
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
-var $author$project$Scatterplot$tickCount = 5;
-var $author$project$Scatterplot$wideExtent = function (values) {
+var $author$project$VisualisationStickfigurePlot$tickCount = 5;
+var $author$project$VisualisationStickfigurePlot$wideExtent = function (values) {
 	var result = A2(
 		$elm$core$Maybe$withDefault,
 		_Utils_Tuple2(0, 0),
@@ -7212,8 +7557,8 @@ var $author$project$Scatterplot$wideExtent = function (values) {
 		$elm$core$Maybe$withDefault,
 		0,
 		$elm$core$List$maximum(values));
-	var result1 = A2($author$project$Scatterplot$adding, result, ($author$project$Scatterplot$tickCount * max) / 50);
-	var result2 = A2($author$project$Scatterplot$adding, result1, 0.0);
+	var result1 = A2($author$project$VisualisationStickfigurePlot$adding, result, ($author$project$VisualisationStickfigurePlot$tickCount * max) / 50);
+	var result2 = A2($author$project$VisualisationStickfigurePlot$adding, result1, 0.0);
 	return result2;
 };
 var $elm_community$typed_svg$TypedSvg$Attributes$width = function (length) {
@@ -7758,20 +8103,20 @@ var $gampleman$elm_visualization$Scale$linear = F2(
 		return $gampleman$elm_visualization$Scale$Scale(
 			A2($gampleman$elm_visualization$Scale$Continuous$linear, range_, domain_));
 	});
-var $author$project$Scatterplot$xScale = function (values) {
+var $author$project$VisualisationStickfigurePlot$xScale = function (values) {
 	return A2(
 		$gampleman$elm_visualization$Scale$linear,
-		_Utils_Tuple2(0, $author$project$Scatterplot$w - (2 * $author$project$Scatterplot$padding)),
-		$author$project$Scatterplot$wideExtent(values));
+		_Utils_Tuple2(0, $author$project$VisualisationStickfigurePlot$w - (2 * $author$project$VisualisationStickfigurePlot$padding)),
+		$author$project$VisualisationStickfigurePlot$wideExtent(values));
 };
-var $author$project$Scatterplot$xAsis = function (values) {
+var $author$project$VisualisationStickfigurePlot$xAxis = function (values) {
 	return A2(
 		$gampleman$elm_visualization$Axis$bottom,
 		_List_fromArray(
 			[
-				$gampleman$elm_visualization$Axis$tickCount($author$project$Scatterplot$tickCount)
+				$gampleman$elm_visualization$Axis$tickCount($author$project$VisualisationStickfigurePlot$tickCount)
 			]),
-		$author$project$Scatterplot$xScale(values));
+		$author$project$VisualisationStickfigurePlot$xScale(values));
 };
 var $gampleman$elm_visualization$Axis$horizontalAttrs = {
 	horizontal: true,
@@ -7786,456 +8131,353 @@ var $gampleman$elm_visualization$Axis$horizontalAttrs = {
 	y2: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$y2, $elm$core$String$fromFloat)
 };
 var $gampleman$elm_visualization$Axis$left = A4($gampleman$elm_visualization$Axis$element, $gampleman$elm_visualization$Axis$horizontalAttrs, -1, '0.32em', 'end');
-var $author$project$Scatterplot$yScale = function (values) {
+var $author$project$VisualisationStickfigurePlot$yScale = function (values) {
 	return A2(
 		$gampleman$elm_visualization$Scale$linear,
-		_Utils_Tuple2($author$project$Scatterplot$h - (2 * $author$project$Scatterplot$padding), 0),
-		$author$project$Scatterplot$wideExtent(values));
+		_Utils_Tuple2($author$project$VisualisationStickfigurePlot$h - (2 * $author$project$VisualisationStickfigurePlot$padding), 0),
+		$author$project$VisualisationStickfigurePlot$wideExtent(values));
 };
-var $author$project$Scatterplot$yAxis = function (values) {
+var $author$project$VisualisationStickfigurePlot$yAxis = function (values) {
 	return A2(
 		$gampleman$elm_visualization$Axis$left,
 		_List_fromArray(
 			[
-				$gampleman$elm_visualization$Axis$tickCount($author$project$Scatterplot$tickCount)
+				$gampleman$elm_visualization$Axis$tickCount($author$project$VisualisationStickfigurePlot$tickCount)
 			]),
-		$author$project$Scatterplot$yScale(values));
+		$author$project$VisualisationStickfigurePlot$yScale(values));
 };
-var $author$project$Scatterplot$scatterplot = function (model) {
-	var yValues = A2(
-		$elm$core$List$map,
-		function ($) {
-			return $.y;
-		},
-		model.data);
-	var yScaleLocal = $author$project$Scatterplot$yScale(yValues);
-	var xValues = A2(
-		$elm$core$List$map,
-		function ($) {
-			return $.x;
-		},
-		model.data);
-	var xScaleLocal = $author$project$Scatterplot$xScale(xValues);
-	var half = function (t) {
-		return (t.b - t.a) / 2;
-	};
-	var labelPosition = {
-		x: half(
-			$author$project$Scatterplot$wideExtent(xValues)),
-		y: $author$project$Scatterplot$wideExtent(yValues).b
-	};
-	return A2(
-		$elm_community$typed_svg$TypedSvg$svg,
-		_List_fromArray(
-			[
-				A4($elm_community$typed_svg$TypedSvg$Attributes$viewBox, 0, 0, $author$project$Scatterplot$w, $author$project$Scatterplot$h),
-				$elm_community$typed_svg$TypedSvg$Attributes$width(
-				$elm_community$typed_svg$TypedSvg$Types$Percent(100)),
-				$elm_community$typed_svg$TypedSvg$Attributes$height(
-				$elm_community$typed_svg$TypedSvg$Types$Percent(100))
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$elm_community$typed_svg$TypedSvg$style,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm_community$typed_svg$TypedSvg$Core$text('\n            .point circle { stroke-opacity: 0.2 ; stroke-width: 2 ; stroke: rgba(2, 19, 100, 0.8); fill: rgba(255, 255, 255,0.3); }\n            .point text { display: none; }\n            .point:hover circle { stroke: rgba(154, 22, 90, 0.8); fill: rgb(65, 209, 204); }\n            .point:hover text { display: inline; }\n          ')
-					])),
-				A2(
-				$elm_community$typed_svg$TypedSvg$g,
-				_List_fromArray(
-					[
-						$elm_community$typed_svg$TypedSvg$Attributes$transform(
-						_List_fromArray(
-							[
-								A2($elm_community$typed_svg$TypedSvg$Types$Translate, 60, 390)
-							]))
-					]),
-				_List_fromArray(
-					[
-						$author$project$Scatterplot$xAsis(xValues),
+var $author$project$VisualisationStickfigurePlot$stickfigureplot = F3(
+	function (model, len, grade) {
+		var zValues = A2(
+			$elm$core$List$map,
+			function ($) {
+				return $.g;
+			},
+			model.data);
+		var zDegree = A2(
+			$elm$core$List$map,
+			function (x) {
+				return 270 - x;
+			},
+			$author$project$VisualisationStickfigurePlot$inDegree(zValues));
+		var yValues = function () {
+			switch (grade) {
+				case '10':
+					return A2(
+						$elm$core$List$map,
+						function ($) {
+							return $.a;
+						},
+						model.data);
+				case '11':
+					return A2(
+						$elm$core$List$map,
+						function ($) {
+							return $.b;
+						},
+						model.data);
+				default:
+					return A2(
+						$elm$core$List$map,
+						function ($) {
+							return $.c;
+						},
+						model.data);
+			}
+		}();
+		var yScaleLocal = $author$project$VisualisationStickfigurePlot$yScale(yValues);
+		var xValues = function () {
+			switch (grade) {
+				case '10':
+					return A2(
+						$elm$core$List$map,
+						function ($) {
+							return $.x;
+						},
+						model.data);
+				case '11':
+					return A2(
+						$elm$core$List$map,
+						function ($) {
+							return $.y;
+						},
+						model.data);
+				default:
+					return A2(
+						$elm$core$List$map,
+						function ($) {
+							return $.z;
+						},
+						model.data);
+			}
+		}();
+		var xScaleLocal = $author$project$VisualisationStickfigurePlot$xScale(xValues);
+		var vValues = A2(
+			$elm$core$List$map,
+			function ($) {
+				return $.e;
+			},
+			model.data);
+		var vDegree = A2(
+			$elm$core$List$map,
+			function (x) {
+				return 270 - x;
+			},
+			$author$project$VisualisationStickfigurePlot$inDegree(vValues));
+		var uValues = A2(
+			$elm$core$List$map,
+			function ($) {
+				return $.i;
+			},
+			model.data);
+		var uDegree = A2(
+			$elm$core$List$map,
+			function (x) {
+				return 270 - x;
+			},
+			$author$project$VisualisationStickfigurePlot$inDegree(uValues));
+		var qValues = A2(
+			$elm$core$List$map,
+			function ($) {
+				return $.h;
+			},
+			model.data);
+		var qDegree = A2(
+			$elm$core$List$map,
+			function (x) {
+				return 270 - x;
+			},
+			$author$project$VisualisationStickfigurePlot$inDegree(qValues));
+		var pValues = A2(
+			$elm$core$List$map,
+			function ($) {
+				return $.f;
+			},
+			model.data);
+		var pDegree = A2(
+			$elm$core$List$map,
+			function (x) {
+				return 270 - x;
+			},
+			$author$project$VisualisationStickfigurePlot$inDegree(pValues));
+		var half = function (t) {
+			return ((t.b - t.a) * 8) / 9;
+		};
+		var labelPositions = {
+			x: half(
+				$author$project$VisualisationStickfigurePlot$wideExtent(xValues)),
+			y: $author$project$VisualisationStickfigurePlot$wideExtent(yValues).b
+		};
+		return A2(
+			$elm_community$typed_svg$TypedSvg$svg,
+			_List_fromArray(
+				[
+					A4($elm_community$typed_svg$TypedSvg$Attributes$viewBox, 0, 0, $author$project$VisualisationStickfigurePlot$w, $author$project$VisualisationStickfigurePlot$h),
+					$elm_community$typed_svg$TypedSvg$Attributes$width(
+					$elm_community$typed_svg$TypedSvg$Types$Percent(100)),
+					$elm_community$typed_svg$TypedSvg$Attributes$height(
+					$elm_community$typed_svg$TypedSvg$Types$Percent(100))
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm_community$typed_svg$TypedSvg$style,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm_community$typed_svg$TypedSvg$Core$text('\n            .line polyline { stroke: lightBlue; fill: rgba(255, 255, 255,0.3); ; stroke-width:1; }\n            .line text { display: none; }\n            .line:hover polyline { stroke: blue; stroke-width:1.5; }\n            .line:hover text { display: inline; font-size: small }\n          ')
+						])),
+					A2(
+					$elm_community$typed_svg$TypedSvg$g,
+					_List_fromArray(
+						[
+							$elm_community$typed_svg$TypedSvg$Attributes$transform(
+							_List_fromArray(
+								[
+									A2($elm_community$typed_svg$TypedSvg$Types$Translate, 60, 390)
+								]))
+						]),
+					_List_fromArray(
+						[
+							$author$project$VisualisationStickfigurePlot$xAxis(xValues),
+							A2(
+							$elm_community$typed_svg$TypedSvg$text_,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(
+									A2($gampleman$elm_visualization$Scale$convert, xScaleLocal, labelPositions.x)),
+									$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(35),
+									$elm_community$typed_svg$TypedSvg$Attributes$fontSize(
+									$elm_community$typed_svg$TypedSvg$Types$px(15))
+								]),
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Core$text(
+									(grade === '10') ? 'Math10' : ((grade === '11') ? 'Math11' : 'Math12'))
+								]))
+						])),
+					A2(
+					$elm_community$typed_svg$TypedSvg$g,
+					_List_fromArray(
+						[
+							$elm_community$typed_svg$TypedSvg$Attributes$transform(
+							_List_fromArray(
+								[
+									A2($elm_community$typed_svg$TypedSvg$Types$Translate, 60, 60)
+								]))
+						]),
+					_List_fromArray(
+						[
+							$author$project$VisualisationStickfigurePlot$yAxis(yValues),
+							A2(
+							$elm_community$typed_svg$TypedSvg$text_,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(-30),
+									$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(-30),
+									$elm_community$typed_svg$TypedSvg$Attributes$fontSize(
+									$elm_community$typed_svg$TypedSvg$Types$px(15))
+								]),
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Core$text(
+									(grade === '10') ? 'Port10' : ((grade === '11') ? 'Port11' : 'Port12'))
+								]))
+						])),
+					A2(
+					$elm_community$typed_svg$TypedSvg$g,
+					_List_fromArray(
+						[
+							$elm_community$typed_svg$TypedSvg$Attributes$transform(
+							_List_fromArray(
+								[
+									A2($elm_community$typed_svg$TypedSvg$Types$Translate, $author$project$VisualisationStickfigurePlot$padding, $author$project$VisualisationStickfigurePlot$padding)
+								]))
+						]),
+					A2(
+						$author$project$VisualisationStickfigurePlot$andMapl,
+						model.data,
 						A2(
-						$elm_community$typed_svg$TypedSvg$text_,
-						_List_fromArray(
-							[
-								$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(
-								A2($gampleman$elm_visualization$Scale$convert, xScaleLocal, labelPosition.x)),
-								$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(35),
-								$elm_community$typed_svg$TypedSvg$Attributes$fontFamily(
-								_List_fromArray(
-									['Times New Roman'])),
-								$elm_community$typed_svg$TypedSvg$Attributes$fontSize(
-								$elm_community$typed_svg$TypedSvg$Types$px(20))
-							]),
-						_List_fromArray(
-							[
-								$elm_community$typed_svg$TypedSvg$Core$text(model.xDescription)
-							]))
-					])),
-				A2(
-				$elm_community$typed_svg$TypedSvg$g,
-				_List_fromArray(
-					[
-						$elm_community$typed_svg$TypedSvg$Attributes$transform(
-						_List_fromArray(
-							[
-								A2($elm_community$typed_svg$TypedSvg$Types$Translate, 60, 60)
-							]))
-					]),
-				_List_fromArray(
-					[
-						$author$project$Scatterplot$yAxis(yValues),
-						A2(
-						$elm_community$typed_svg$TypedSvg$text_,
-						_List_fromArray(
-							[
-								$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(-30),
-								$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(-30),
-								$elm_community$typed_svg$TypedSvg$Attributes$fontFamily(
-								_List_fromArray(
-									['Times New Roman'])),
-								$elm_community$typed_svg$TypedSvg$Attributes$fontSize(
-								$elm_community$typed_svg$TypedSvg$Types$px(20))
-							]),
-						_List_fromArray(
-							[
-								$elm_community$typed_svg$TypedSvg$Core$text(model.yDescription)
-							]))
-					])),
-				A2(
-				$elm_community$typed_svg$TypedSvg$g,
-				_List_fromArray(
-					[
-						$elm_community$typed_svg$TypedSvg$Attributes$transform(
-						_List_fromArray(
-							[
-								A2($elm_community$typed_svg$TypedSvg$Types$Translate, $author$project$Scatterplot$padding, $author$project$Scatterplot$padding)
-							]))
-					]),
-				A2(
-					$elm$core$List$map,
-					A2($author$project$Scatterplot$point, xScaleLocal, yScaleLocal),
-					model.data))
-			]));
-};
-var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $author$project$Scatterplot$view = function (model) {
+							$author$project$VisualisationStickfigurePlot$andMapl,
+							zDegree,
+							A2(
+								$author$project$VisualisationStickfigurePlot$andMapl,
+								qDegree,
+								A2(
+									$author$project$VisualisationStickfigurePlot$andMapl,
+									pDegree,
+									A2(
+										$author$project$VisualisationStickfigurePlot$andMapl,
+										vDegree,
+										A2(
+											$author$project$VisualisationStickfigurePlot$andMapl,
+											uDegree,
+											A2(
+												$author$project$VisualisationStickfigurePlot$andMapl,
+												yValues,
+												A2(
+													$elm$core$List$map,
+													A3($author$project$VisualisationStickfigurePlot$stickfigure, xScaleLocal, yScaleLocal, len),
+													xValues)))))))))
+				]));
+	});
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $author$project$VisualisationStickfigurePlot$view = function (model) {
 	switch (model.$) {
 		case 'Error':
-			return $elm$html$Html$text('Unfortunately scatterplot StudentAcoholConsumption can not be open.');
+			return $elm_community$typed_svg$TypedSvg$Core$text('I cannot open the database');
 		case 'Loading':
-			return $elm$html$Html$text('Loading StudentAcoholConsumption');
+			return $elm_community$typed_svg$TypedSvg$Core$text('Loading ...');
 		default:
 			var l = model.a;
-			var studentAcoholConsumption = A6(
-				$author$project$Scatterplot$filterReducedStudentAcoholConsumption,
-				l.data,
-				function ($) {
-					return $.sex;
-				},
-				l.xFunction,
-				l.yFunction,
-				l.xName,
-				l.yName);
+			var numberStudies = $elm$core$List$length(l.data);
+			var filteredStud = $author$project$VisualisationStickfigurePlot$filterReducedStudentAcoholConsumption(l.data);
 			return A2(
 				$elm$html$Html$div,
 				_List_Nil,
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$ul,
+						$elm$html$Html$p,
 						_List_Nil,
 						_List_fromArray(
 							[
-								A2(
-								$elm$html$Html$li,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('You have a lot of interesting combinations to look for X at here'),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeX(
-													_Utils_Tuple2(
-														function ($) {
-															return $.firstperiodGradeMath;
-														},
-														'first period Grade mathematics')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('first period Grade mathematics')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeX(
-													_Utils_Tuple2(
-														function ($) {
-															return $.secondperiodGradeMath;
-														},
-														'second period Grade mathematics')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('second period Grade mathematics')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeX(
-													_Utils_Tuple2(
-														function ($) {
-															return $.thirdperiodGradeMath;
-														},
-														'third period Grade mathematics')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('third period Grade mathematics')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeX(
-													_Utils_Tuple2(
-														function ($) {
-															return $.firstperiodGradePort;
-														},
-														'first period Grade portuguese')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('first period Grade portuguese')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeX(
-													_Utils_Tuple2(
-														function ($) {
-															return $.firstperiodGradePort;
-														},
-														'second period Grade portuguese')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('second period Grade portuguese')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeX(
-													_Utils_Tuple2(
-														function ($) {
-															return $.firstperiodGradePort;
-														},
-														'third period Grade portuguese')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('third period Grade portuguese')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeX(
-													_Utils_Tuple2(
-														function ($) {
-															return $.dalc;
-														},
-														'workday alcohol consumption')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('workday alcohol consumption')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeX(
-													_Utils_Tuple2(
-														function ($) {
-															return $.walc;
-														},
-														'weekend alcohol consumption')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('weekend alcohol consumption')
-											]))
-									]))
+								$elm_community$typed_svg$TypedSvg$Core$text('Number of students: '),
+								$elm_community$typed_svg$TypedSvg$Core$text(
+								$elm$core$String$fromInt(numberStudies))
 							])),
 						A2(
-						$elm$html$Html$ul,
+						$elm$html$Html$p,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text('Please select the attributes for the axes: '),
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick(
+										$author$project$VisualisationStickfigurePlot$ChangeGrade('10'))
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Math10 vs Port10')
+									])),
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick(
+										$author$project$VisualisationStickfigurePlot$ChangeGrade('11'))
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Math11 vs Port11')
+									])),
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick(
+										$author$project$VisualisationStickfigurePlot$ChangeGrade('12'))
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Math12 vs Port12')
+									]))
+							])),
+						$elm_community$typed_svg$TypedSvg$Core$text('Please adjust the size of stick figure:'),
+						A2(
+						$elm$html$Html$p,
 						_List_Nil,
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$li,
-								_List_Nil,
+								$elm$html$Html$input,
 								_List_fromArray(
 									[
-										$elm$html$Html$text('You have a lot of interesting combinations to look for Y at here'),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeY(
-													_Utils_Tuple2(
-														function ($) {
-															return $.firstperiodGradeMath;
-														},
-														'first period Grade mathematics')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('first period Grade mathematics')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeY(
-													_Utils_Tuple2(
-														function ($) {
-															return $.secondperiodGradeMath;
-														},
-														'second period Grade mathematics')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('second period Grade mathematics')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeY(
-													_Utils_Tuple2(
-														function ($) {
-															return $.thirdperiodGradeMath;
-														},
-														'third period Grade mathematics')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('third period Grade mathematics')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeY(
-													_Utils_Tuple2(
-														function ($) {
-															return $.firstperiodGradePort;
-														},
-														'first period Grade portuguese')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('first period Grade portuguese')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeY(
-													_Utils_Tuple2(
-														function ($) {
-															return $.firstperiodGradePort;
-														},
-														'second period Grade portuguese')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('second period Grade portuguese')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeY(
-													_Utils_Tuple2(
-														function ($) {
-															return $.firstperiodGradePort;
-														},
-														'third period Grade portuguese')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('third period Grade portuguese')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeY(
-													_Utils_Tuple2(
-														function ($) {
-															return $.dalc;
-														},
-														'workday alcohol consumption')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('workday alcohol consumption')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Scatterplot$ChangeY(
-													_Utils_Tuple2(
-														function ($) {
-															return $.walc;
-														},
-														'weekend alcohol consumption')))
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('weekend alcohol consumption')
-											]))
-									]))
+										$elm$html$Html$Attributes$type_('range'),
+										$elm$html$Html$Attributes$min('2'),
+										$elm$html$Html$Attributes$max('15'),
+										$elm$html$Html$Attributes$value(
+										$elm$core$String$fromFloat(l.len)),
+										$elm$html$Html$Events$onInput($author$project$VisualisationStickfigurePlot$ChangeLen)
+									]),
+								_List_Nil),
+								$elm_community$typed_svg$TypedSvg$Core$text(
+								$elm$core$String$fromFloat(l.len))
 							])),
-						$author$project$Scatterplot$scatterplot(studentAcoholConsumption)
+						A3($author$project$VisualisationStickfigurePlot$stickfigureplot, filteredStud, l.len, l.gr)
 					]));
 	}
 };
-var $author$project$Scatterplot$main = $elm$browser$Browser$element(
-	{init: $author$project$Scatterplot$init, subscriptions: $author$project$Scatterplot$subscriptions, update: $author$project$Scatterplot$update, view: $author$project$Scatterplot$view});
-_Platform_export({'Scatterplot':{'init':$author$project$Scatterplot$main(
+var $author$project$VisualisationStickfigurePlot$main = $elm$browser$Browser$element(
+	{init: $author$project$VisualisationStickfigurePlot$init, subscriptions: $author$project$VisualisationStickfigurePlot$subscriptions, update: $author$project$VisualisationStickfigurePlot$update, view: $author$project$VisualisationStickfigurePlot$view});
+_Platform_export({'VisualisationStickfigurePlot':{'init':$author$project$VisualisationStickfigurePlot$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
 
-  var app = Elm.Scatterplot.init({ node: document.getElementById("elm") });
+  var app = Elm.VisualisationStickfigurePlot.init({ node: document.getElementById("elm") });
 }
 catch (e)
 {
