@@ -120,7 +120,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], firstFUNCTION = .firstperiodGradeMath, secondFUNCTION = .secondperiodGradeMath, thirdFUNCTION = .thirdperiodGradeMath, fourthFUNCTION = .firstperiodGradePort, firstNAME = "first period Grade mathematics", secondNAME = "second period Grade mathematics", thirdNAME = "third period Grade mathematics", fourthNAME = "first period Grade portuguese"}, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], firstFUNCTION = .firstperiodGradeMath, secondFUNCTION = .secondperiodGradeMath, thirdFUNCTION = .thirdperiodGradeMath, fourthFUNCTION = .dalc, firstNAME = "Math10", secondNAME = "Math11", thirdNAME = "Math12", fourthNAME = "workdayAlcohol"}, Cmd.none )
 
                 Err  _ ->
                     ( model, Cmd.none )
@@ -333,54 +333,54 @@ view model =
                         [
                             ul[][
                                 li[][
-                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic."
-                                    , Html.button [onClick (ChangeONE (.firstperiodGradeMath, "first period Grade mathematics"))][Html.text "firstPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeONE (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "secondPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "thirdPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeONE (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "firstPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "secondPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "third period Grade portuguese"))][Html.text "thirdPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workdayAlcoholConsumption"]
-                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekendAlcoholConsumption"]
+                                    Html.text <| "Select a data type from the first axis."
+                                    , Html.button [onClick (ChangeONE (.firstperiodGradeMath, "Math10"))][Html.text "Math10"]
+                                    , Html.button [onClick (ChangeONE (.secondperiodGradeMath, "Math11"))][Html.text "Math11"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradeMath, "Math12"))][Html.text "Math12"]
+                                    , Html.button [onClick (ChangeONE (.firstperiodGradePort, "Port10"))][Html.text "Port10"]
+                                    , Html.button [onClick (ChangeONE (.secondperiodGradePort, "Port11"))][Html.text "Port11"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "Port12"))][Html.text "Port12"]
+                                    , Html.button [onClick (ChangeONE (.dalc, "workdayAlcohol"))][Html.text "workdayAlcohol"]
+                                    , Html.button [onClick (ChangeONE (.walc, "weekendAlcohol"))][Html.text "weekendAlcohol"]
                                 ]
                             ]
                             , ul[][
                                 li[][
-                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic."
-                                    , Html.button [onClick (ChangeTWO (.firstperiodGradeMath, "first period Grade mathematics"))][Html.text "firstPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeTWO (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "secondPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeTWO (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "thirdPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeTWO (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "firstPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeTWO (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "secondPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "third period Grade portuguese"))][Html.text "thirdPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workdayAlcoholConsumption"]
-                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekendAlcoholConsumption"]
+                                    Html.text <| "Select a data type from the second axis."
+                                    , Html.button [onClick (ChangeTWO (.firstperiodGradeMath, "Math10"))][Html.text "Math10"]
+                                    , Html.button [onClick (ChangeTWO (.secondperiodGradeMath, "Math11"))][Html.text "Math11"]
+                                    , Html.button [onClick (ChangeTWO (.thirdperiodGradeMath, "Math12"))][Html.text "Math12"]
+                                    , Html.button [onClick (ChangeTWO (.firstperiodGradePort, "Port10"))][Html.text "Port10"]
+                                    , Html.button [onClick (ChangeTWO (.secondperiodGradePort, "Port11"))][Html.text "Port11"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "Port12"))][Html.text "Port12"]
+                                    , Html.button [onClick (ChangeONE (.dalc, "workdayAlcohol"))][Html.text "workdayAlcohol"]
+                                    , Html.button [onClick (ChangeONE (.walc, "weekendAlcohol"))][Html.text "weekendAlcohol"]
                                 ]
                             ]
                             , ul[][
                                 li[][
-                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic."
-                                    , Html.button [onClick (ChangeTHREE (.firstperiodGradeMath, "first period Grade mathematics"))][Html.text "firstPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeTHREE (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "secondPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeTHREE (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "thirdPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeTHREE (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "firstPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeTHREE (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "secondPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "first period Grade portuguese"))][Html.text "thirdPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workdayAlcoholConsumption"]
-                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "weekendAlcoholConsumption"]
+                                    Html.text <| "Select a data type from the third axis."
+                                    , Html.button [onClick (ChangeTHREE (.firstperiodGradeMath, "Math10"))][Html.text "Math10"]
+                                    , Html.button [onClick (ChangeTHREE (.secondperiodGradeMath, "Math11"))][Html.text "Math11"]
+                                    , Html.button [onClick (ChangeTHREE (.thirdperiodGradeMath, "Math12"))][Html.text "Math12"]
+                                    , Html.button [onClick (ChangeTHREE (.firstperiodGradePort, "Port10"))][Html.text "Port10"]
+                                    , Html.button [onClick (ChangeTHREE (.secondperiodGradePort, "Port11"))][Html.text "Port11"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "Port12"))][Html.text "Port12"]
+                                    , Html.button [onClick (ChangeONE (.dalc, "workdayAlcohol"))][Html.text "workdayAlcohol"]
+                                    , Html.button [onClick (ChangeONE (.walc, "weekendAlcohol"))][Html.text "weekendAlcohol"]
                                 ]
                             ]
                             , ul[][
                                 li[][
-                                    Html.text <| "Please select a data type from the first axis to get interesting outups about the topic."
-                                    , Html.button [onClick (ChangeFOUR (.firstperiodGradeMath, "first period Grade mathematics"))][Html.text "firstPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeFOUR (.secondperiodGradeMath, "second period Grade mathematics"))][Html.text "secondPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeFOUR (.thirdperiodGradeMath, "third period Grade mathematics"))][Html.text "thirdPeriodGrade Math"]
-                                    , Html.button [onClick (ChangeFOUR (.firstperiodGradePort, "first period Grade portuguese"))][Html.text "firstPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeFOUR (.secondperiodGradePort, "second period Grade portuguese"))][Html.text "secondPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "third period Grade portuguese"))][Html.text "thirdPeriodGrade Port"]
-                                    , Html.button [onClick (ChangeONE (.dalc, "workday alcohol consumption"))][Html.text "workdayAlcoholConsumption"]
-                                    , Html.button [onClick (ChangeONE (.walc, "weekend alcohol consumption"))][Html.text "workdayAlcoholConsumption"]
+                                    Html.text <| "Select a data type from the fourth axis."
+                                    , Html.button [onClick (ChangeFOUR (.firstperiodGradeMath, "Math10"))][Html.text "Math10"]
+                                    , Html.button [onClick (ChangeFOUR (.secondperiodGradeMath, "Math11"))][Html.text "Math11"]
+                                    , Html.button [onClick (ChangeFOUR (.thirdperiodGradeMath, "Math12"))][Html.text "Math12"]
+                                    , Html.button [onClick (ChangeFOUR (.firstperiodGradePort, "Port10"))][Html.text "Port10"]
+                                    , Html.button [onClick (ChangeFOUR (.secondperiodGradePort, "Port11"))][Html.text "Port11"]
+                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "Port12"))][Html.text "Port12"]
+                                    , Html.button [onClick (ChangeONE (.dalc, "workdayAlcohol"))][Html.text "workdayAlcohol"]
+                                    , Html.button [onClick (ChangeONE (.walc, "weekendAlcohol"))][Html.text "weekendAlcohol"]
                                 ]
                              ]
                                 , parallelCoordinatesPlot 600 2 plotData

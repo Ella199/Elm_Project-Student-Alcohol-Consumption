@@ -240,8 +240,8 @@ stud2point stud =
             |> andMap (Just stud.absences)
 pointLabel : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point 
 pointLabel sex firstperiodGradeMath secondperiodGradeMath thirdperiodGradeMath firstperiodGradePort secondperiodGradePort thirdperiodGradePort dalc walc fedu medu freetime absences= 
-    Point (sex ++ " (" ++ "DailyAlcCons: " ++  String.fromFloat dalc  ++ ", " ++ String.fromFloat fedu ++ ", "++ String.fromFloat medu ++ ", " 
-        ++ String.fromFloat freetime ++ ", " ++ String.fromFloat absences ++")") 
+    Point (sex ++ " (" ++ "DailyAlcCons: " ++  String.fromFloat dalc  ++ ", " ++ "Feduc: " ++ String.fromFloat fedu ++ ", " ++ "Meduc: " ++ String.fromFloat medu ++ ", " 
+        ++ "absences: " ++ String.fromFloat freetime ++ ", " ++ "freetime: " ++ String.fromFloat absences ++ ")") 
         (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime)
 xAxis : List Float -> Svg msg
 xAxis values = 

@@ -111,7 +111,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .thirdperiodGradeMath, yFunction = .dalc, xName = "workday alcohol consumption", yName = "third period Grade Math"}, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .thirdperiodGradeMath, yFunction = .dalc, xName = "workdayAlcohol", yName = "Math12"}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
@@ -311,28 +311,28 @@ view model =
                 [
                     ul[][
                         li[][
-                            Html.text <| "You have a lot of interesting combinations to look for X at here"
-                            , Html.button [onClick (ChangeX (.firstperiodGradeMath, "first period Grade mathematics"))] [Html.text "first period Grade mathematics"]
-                            , Html.button [onClick (ChangeX (.secondperiodGradeMath, "second period Grade mathematics"))] [Html.text "second period Grade mathematics"]
-                            , Html.button [onClick (ChangeX (.thirdperiodGradeMath, "third period Grade mathematics"))] [Html.text "third period Grade mathematics"]
-                            , Html.button [onClick (ChangeX (.firstperiodGradePort, "first period Grade portuguese"))] [Html.text "first period Grade portuguese"]
-                            , Html.button [onClick (ChangeX (.firstperiodGradePort, "second period Grade portuguese"))] [Html.text "second period Grade portuguese"]
-                            , Html.button [onClick (ChangeX (.firstperiodGradePort, "third period Grade portuguese"))] [Html.text "third period Grade portuguese"]
-                            , Html.button [onClick (ChangeX (.dalc, "workday alcohol consumption"))] [Html.text "workday alcohol consumption"]
-                            , Html.button [onClick (ChangeX (.walc, "weekend alcohol consumption"))] [Html.text "weekend alcohol consumption"]
+                            Html.text <| "Change the x axis, to explore different combinations"
+                            , Html.button [onClick (ChangeX (.firstperiodGradeMath, "Math10"))] [Html.text "Math10"]
+                            , Html.button [onClick (ChangeX (.secondperiodGradeMath, "Math11"))] [Html.text "Math11"]
+                            , Html.button [onClick (ChangeX (.thirdperiodGradeMath, "Math12"))] [Html.text "Math12"]
+                            , Html.button [onClick (ChangeX (.firstperiodGradePort, "Port10"))] [Html.text "Port10"]
+                            , Html.button [onClick (ChangeX (.firstperiodGradePort, "Port11"))] [Html.text "Port11"]
+                            , Html.button [onClick (ChangeX (.firstperiodGradePort, "Port12"))] [Html.text "Port12"]
+                            , Html.button [onClick (ChangeX (.dalc, "workdayAlcohol"))] [Html.text "workdayAlcohol"]
+                            , Html.button [onClick (ChangeX (.walc, "weekendAlcohol"))] [Html.text "weekendAlcohol"]
                        ]
                     ]
                     , ul[][
                         li[][
-                            Html.text <| "You have a lot of interesting combinations to look for Y at here"
-                            , Html.button [onClick (ChangeY (.firstperiodGradeMath, "first period Grade mathematics"))] [Html.text "first period Grade mathematics"]
-                            , Html.button [onClick (ChangeY (.secondperiodGradeMath, "second period Grade mathematics"))] [Html.text "second period Grade mathematics"]
-                            , Html.button [onClick (ChangeY (.thirdperiodGradeMath, "third period Grade mathematics"))] [Html.text "third period Grade mathematics"]
-                            , Html.button [onClick (ChangeY (.firstperiodGradePort, "first period Grade portuguese"))] [Html.text "first period Grade portuguese"]
-                            , Html.button [onClick (ChangeY (.firstperiodGradePort, "second period Grade portuguese"))] [Html.text "second period Grade portuguese"]
-                            , Html.button [onClick (ChangeY (.firstperiodGradePort, "third period Grade portuguese"))] [Html.text "third period Grade portuguese"]
-                            , Html.button [onClick (ChangeY (.dalc, "workday alcohol consumption"))] [Html.text "workday alcohol consumption"]
-                            , Html.button [onClick (ChangeY (.walc, "weekend alcohol consumption"))] [Html.text "weekend alcohol consumption"]
+                            Html.text <| "Change the y axis, to explore different combinations"
+                            , Html.button [onClick (ChangeY (.firstperiodGradeMath, "Math10"))] [Html.text "Math10"]
+                            , Html.button [onClick (ChangeY (.secondperiodGradeMath, "Math11"))] [Html.text "Math11"]
+                            , Html.button [onClick (ChangeY (.thirdperiodGradeMath, "Math12"))] [Html.text "Math12"]
+                            , Html.button [onClick (ChangeY (.firstperiodGradePort, "Port10"))] [Html.text "Port10"]
+                            , Html.button [onClick (ChangeY (.firstperiodGradePort, "Port11"))] [Html.text "Port11"]
+                            , Html.button [onClick (ChangeY (.firstperiodGradePort, "Port12"))] [Html.text "Port12"]
+                            , Html.button [onClick (ChangeY (.dalc, "workdayAlcohol"))] [Html.text "workdayAlcohol"]
+                            , Html.button [onClick (ChangeY (.walc, "weekendAlcohol"))] [Html.text "weekendAlcohol"]
                        ]
                     ]
                     ,   scatterplot studentAcoholConsumption
