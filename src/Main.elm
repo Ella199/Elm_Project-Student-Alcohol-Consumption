@@ -64,6 +64,9 @@ view model =
         , Html.button [ onClick (SwitchView ParalleleKoordinaten) ] [ Html.text "ParalleleKoordinaten" ]
         , Html.button [ onClick (SwitchView VisualisationStickfigure) ] [ Html.text "VisualisationStickfigure" ]
         , case model.active of
+            Text ->
+                Html.p [] [ Html.text "Elm Visualisation" ]
+
             Scatterplot ->
                 Html.map ScatterplotMsg (Scatterplot.view model.scatterplotModel)
 
