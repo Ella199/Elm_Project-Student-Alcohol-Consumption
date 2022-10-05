@@ -41,9 +41,16 @@ main =
         }
 
 
-init : Model
-init =
-    Model Scatterplot.init ParalleleKoordinaten.init VisualisationStickfigure.init 
+init : () -> ( Model, Cmd Msg )
+init _ =
+    let
+        (scatterplot, scatterplotCmd) = Scatterplot.init ()
+        (paralleleKoordinaten, paralleleKoordinatenCmd) = ParalleleKoordinaten.init ()
+        (visualisationStickfigurePlot, visualisationStickfigurePlotCmd) = VisualisationStickfigurePlot.init ()
+    in
+    ( Model scatterplot paralleleKoordinaten visualisationStickfigurePlot Text
+    , Cmd.batch [ Cmd.map ScatterplotMsg scatterplotCmd, Cmd.map ParalleleKoordinatenMsg paralleleKoordinatenCmd, Cmd.map VisualisationStickfigureMsg visualisationStickfigurePlotCmd ])
+
 
 --
 
