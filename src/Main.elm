@@ -72,7 +72,7 @@ view model =
 
             ParalleleKoordinaten ->
                 Html.map ParalleleKoordinatenMsg (ParalleleKoordinaten.view model.paralleleKoordinatenModel)
-                
+
             VisualisationStickfigure ->
                 Html.map VisualisationStickfigureMsg (VisualisationStickfigurePlot.view model.visualisationStickfigurePlotModel)
         ]
@@ -81,14 +81,19 @@ view model =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        TextMsg ->
-            { model | textModel = Text.String}
         
-        ScatterplotMsg ScatterplotMsg ->
-            { model | scatterplotModel = Scatterplot.update ScatterplotMsg model.scatterplotModel }
+        
+        ScatterplotMsg scatterplotMsg ->
+            let
+                (scatterplot, scatterplotCmd) = Scatterplot.update scatterplotMsg model.scatterplotModel
+            in
+            ( { model | scatterplotModel = scatterplot }, Cmd.map ScatterplotMsg scatterplotCmd )
 
-        ParalleleKoordinatenMsg ParalleleKoordinatenMsg ->
-            { model | paralleleKoordinatenModel = ParalleleKoordinaten.update ParalleleKoordinatenMsg model.paralleleKoordinaten }
+        ParalleleKoordinatenMsg paralleleKoordinatenMsg ->
+            let
+                (paralleleKoordinaten, paralleleKoordinatenCmd) = ParalleleKoordinaten.update paralleleKoordinatenMsg model.paralleleKoordinatenModel
+            in
+            ( { model | paralleleKoordinatenModel = paralleleKoordinaten }, Cmd.map ParalleleKoordinatenMsg paralleleKoordinatenCmd )
 
         SwitchView newActitve ->
             { model | active = newActitve }
