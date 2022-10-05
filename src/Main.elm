@@ -5,7 +5,7 @@ import Html.Events exposing (onClick)
 import VisualisationStickfigurePlot
 import ParalleleKoordinaten
 import Scatterplot
-
+import Scatterplot exposing (scatterplot)
 
 
 type alias Model =
