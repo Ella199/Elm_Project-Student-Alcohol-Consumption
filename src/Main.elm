@@ -24,7 +24,7 @@ type Active
 
 
 type Msg
-    = TextMsg
+    = ScatterplotMsg Scatterplot.Msg
     | ScatterplotMsg Scatterplot.Msg
     | ParalleleKoordinatenMsg ParalleleKoordinaten.Msg
     | VisualisationStickfigureMsg VisualisationStickfigure.Msg
@@ -33,10 +33,11 @@ type Msg
 
 main : Program () Model Msg
 main =
-    Browser.sandbox
+     Browser.element
         { init = init
         , view = view
         , update = update
+        , subscriptions = subscriptions
         }
 
 
