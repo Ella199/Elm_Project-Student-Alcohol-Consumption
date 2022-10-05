@@ -51,6 +51,9 @@ init _ =
     ( Model scatterplot paralleleKoordinaten visualisationStickfigurePlot Text
     , Cmd.batch [ Cmd.map ScatterplotMsg scatterplotCmd, Cmd.map ParalleleKoordinatenMsg paralleleKoordinatenCmd, Cmd.map VisualisationStickfigureMsg visualisationStickfigurePlotCmd ])
 
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
 
 --
 
