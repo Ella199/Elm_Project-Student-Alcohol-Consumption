@@ -275,7 +275,10 @@ body model =
 
             ParalleleKoordinaten ->
                 Html.map ParalleleKoordinatenMsg (ParalleleKoordinaten.view model.paralleleKoordinatenModel)
-
+                
+            VisualisationStickfigure ->
+                Html.map VisualisationStickfigureMsg (VisualisationStickfigurePlot.view model.visualisationStickfigurePlotModel)
+        ]
 
 view : Model -> Html.Html Msg
 view model =
