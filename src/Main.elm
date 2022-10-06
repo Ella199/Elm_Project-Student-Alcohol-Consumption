@@ -95,5 +95,11 @@ update msg model =
             in
             ( { model | paralleleKoordinatenModel = paralleleKoordinaten }, Cmd.map ParalleleKoordinatenMsg paralleleKoordinatenCmd )
 
+        VisualisationStickfigureMsg visualisationStickfigurePlotMsg ->
+            let
+                (visualisationStickfigurePlot, visualisationStickfigurePlotCmd) = VisualisationStickfigurePlot.update visualisationStickfigurePlotMsg model.visualisationStickfigurePlotModel
+            in
+            ( { model | visualisationStickfigurePlotModel = visualisationStickfigurePlot }, Cmd.map VisualisationStickfigureMsg visualisationStickfigurePlotCmd )
+
         SwitchView newActitve ->
-            { model | active = newActitve }
+            ( { model | active = newActitve }, Cmd.none )
