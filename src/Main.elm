@@ -273,6 +273,9 @@ body model =
             Scatterplot ->
                 Html.map ScatterplotMsg (Scatterplot.view model.scatterplotModel)
 
+            ParalleleKoordinaten ->
+                Html.map ParalleleKoordinatenMsg (ParalleleKoordinaten.view model.paralleleKoordinatenModel)
+
 
 view : Model -> Html.Html Msg
 view model =
