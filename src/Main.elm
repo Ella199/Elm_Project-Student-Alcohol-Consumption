@@ -312,6 +312,11 @@ footer model =
             ]
         , Html.nav
             []
+[ Html.a
+                [ Html.Attributes.href "https://www.kaggle.com/datasets/uciml/student-alcohol-consumption"
+                , Html.Attributes.target "_blank"
+                ]
+                [ Html.text "Daten" ]
 
 update : Msg -> Model -> Model
 update msg model =
