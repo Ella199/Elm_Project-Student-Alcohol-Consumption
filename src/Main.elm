@@ -261,6 +261,16 @@ body model =
                             [ Html.text "Parallele Koordinaten ",
                             FontAwesome.view FontAwesome.Solid.arrowRight
                             ]
+                        , Html.button 
+                            [ onClick (SwitchView VisualisationStickfigure) ]
+                            [ Html.text "Stickfigures ",
+                            FontAwesome.view FontAwesome.Solid.arrowRight
+                            ]
+                        ]
+                    ]
+
+
+
 
 view : Model -> Html.Html Msg
 view model =
