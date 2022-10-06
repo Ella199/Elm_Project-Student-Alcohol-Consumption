@@ -199,6 +199,37 @@ nav model =
             , onClick (SwitchView Text)
             ]
             [ FontAwesome.view FontAwesome.Solid.beer ]
+        , Html.span 
+            [ Html.Attributes.id "nav-title"
+            , onClick (SwitchView Text)
+            ] 
+            [ Html.text " Alkoholkonsum von Schülern" ]
+        , Html.button
+            [ onClick (SwitchView Text)
+            , Html.Attributes.class (if model.active == Text then "active" else "")
+            ]
+            [ FontAwesome.view FontAwesome.Solid.home ]
+        , Html.button
+            [ onClick (SwitchView Scatterplot)
+            , Html.Attributes.class (if model.active == Scatterplot then "active" else "")
+            ]
+            [ Html.text "Scatterplot" ]
+        , Html.button 
+            [ onClick (SwitchView ParalleleKoordinaten)
+            , Html.Attributes.class (if model.active == ParalleleKoordinaten then "active" else "")
+            ]
+            [ Html.text "Parallele Koordinaten" ]
+        , Html.button 
+            [ onClick (SwitchView VisualisationStickfigure)
+            , Html.Attributes.class (if model.active == VisualisationStickfigure then "active" else "")
+            ]
+            [ Html.text "Stickfigures" ]
+        , Html.a 
+            [ Html.Attributes.href "https://github.com/Ella199/Elm_Project-Student-Alcohol-Consumption"
+            , Html.Attributes.target "_blank"
+            ]
+            [ FontAwesome.view FontAwesome.Brands.github ] 
+        ]
 
 view : Model -> Html.Html Msg
 view model =
