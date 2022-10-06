@@ -256,7 +256,11 @@ body model =
                             FontAwesome.view FontAwesome.Solid.arrowRight
                             ]
 
-
+                        , Html.button 
+                            [ onClick (SwitchView ParalleleKoordinaten) ]
+                            [ Html.text "Parallele Koordinaten ",
+                            FontAwesome.view FontAwesome.Solid.arrowRight
+                            ]
 
 view : Model -> Html.Html Msg
 view model =
