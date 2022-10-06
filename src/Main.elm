@@ -190,6 +190,14 @@ style =
   in
     Html.node "style" [] [ Html.text styles ]
 
+nav : Model -> Html.Html Msg
+nav model =
+    Html.nav 
+        [ Html.Attributes.id "nav" ] 
+        [ Html.span 
+            [ Html.Attributes.id "nav-logo"
+            , onClick (SwitchView Text)
+            ]
 
 view : Model -> Html.Html Msg
 view model =
