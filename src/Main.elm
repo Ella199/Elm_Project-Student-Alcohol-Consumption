@@ -248,6 +248,15 @@ body model =
                         , Html.text "Was haben wir für Daten verwendet?"
                         ]
                     , Html.p [] [ Html.text "Wählen Sie nun eine unserer Visualisierungen:" ]       
+                    , Html.nav
+                        [ Html.Attributes.id "start-screen-nav" ]
+                        [ Html.button
+                            [ onClick (SwitchView Scatterplot) ]
+                            [ Html.text "Scatterplot ",
+                            FontAwesome.view FontAwesome.Solid.arrowRight
+                            ]
+
+
 
 view : Model -> Html.Html Msg
 view model =
