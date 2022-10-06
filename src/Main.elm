@@ -1,11 +1,17 @@
 module Main exposing (..)
 import Browser
+import FontAwesome
+import FontAwesome.Solid
+import FontAwesome.Styles
 import Html
 import Html.Events exposing (onClick)
+import Html.Attributes
 import VisualisationStickfigurePlot
 import ParalleleKoordinaten
 import Scatterplot
 import Scatterplot exposing (scatterplot)
+import FontAwesome.Brands
+
 
 
 type alias Model =
