@@ -282,25 +282,7 @@ body model =
 
 
 
-view : Model -> Html.Html Msg
-view model =
-    Html.div []
-        [ Html.button [ onClick (SwitchView Scatterplot) ] [ Html.text "Scatterplot" ]
-        , Html.button [ onClick (SwitchView ParalleleKoordinaten) ] [ Html.text "ParalleleKoordinaten" ]
-        , Html.button [ onClick (SwitchView VisualisationStickfigure) ] [ Html.text "VisualisationStickfigure" ]
-        , case model.active of
-            Text ->
-                Html.p [] [ Html.text "Elm Visualisation" ]
 
-            Scatterplot ->
-                Html.map ScatterplotMsg (Scatterplot.view model.scatterplotModel)
-
-            ParalleleKoordinaten ->
-                Html.map ParalleleKoordinatenMsg (ParalleleKoordinaten.view model.paralleleKoordinatenModel)
-
-            VisualisationStickfigure ->
-                Html.map VisualisationStickfigureMsg (VisualisationStickfigurePlot.view model.visualisationStickfigurePlotModel)
-        ]
 footer : Model -> Html.Html Msg
 footer model =
     Html.footer 
