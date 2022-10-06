@@ -198,6 +198,7 @@ nav model =
             [ Html.Attributes.id "nav-logo"
             , onClick (SwitchView Text)
             ]
+            [ FontAwesome.view FontAwesome.Solid.beer ]
 
 view : Model -> Html.Html Msg
 view model =
