@@ -63,6 +63,132 @@ style =
     styles = 
         """
         @import url("https://fonts.googleapis.com/css2?family=Inter+Tight&family=Inter:wght@400;600&display=swap");
+        body {
+            font-family: "Inter", sans-serif;
+            width: 100vw;
+            height: 100vh;
+            background: #f0f0f0;
+        }
+
+        * {
+            font-family: inherit;
+        }
+
+        #wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1000px;
+            height: 100vh;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 0 16px 0 rgba(0,0,0,0.4);
+        }
+
+        #nav {
+            display: flex;
+            z-index: 10;
+            flex: 0;
+            background: #55bfff;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+        }
+
+        #nav-logo {
+            line-height: 1em;
+            padding: 0.5em;
+            font-weight: 600;
+            font-size: 1.5em;
+        }
+
+        #nav-title {
+            flex: 1;
+            line-height: 1em;
+            padding: 1em;
+            font-weight: 600;
+            font-size: 1em;
+            font-variant: small-caps;
+        }
+
+        #nav > button, #nav > a {
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            height: 100%;
+            padding: 0 1em;
+            background: transparent;
+            border: none;
+            border-top: 2px solid transparent;
+            border-bottom: 2px solid transparent;
+            font-size: 0.9em;
+            transition: background 0.2s ease, border 0.2s ease;
+        }
+
+        #nav > button.active, #nav > a.active {
+            background: #ffffff44;
+            border-bottom-color: #000000;
+        }
+
+        #nav > button:hover, #nav > a:hover {
+            background: #ffffffaa;
+            border-bottom-color: #666666;
+        }
+
+        #nav > a:visited {
+            color: unset;
+        }
+
+        #main {
+            flex: 1;
+            padding: 1em;
+            padding-top: 1.5em;
+            overflow: scroll;
+        }
+
+        #start-screen-nav {
+            display: flex;
+        }
+
+        #start-screen-nav > button {
+            height: 2.5em;
+            border-radius: 1.25em;
+            margin-right: 1em;
+            padding: 0 1em;
+            background: #55bfff3b;
+            border: 2px solid #55bfff;
+            font-size: 0.9em;
+            transition: background 0.2s ease;
+        }
+
+        #start-screen-nav > button:hover {
+            background: #55bfff;
+        }
+
+        #footer {
+            display: flex;
+            z-index: 10;
+            flex: 0;
+            font-size: 0.75em;
+            padding: 1em;
+            background: #f4f4f4;
+            box-shadow: 0 -4px 8px 0 rgba(0,0,0,0.2);
+            color: #444444;
+        }
+
+        #footer a, #footer a:visited {
+            color: inherit;
+        }
+
+        #footer > p {
+            flex: 1;
+            margin: 0;
+        }
+
+        #footer > nav > a {
+            margin-left: 1em;
+        }
+        """
+  in
+    Html.node "style" [] [ Html.text styles ]
 
 
 view : Model -> Html.Html Msg
