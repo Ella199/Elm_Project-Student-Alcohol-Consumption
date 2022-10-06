@@ -57,6 +57,14 @@ subscriptions model =
 
 --
 
+style : Html.Html Msg
+style =
+  let
+    styles = 
+        """
+        @import url("https://fonts.googleapis.com/css2?family=Inter+Tight&family=Inter:wght@400;600&display=swap");
+
+
 view : Model -> Html.Html Msg
 view model =
     Html.div []
