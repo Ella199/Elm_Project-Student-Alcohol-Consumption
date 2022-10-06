@@ -312,11 +312,18 @@ footer model =
             ]
         , Html.nav
             []
-[ Html.a
+            [ Html.a
                 [ Html.Attributes.href "https://www.kaggle.com/datasets/uciml/student-alcohol-consumption"
                 , Html.Attributes.target "_blank"
                 ]
                 [ Html.text "Daten" ]
+            , Html.a
+                [ Html.Attributes.href "https://github.com/Ella199/Elm_Project-Student-Alcohol-Consumption"
+                , Html.Attributes.target "_blank"
+                ]
+                [ Html.text "Quellcode" ]
+            ]
+        ]
 
 update : Msg -> Model -> Model
 update msg model =
