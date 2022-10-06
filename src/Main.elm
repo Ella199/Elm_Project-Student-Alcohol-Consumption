@@ -267,9 +267,11 @@ body model =
                             FontAwesome.view FontAwesome.Solid.arrowRight
                             ]
                         ]
+            
                     ]
 
-
+            Scatterplot ->
+                Html.map ScatterplotMsg (Scatterplot.view model.scatterplotModel)
 
 
 view : Model -> Html.Html Msg
