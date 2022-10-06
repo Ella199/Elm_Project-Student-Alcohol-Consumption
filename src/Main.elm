@@ -231,6 +231,24 @@ nav model =
             [ FontAwesome.view FontAwesome.Brands.github ] 
         ]
 
+body : Model -> Html.Html Msg
+body model =
+    Html.main_ 
+        [ Html.Attributes.id "main" ]
+        [ case model.active of
+            Text ->
+                Html.div
+                    [] 
+                    [ Html.p
+                        [] 
+                        [ Html.text "Herzlich wilkommen!"
+                        , Html.br [] []
+                        , Html.text "Kleine Einführung in die Möglichkeiten der Visualisierung..."
+                        , Html.br [] []
+                        , Html.text "Was haben wir für Daten verwendet?"
+                        ]
+                    , Html.p [] [ Html.text "Wählen Sie nun eine unserer Visualisierungen:" ]       
+
 view : Model -> Html.Html Msg
 view model =
     Html.div []
