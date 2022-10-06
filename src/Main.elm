@@ -10,9 +10,9 @@ import Scatterplot exposing (scatterplot)
 
 type alias Model =
     { 
-      ScatterplotModel : Scatterplot.Model
-    , ParalleleKoordinatenModel : ParalleleKoordinaten.Model
-    , VisualisationStickfigurePlotModel : VisualisationStickfigurePlot.Model
+      scatterplotModel : Scatterplot.Model
+    , paralleleKoordinatenModel : ParalleleKoordinaten.Model
+    , visualisationStickfigurePlotModel : VisualisationStickfigurePlot.Model
     , active : Active
     }
 
@@ -280,9 +280,6 @@ body model =
                 Html.map VisualisationStickfigureMsg (VisualisationStickfigurePlot.view model.visualisationStickfigurePlotModel)
         ]
 
-
-
-
 footer : Model -> Html.Html Msg
 footer model =
     Html.footer 
@@ -306,6 +303,21 @@ footer model =
                 [ Html.text "Quellcode" ]
             ]
         ]
+
+view : Model -> Html.Html Msg
+view model =
+    Html.div 
+        []
+        [ style
+        , FontAwesome.Styles.css
+        , Html.div 
+            [ Html.Attributes.id "wrapper" ]
+            [ nav model
+            , body model
+            , footer model
+            ]
+        ]
+
 
 update : Msg -> Model -> Model
 update msg model =
