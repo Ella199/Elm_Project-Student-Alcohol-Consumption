@@ -275,10 +275,12 @@ body model =
 
             ParalleleKoordinaten ->
                 Html.map ParalleleKoordinatenMsg (ParalleleKoordinaten.view model.paralleleKoordinatenModel)
-                
+
             VisualisationStickfigure ->
                 Html.map VisualisationStickfigureMsg (VisualisationStickfigurePlot.view model.visualisationStickfigurePlotModel)
         ]
+
+
 
 view : Model -> Html.Html Msg
 view model =
@@ -299,7 +301,17 @@ view model =
             VisualisationStickfigure ->
                 Html.map VisualisationStickfigureMsg (VisualisationStickfigurePlot.view model.visualisationStickfigurePlotModel)
         ]
-
+footer : Model -> Html.Html Msg
+footer model =
+    Html.footer 
+        [ Html.Attributes.id "footer" ]
+        [ Html.p
+            []
+            [ FontAwesome.view FontAwesome.Solid.copyright
+            , Html.text " 2022"
+            ]
+        , Html.nav
+            []
 
 update : Msg -> Model -> Model
 update msg model =
