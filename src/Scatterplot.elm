@@ -531,34 +531,6 @@ view model =
                 studentAcoholConsumption =
                     filterReducedStudentAcoholConsumption l.data .sex l.xFunction l.yFunction l.xName l.yName
 
-            in 
-            Html.div []
-                [
-                    ul[][
-                        li[][
-                            Html.text <| "Change the x axis, to explore different combinations"
-                            , Html.button [onClick (ChangeX (.firstperiodGradeMath, "Math10"))] [Html.text "Math10"]
-                            , Html.button [onClick (ChangeX (.secondperiodGradeMath, "Math11"))] [Html.text "Math11"]
-                            , Html.button [onClick (ChangeX (.thirdperiodGradeMath, "Math12"))] [Html.text "Math12"]
-                            , Html.button [onClick (ChangeX (.firstperiodGradePort, "Port10"))] [Html.text "Port10"]
-                            , Html.button [onClick (ChangeX (.firstperiodGradePort, "Port11"))] [Html.text "Port11"]
-                            , Html.button [onClick (ChangeX (.firstperiodGradePort, "Port12"))] [Html.text "Port12"]
-                            , Html.button [onClick (ChangeX (.dalc, "workdayAlcohol"))] [Html.text "workdayAlcohol"]
-                            , Html.button [onClick (ChangeX (.walc, "weekendAlcohol"))] [Html.text "weekendAlcohol"]
-                       ]
-                    ]
-                    , ul[][
-                        li[][
-                            Html.text <| "Change the y axis, to explore different combinations"
-                            , Html.button [onClick (ChangeY (.firstperiodGradeMath, "Math10"))] [Html.text "Math10"]
-                            , Html.button [onClick (ChangeY (.secondperiodGradeMath, "Math11"))] [Html.text "Math11"]
-                            , Html.button [onClick (ChangeY (.thirdperiodGradeMath, "Math12"))] [Html.text "Math12"]
-                            , Html.button [onClick (ChangeY (.firstperiodGradePort, "Port10"))] [Html.text "Port10"]
-                            , Html.button [onClick (ChangeY (.firstperiodGradePort, "Port11"))] [Html.text "Port11"]
-                            , Html.button [onClick (ChangeY (.firstperiodGradePort, "Port12"))] [Html.text "Port12"]
-                            , Html.button [onClick (ChangeY (.dalc, "workdayAlcohol"))] [Html.text "workdayAlcohol"]
-                            , Html.button [onClick (ChangeY (.walc, "weekendAlcohol"))] [Html.text "weekendAlcohol"]
-                       ]
-                    ]
+            
                     ,   scatterplot studentAcoholConsumption
                 ]
