@@ -413,7 +413,58 @@ change msg value =
         "Alkoholkonsum (Wochenende)" -> msg (.walc, "Alkoholkonsum (Wochenende)")
         _ -> msg (.dalc, "Alkoholkonsum (Wochentag)")
 
-
+nav : Data -> Html Msg
+nav data = Html.nav
+    [ Html.Attributes.id "scatterplot-nav" ]
+    [ Html.span [] [ Html.text "Wechseln Sie die X- und Y-Achsen, um verschiedene Kombinationen zu erkunden." ]
+    , Html.form
+        []
+        [ Html.label [] [ Html.text "X-Achse:" ]
+        , Html.select
+            [ Html.Events.onInput (change ChangeX) ]
+            [ Html.optgroup 
+                [ Html.Attributes.attribute "label" "Mathematik-Note" ] 
+                [ Html.option
+                    [ Html.Attributes.value "Mathematik (10. Kl.)"
+                    , Html.Attributes.selected (data.xName == "Mathematik (10. Kl.)") ]
+                    [ Html.text "Mathematik-Note in der 10. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Mathematik (11. Kl.)"
+                    , Html.Attributes.selected (data.xName == "Mathematik (11. Kl.)") ]
+                    [ Html.text "Mathematik-Note in der 11. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Mathematik (12. Kl.)"
+                    , Html.Attributes.selected (data.xName == "Mathematik (12. Kl.)") ]
+                    [ Html.text "Mathematik-Note in der 12. Klasse" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Portugiesisch-Note" ] 
+                [ Html.option
+                    [ Html.Attributes.value "Portugiesisch (10. Kl.)"
+                    , Html.Attributes.selected (data.xName == "Portugiesisch (10. Kl.)") ]
+                    [ Html.text "Portugiesisch-Note in der 10. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Portugiesisch (11. Kl.)"
+                    , Html.Attributes.selected (data.xName == "Portugiesisch (11. Kl.)") ]
+                    [ Html.text "Portugiesisch-Note in der 11. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Portugiesisch (12. Kl.)"
+                    , Html.Attributes.selected (data.xName == "Portugiesisch (12. Kl.)") ]
+                    [ Html.text "Portugiesisch-Note in der 12. Klasse" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Alkoholkonsum" ] 
+                [   Html.option
+                    [ Html.Attributes.value "Alkoholkonsum (Wochentag)"
+                    , Html.Attributes.selected (data.xName == "Alkoholkonsum (Wochentag)") ]
+                    [ Html.text "Alkoholkonsum am Wochentag" ]
+                , Html.option
+                    [ Html.Attributes.value "Alkoholkonsum (Wochenende)"
+                    , Html.Attributes.selected (data.xName == "Alkoholkonsum (Wochenende)") ]
+                    [ Html.text "Alkoholkonsum am Wochenende" ]
+                ]
+        ]
+    ]
 
 
 
