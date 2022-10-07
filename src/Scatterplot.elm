@@ -142,7 +142,7 @@ update msg model =
 
                 _ ->
                     ( model, Cmd.none )
-                    
+
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption
 studentAcoholConsumptionList list1 =
     List.map(\t -> csvStringToData t) list1
@@ -222,6 +222,13 @@ wideExtent values =
             adding result1 (0.0)       
     in
         result2
+
+sexLabel : String -> String
+sexLabel sex = case sex of 
+    "M" -> "männlich"
+    "F" -> "weiblich"
+    _ -> "unbekannt"
+    
 pointName : StudentAcoholConsumption -> (StudentAcoholConsumption -> String) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> String -> String -> Point
 pointName studentAcoholConsumption u v x y z =
     Point (u studentAcoholConsumption ++ ", " ++ y ++ ": " ++ String.fromFloat (v studentAcoholConsumption) ++ ", " ++ z ++ ": " ++ String.fromFloat (x studentAcoholConsumption)) (v studentAcoholConsumption) (x studentAcoholConsumption)
