@@ -465,6 +465,55 @@ nav data = Html.nav
                 ]
         ]
     ]
+    , Html.form
+        []
+        [ Html.label [] [ Html.text "Y-Achse:" ]
+        , Html.select
+            [ Html.Events.onInput (change ChangeY) ]
+            [ Html.optgroup 
+                [ Html.Attributes.attribute "label" "Mathematik-Note" ] 
+                [ Html.option
+                    [ Html.Attributes.value "Mathematik (10. Kl.)"
+                    , Html.Attributes.selected (data.yName == "Mathematik (10. Kl.)") ]
+                    [ Html.text "Mathematik-Note in der 10. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Mathematik (11. Kl.)"
+                    , Html.Attributes.selected (data.yName == "Mathematik (11. Kl.)") ]
+                    [ Html.text "Mathematik-Note in der 11. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Mathematik (12. Kl.)"
+                    , Html.Attributes.selected (data.yName == "Mathematik (12. Kl.)") ]
+                    [ Html.text "Mathematik-Note in der 12. Klasse" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Portugiesisch-Note" ] 
+                [ Html.option
+                    [ Html.Attributes.value "Portugiesisch (10. Kl.)"
+                    , Html.Attributes.selected (data.yName == "Portugiesisch (10. Kl.)") ]
+                    [ Html.text "Portugiesisch-Note in der 10. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Portugiesisch (11. Kl.)"
+                    , Html.Attributes.selected (data.yName == "Portugiesisch (11. Kl.)") ]
+                    [ Html.text "Portugiesisch-Note in der 11. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Portugiesisch (12. Kl.)"
+                    , Html.Attributes.selected (data.yName == "Portugiesisch (12. Kl.)") ]
+                    [ Html.text "Portugiesisch-Note in der 12. Klasse" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Alkoholkonsum" ] 
+                [   Html.option
+                    [ Html.Attributes.value "Alkoholkonsum (Wochentag)"
+                    , Html.Attributes.selected (data.yName == "Alkoholkonsum (Wochentag)") ]
+                    [ Html.text "Alkoholkonsum am Wochentag" ]
+                , Html.option
+                    [ Html.Attributes.value "Alkoholkonsum (Wochenende)"
+                    , Html.Attributes.selected (data.yName == "Alkoholkonsum (Wochenende)") ]
+                    [ Html.text "Alkoholkonsum am Wochenende" ]
+                ]
+            ]
+        ]
+    ]
 
 
 
