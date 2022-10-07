@@ -228,7 +228,13 @@ sexLabel sex = case sex of
     "M" -> "männlich"
     "F" -> "weiblich"
     _ -> "unbekannt"
-    
+
+sexFlag :  String -> Sex
+sexFlag sex = case sex of 
+    "M" -> M
+    "F" -> F
+    _ -> UnknownSex
+
 pointName : StudentAcoholConsumption -> (StudentAcoholConsumption -> String) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> String -> String -> Point
 pointName studentAcoholConsumption u v x y z =
     Point (u studentAcoholConsumption ++ ", " ++ y ++ ": " ++ String.fromFloat (v studentAcoholConsumption) ++ ", " ++ z ++ ": " ++ String.fromFloat (x studentAcoholConsumption)) (v studentAcoholConsumption) (x studentAcoholConsumption)
