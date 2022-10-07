@@ -124,7 +124,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .thirdperiodGradeMath, yFunction = .dalc, xName = "workdayAlcohol", yName = "Math12"}, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .thirdperiodGradeMath, yFunction = .dalc, xName = "Alkoholkonsum (Wochentag)", yName = "Mathematik (12. Kl.)"}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
@@ -142,7 +142,7 @@ update msg model =
 
                 _ ->
                     ( model, Cmd.none )
-
+                    
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption
 studentAcoholConsumptionList list1 =
     List.map(\t -> csvStringToData t) list1
