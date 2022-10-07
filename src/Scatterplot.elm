@@ -52,6 +52,11 @@ type Msg
     | ChangeX (StudentAcoholConsumption -> Float, String)
     | ChangeY (StudentAcoholConsumption -> Float, String)
 
+type Sex
+    = M
+    | F
+    | UnknownSex
+
 type alias Point = 
     { pointName : String, x : Float, y : Float }
 type alias XYData =
