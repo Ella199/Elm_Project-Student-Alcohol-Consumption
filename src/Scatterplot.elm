@@ -521,7 +521,7 @@ view : Model -> Html Msg
 view model =
     case model of
         Error ->
-            Html.text "Unfortunately scatterplot StudentAcoholConsumption can not be open."
+            Html.text "Leider konnte der Scatterplot zum Alkoholkonsum von Schülern nicht geladen werden."
 
         Loading ->
             Html.span
@@ -530,16 +530,12 @@ view model =
                 , FontAwesome.view (FontAwesome.styled [ FontAwesome.Attributes.spin ] FontAwesome.Solid.spinner)
                 ]
 
-
         Success l ->
             let
                 studentAcoholConsumption =
                     filterReducedStudentAcoholConsumption l.data .sex l.xFunction l.yFunction l.xName l.yName
 
-            
-                    ,   scatterplot studentAcoholConsumption
-                ]
-             in 
+            in 
             Html.div
                 []
                 [ stylesheet
