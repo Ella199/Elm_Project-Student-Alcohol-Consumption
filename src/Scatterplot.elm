@@ -22,16 +22,19 @@ import FontAwesome.Solid
 import FontAwesome.Attributes
 import Json.Decode
 
-type Model
- = Error
- | Loading
- | Success
+type alias Data =
     { data : List StudentAcoholConsumption
     , xFunction : StudentAcoholConsumption -> Float
     , yFunction : StudentAcoholConsumption -> Float
     , xName : String
     , yName : String
     }
+
+type Model
+ = Error
+ | Loading
+ | Success Data
+
 
 type alias StudentAcoholConsumption =
     { sex : String
