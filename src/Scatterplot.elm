@@ -237,13 +237,14 @@ sexFlag sex = case sex of
 
 pointName : StudentAcoholConsumption -> (StudentAcoholConsumption -> String) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> String -> String -> Point
 pointName studentAcoholConsumption u v x y z =
-    Point (u studentAcoholConsumption ++ ", " ++ y ++ ": " ++ String.fromFloat (v studentAcoholConsumption) ++ ", " ++ z ++ ": " ++ String.fromFloat (x studentAcoholConsumption)) (v studentAcoholConsumption) (x studentAcoholConsumption)
+    Point (sexLabel (u studentAcoholConsumption) ++ ", " ++ y ++ ": " ++ String.fromFloat (v studentAcoholConsumption) ++ ", " ++ z ++ ": " ++ String.fromFloat (x studentAcoholConsumption)) (v studentAcoholConsumption) (x studentAcoholConsumption) (sexFlag (u studentAcoholConsumption))
 
 point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
 point scaleX scaleY yxPoint =
     g
         [
-            class["point"]
+            class
+                
             ,fontSize <| Px 15.0
             ,fontFamily ["Times New Roman"]
             ,transform
