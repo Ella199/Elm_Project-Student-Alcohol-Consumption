@@ -16,6 +16,11 @@ import Browser
 import Html exposing (li)
 import Html.Events exposing (onClick)
 import Html exposing (ul)
+import Html.Attributes
+import FontAwesome
+import FontAwesome.Solid
+import FontAwesome.Attributes
+import Json.Decode
 
 type Model
  = Error
