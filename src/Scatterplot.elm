@@ -244,7 +244,12 @@ point scaleX scaleY yxPoint =
     g
         [
             class
-                
+                [ "point"
+                , case yxPoint.sex of
+                    M -> "sex-male"
+                    F -> "sex-female"
+                    UnknownSex -> "sex-unknown"
+                ]
             ,fontSize <| Px 15.0
             ,fontFamily ["Times New Roman"]
             ,transform
