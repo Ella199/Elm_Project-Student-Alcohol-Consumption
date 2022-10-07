@@ -539,3 +539,10 @@ view model =
             
                     ,   scatterplot studentAcoholConsumption
                 ]
+             in 
+            Html.div
+                []
+                [ stylesheet
+                , nav l
+                , scatterplot studentAcoholConsumption
+                ]
