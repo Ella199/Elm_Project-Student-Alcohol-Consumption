@@ -524,7 +524,12 @@ view model =
             Html.text "Unfortunately scatterplot StudentAcoholConsumption can not be open."
 
         Loading ->
-            Html.text "Loading StudentAcoholConsumption"
+            Html.span
+                []
+                [ Html.text "Lade  Scatterplot zum Alkoholkonsum von Schülern... "
+                , FontAwesome.view (FontAwesome.styled [ FontAwesome.Attributes.spin ] FontAwesome.Solid.spinner)
+                ]
+
 
         Success l ->
             let
