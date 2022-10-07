@@ -22,6 +22,7 @@ type alias Model =
     , active : Active
     }
 
+
 type Active
     = Text
     | Scatterplot
@@ -30,10 +31,9 @@ type Active
 
 
 type Msg
-    = ScatterplotMsg Scatterplot.Msg
-    | ScatterplotMsg Scatterplot.Msg
+     = ScatterplotMsg Scatterplot.Msg
     | ParalleleKoordinatenMsg ParalleleKoordinaten.Msg
-    | VisualisationStickfigureMsg VisualisationStickfigure.Msg
+    | VisualisationStickfigureMsg VisualisationStickfigurePlot.Msg
     | SwitchView Active
 
 
@@ -41,9 +41,9 @@ main : Program () Model Msg
 main =
      Browser.element
         { init = init
-        , view = view
         , update = update
         , subscriptions = subscriptions
+        , view = view
         }
 
 
@@ -54,7 +54,7 @@ init _ =
         (paralleleKoordinaten, paralleleKoordinatenCmd) = ParalleleKoordinaten.init ()
         (visualisationStickfigurePlot, visualisationStickfigurePlotCmd) = VisualisationStickfigurePlot.init ()
     in
-    ( Model scatterplot paralleleKoordinaten visualisationStickfigurePlot Text
+    ( Model scatterplot paralleleKoordinaten visualisationStickfigurePlot VisualisationStickfigure -- Text
     , Cmd.batch [ Cmd.map ScatterplotMsg scatterplotCmd, Cmd.map ParalleleKoordinatenMsg paralleleKoordinatenCmd, Cmd.map VisualisationStickfigureMsg visualisationStickfigurePlotCmd ])
 
 subscriptions : Model -> Sub Msg
@@ -253,7 +253,7 @@ body model =
                         , Html.br [] []
                         , Html.text "Was haben wir für Daten verwendet?"
                         ]
-                    , Html.p [] [ Html.text "Wählen Sie nun eine unserer Visualisierungen:" ]       
+                    , Html.p [] [ Html.text "Wählen Sie nun eine unserer Visualisierungen:" ]
                     , Html.nav
                         [ Html.Attributes.id "start-screen-nav" ]
                         [ Html.button
@@ -261,7 +261,6 @@ body model =
                             [ Html.text "Scatterplot ",
                             FontAwesome.view FontAwesome.Solid.arrowRight
                             ]
-
                         , Html.button 
                             [ onClick (SwitchView ParalleleKoordinaten) ]
                             [ Html.text "Parallele Koordinaten ",
@@ -273,7 +272,6 @@ body model =
                             FontAwesome.view FontAwesome.Solid.arrowRight
                             ]
                         ]
-            
                     ]
 
             Scatterplot ->
@@ -285,6 +283,7 @@ body model =
             VisualisationStickfigure ->
                 Html.map VisualisationStickfigureMsg (VisualisationStickfigurePlot.view model.visualisationStickfigurePlotModel)
         ]
+
 
 footer : Model -> Html.Html Msg
 footer model =
@@ -310,6 +309,7 @@ footer model =
             ]
         ]
 
+
 view : Model -> Html.Html Msg
 view model =
     Html.div 
@@ -325,11 +325,9 @@ view model =
         ]
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case msg of
-        
-        
+    case msg of        
         ScatterplotMsg scatterplotMsg ->
             let
                 (scatterplot, scatterplotCmd) = Scatterplot.update scatterplotMsg model.scatterplotModel
