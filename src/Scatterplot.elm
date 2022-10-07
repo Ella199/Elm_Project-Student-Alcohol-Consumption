@@ -295,12 +295,49 @@ scatterplot model =
             }
     in
     svg [ viewBox 0 0 w h, TypedSvg.Attributes.width <| TypedSvg.Types.Percent 100, TypedSvg.Attributes.height <| TypedSvg.Types.Percent 100 ]
-        [ style [] [ TypedSvg.Core.text """
-            .point circle { stroke-opacity: 0.2 ; stroke-width: 2 ; stroke: rgba(2, 19, 100, 0.8); fill: rgba(255, 255, 255,0.3); }
-            .point text { display: none; }
-            .point:hover circle { stroke: rgba(154, 22, 90, 0.8); fill: rgb(65, 209, 204); }
-            .point:hover text { display: inline; }
-          """ ]
+        [ style
+            []
+            [ TypedSvg.Core.text
+                """
+                .point circle {
+                    stroke: #dddddd;
+                    fill: #dddddd;
+                    stroke-width: 2;
+                    stroke-opacity: 0.3;
+                    fill-opacity: 0.05;
+                    transition: fill 0.2s ease, border 0.1s ease;
+                }
+
+                .point.sex-male circle {
+                    stroke: #55bfff;
+                    fill: #55bfff;
+                }
+
+                .point.sex-female circle {
+                    stroke: #ff455f;
+                    fill: #ff455f;
+                }
+
+                .point text {
+                    font-family: "Inter Tight", sans-serif;
+                    fill: #000;
+                    text-shadow: 1px 1px 4px #fff, 1px -1px 4px #fff, -1px 1px 4px #fff, -1px -1px 4px #fff;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                .point:hover circle {
+                    stroke-opacity: 1;
+                    fill-opacity: 1;
+                }
+
+                .point:hover text {
+                    visibility: visible;
+                    opacity: 1;
+                }
+                """
+            ]
         , g [ transform [ Translate 60 390 ] ]
             [ xAsis xValues
             , text_
@@ -324,6 +361,44 @@ scatterplot model =
         , g [ transform [ Translate padding padding ] ]
             (List.map (point xScaleLocal yScaleLocal) model.data)
         ]
+
+
+stylesheet : Html.Html Msg
+stylesheet =
+  let
+    styles = 
+        """
+        #scatterplot-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em 3em;
+            margin: -1.5em -1em 1em -1em;
+            padding: 1em; 
+            padding-top: 1.5em; 
+            background: #f8f8f8;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        #scatterplot-nav > span {
+            flex: 0 0 100%;
+        }
+
+        #scatterplot-nav > form {
+            display: flex;
+            flex: 1;
+            gap: 1em;
+        }
+
+        #scatterplot-nav > form > label {
+            flex: 0 33%;
+        }
+
+        #scatterplot-nav > form > select {
+            flex: 1;
+        }
+        """
+  in
+    Html.node "style" [] [ Html.text styles ]
 view : Model -> Html Msg
 view model =
     case model of
