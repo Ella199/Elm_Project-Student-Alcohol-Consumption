@@ -156,9 +156,12 @@ update msg model =
         ChangeFOUR (c, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = c , firstNAME = m.firstNAME, secondNAME = 
+                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = c , firstNAME = m.firstNAME, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = a}, Cmd.none )
 
-                    
+                _ ->
+                    ( model, Cmd.none )   
+
+
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption    
 studentAcoholConsumptionList list1 =
     List.map(\t -> csvStringToData t) list1
