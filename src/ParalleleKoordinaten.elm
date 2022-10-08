@@ -25,10 +25,7 @@ import FontAwesome.Solid
 import FontAwesome.Attributes
 import Json.Decode
 
-type Model
-  = Error
-  | Loading
-  | Success
+type alias Data =
     { data : List StudentAcoholConsumption
     , firstFUNCTION : StudentAcoholConsumption -> Float
     , secondFUNCTION : StudentAcoholConsumption -> Float
@@ -39,6 +36,11 @@ type Model
     , thirdNAME : String
     , fourthNAME : String
     }
+
+type Model
+  = Error
+  | Loading
+  | Success Data
 
 type alias StudentAcoholConsumption =
     { sex : String
