@@ -247,13 +247,43 @@ parallelCoordinatesPlot w ar model =
         , TypedSvg.Attributes.height <| TypedSvg.Types.Percent 90
         ]
     <|
-        [ TypedSvg.style []
-            [
-                TypedSvg.Core.text """
-                .parallelPoint { stroke: rgba(1, 0, 0,0.2);}
-                .parallelPoint:hover {stroke: rgb(60, 179, 113); stroke-width: 2;} 
-                .parallelPoint text { display: none; }
-                .parallelPoint:hover text { display: inline; stroke: rgb(0, 0, 0); stroke-width: 0.1; font-size: small; font-family: calibri}  
+        [ TypedSvg.style
+            []
+            [ TypedSvg.Core.text
+                """
+                .parallelPoint path {
+                    stroke: #dddddd;
+                    stroke-width: 2;
+                    stroke-opacity: 0.1;
+                    transition: stroke 0.1s ease;
+                }
+
+                .parallelPoint.sex-male path {
+                    stroke: #55bfff;
+                }
+
+                .parallelPoint.sex-female path {
+                    stroke: #ff455f;
+                }
+
+                .parallelPoint:hover path {
+                    stroke-opacity: 1;
+                }
+
+                .parallelPoint text {
+                    font-family: "Inter Tight", sans-serif;
+                    font-size: small;
+                    fill: #000;
+                    stroke: none;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: opacity 0.15s ease;
+                }
+
+                .parallelPoint:hover text {
+                    visibility: visible;
+                    opacity: 1;
+                }  
                 """
             ]
         , g []
@@ -284,7 +314,7 @@ parallelCoordinatesPlot w ar model =
             ]
         ]
             ++ (let
-                    drawPoint p name description =
+                    drawPoint p name sex description =
                         let
                             linePath : Path.Path
                             linePath =
@@ -300,12 +330,18 @@ parallelCoordinatesPlot w ar model =
                                     p
                                     |> Shape.line Shape.linearCurve
                         in
-                        g [class ["parallelPoint"]][
+                        g [class 
+                            [ "parallelPoint"
+                            , case sex of
+                                M -> "sex-male"
+                                F -> "sex-female"
+                                UnknownSex -> "sex-unknown"
+                            ]
+                          ][
                             Path.element linePath
                             [ stroke <| Paint <| Color.rgba 0 0 0 0.8
                             , strokeWidth <| Px 0.5
                             , fill PaintNone
-                            , class ["parallelPoint"]
                             ]
                             , text_
                                 [ x 300
@@ -322,9 +358,10 @@ parallelCoordinatesPlot w ar model =
                     |> List.map
                         (\dataset ->
                             g [ transform [ Translate (padding*2) padding ] ]
-                                (List.map (\a -> drawPoint a.value a.pointName model.dimDescription) dataset)
+                                (List.map (\a -> drawPoint a.value a.pointName a.sex model.dimDescription) dataset)
                         )
                )
+
                
 view : Model -> Html Msg
 view model =
