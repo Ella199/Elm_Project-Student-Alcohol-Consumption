@@ -58,7 +58,7 @@ type Sex
     | UnknownSex
 
 type alias Point = 
-    { pointName : String, x : Float, y : Float }
+    { pointName : String, x : Float, y : Float, sex: Sex}
 type alias XYData =
     { xDescription : String
     , yDescription : String
@@ -89,6 +89,7 @@ getCsv x =
                     }
             )
         |> Cmd.batch
+
 
 list : List String 
 list = 
