@@ -99,6 +99,7 @@ type Msg
     | ChangeTWO (StudentAcoholConsumption -> Float,String) 
     | ChangeTHREE (StudentAcoholConsumption -> Float,String)
     | ChangeFOUR (StudentAcoholConsumption -> Float,String)
+    | MoveAxisUp Int
     
 csvStringToData : String -> List StudentAcoholConsumption
 csvStringToData csvR = 
