@@ -128,7 +128,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], firstFUNCTION = .firstperiodGradeMath, secondFUNCTION = .secondperiodGradeMath, thirdFUNCTION = .thirdperiodGradeMath, fourthFUNCTION = .dalc, firstNAME = "Math10", secondNAME = "Math11", thirdNAME = "Math12", fourthNAME = "workdayAlcohol"}, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], firstFUNCTION = .firstperiodGradeMath, secondFUNCTION = .secondperiodGradeMath, thirdFUNCTION = .thirdperiodGradeMath, fourthFUNCTION = .dalc, firstNAME = "Mathematik (10. Kl.)", secondNAME = "Mathematik (11. Kl.)", thirdNAME = "Mathematik (12. Kl.)", fourthNAME = "Alkoholkonsum (Wochentag)"}, Cmd.none )
 
                 Err  _ ->
                     ( model, Cmd.none )
@@ -156,11 +156,9 @@ update msg model =
         ChangeFOUR (c, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = c , firstNAME = m.firstNAME, secondNAME = m.secondNAME, thirdNAME = m.thirdNAME, fourthNAME = a}, Cmd.none )
+                    ( Success <| { data = m.data, firstFUNCTION = m.firstFUNCTION, secondFUNCTION = m.secondFUNCTION, thirdFUNCTION = m.thirdFUNCTION, fourthFUNCTION = c , firstNAME = m.firstNAME, secondNAME = 
 
-                _ ->
-                    ( model, Cmd.none )     
-
+                    
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption    
 studentAcoholConsumptionList list1 =
     List.map(\t -> csvStringToData t) list1
