@@ -251,7 +251,6 @@ point scaleX scaleY yxPoint =
                     UnknownSex -> "sex-unknown"
                 ]
             ,fontSize <| Px 15.0
-            ,fontFamily ["Times New Roman"]
             ,transform
                 [
                     Translate
@@ -264,6 +263,14 @@ point scaleX scaleY yxPoint =
             circle [cx 0, cy 0, r 5] []
             , text_ [x 10, y -20, textAnchor AnchorMiddle] [Html.text yxPoint.pointName]
         ]
+
+        ]
+
+        [
+            circle [cx 0, cy 0, r 5] []
+            , text_ [x 10, y -20, textAnchor AnchorMiddle] [Html.text yxPoint.pointName]
+        ]
+
 
 scatterplot : XYData -> Svg msg
 scatterplot model =
