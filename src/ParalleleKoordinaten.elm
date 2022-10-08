@@ -160,7 +160,20 @@ update msg model =
 
                 _ ->
                     ( model, Cmd.none )   
-
+         MoveAxisUp num ->
+            case model of
+                Success m ->
+                    case num of
+                        2 ->
+                            ( Success <| { m | firstFUNCTION = m.secondFUNCTION, secondFUNCTION = m.firstFUNCTION, firstNAME = m.secondNAME, secondNAME = m.firstNAME}, Cmd.none )
+                        3 ->
+                            ( Success <| { m | secondFUNCTION = m.thirdFUNCTION, thirdFUNCTION = m.secondFUNCTION, secondNAME = m.thirdNAME, thirdNAME = m.secondNAME}, Cmd.none )
+                        4 ->
+                            ( Success <| { m | thirdFUNCTION = m.fourthFUNCTION, fourthFUNCTION = m.thirdFUNCTION, thirdNAME = m.fourthNAME, fourthNAME = m.thirdNAME}, Cmd.none )
+                        _ ->
+                            ( model, Cmd.none )     
+                _ ->
+                    ( model, Cmd.none ) 
 
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption    
 studentAcoholConsumptionList list1 =
