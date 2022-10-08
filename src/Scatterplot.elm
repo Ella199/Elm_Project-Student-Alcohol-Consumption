@@ -265,14 +265,6 @@ point scaleX scaleY yxPoint =
             , text_ [x 10, y -20, textAnchor AnchorMiddle] [Html.text yxPoint.pointName]
         ]
 
-        ]
-
-        [
-            circle [cx 0, cy 0, r 5] []
-            , text_ [x 10, y -20, textAnchor AnchorMiddle] [Html.text yxPoint.pointName]
-        ]
-
-
 scatterplot : XYData -> Svg msg
 scatterplot model =
     let
@@ -421,6 +413,7 @@ change msg value =
         "Alkoholkonsum (Wochenende)" -> msg (.walc, "Alkoholkonsum (Wochenende)")
         _ -> msg (.dalc, "Alkoholkonsum (Wochentag)")
 
+
 nav : Data -> Html Msg
 nav data = Html.nav
     [ Html.Attributes.id "scatterplot-nav" ]
@@ -522,7 +515,6 @@ nav data = Html.nav
             ]
         ]
     ]
-
 
 
 view : Model -> Html Msg
