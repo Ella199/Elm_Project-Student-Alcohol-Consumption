@@ -18,8 +18,12 @@ import TypedSvg.Attributes.InPx exposing (x, y)
 import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (AnchorAlignment(..), Length(..), Paint(..), Transform(..))
 import Tuple exposing (second)
-import Scatterplot exposing (Msg(..))
 import Csv exposing (Csv)
+import Html.Attributes
+import FontAwesome
+import FontAwesome.Solid
+import FontAwesome.Attributes
+import Json.Decode
 
 type Model
   = Error
