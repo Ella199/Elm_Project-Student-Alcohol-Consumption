@@ -16,6 +16,11 @@ import Csv
 import Csv.Decode
 import Statistics
 import Html.Attributes as HA
+import Html.Attributes
+import FontAwesome
+import FontAwesome.Solid
+import FontAwesome.Attributes
+import Json.Decode
 
 w : Float
 w =
