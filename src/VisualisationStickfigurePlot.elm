@@ -285,7 +285,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], len=5, gr="10" }, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], len=8, gr="10" }, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
