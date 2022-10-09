@@ -61,6 +61,7 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
 
+
 view : Model -> Html Msg
 view model =
     case model of
