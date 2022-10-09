@@ -719,60 +719,6 @@ view model =
 
                         plotData = 
                             multiDimDaten l.data l.firstFUNCTION l.secondFUNCTION l.thirdFUNCTION l.fourthFUNCTION .sex l.firstNAME l.secondNAME l.thirdNAME l.fourthNAME       
-                    in
-                    Html.div []
-                        [
-                            ul[][
-                                li[][
-                                    Html.text <| "Select a data type from the first axis."
-                                    , Html.button [onClick (ChangeONE (.firstperiodGradeMath, "Math10"))][Html.text "Math10"]
-                                    , Html.button [onClick (ChangeONE (.secondperiodGradeMath, "Math11"))][Html.text "Math11"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradeMath, "Math12"))][Html.text "Math12"]
-                                    , Html.button [onClick (ChangeONE (.firstperiodGradePort, "Port10"))][Html.text "Port10"]
-                                    , Html.button [onClick (ChangeONE (.secondperiodGradePort, "Port11"))][Html.text "Port11"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "Port12"))][Html.text "Port12"]
-                                    , Html.button [onClick (ChangeONE (.dalc, "workdayAlcohol"))][Html.text "workdayAlcohol"]
-                                    , Html.button [onClick (ChangeONE (.walc, "weekendAlcohol"))][Html.text "weekendAlcohol"]
-                                ]
-                            ]
-                            , ul[][
-                                li[][
-                                    Html.text <| "Select a data type from the second axis."
-                                    , Html.button [onClick (ChangeTWO (.firstperiodGradeMath, "Math10"))][Html.text "Math10"]
-                                    , Html.button [onClick (ChangeTWO (.secondperiodGradeMath, "Math11"))][Html.text "Math11"]
-                                    , Html.button [onClick (ChangeTWO (.thirdperiodGradeMath, "Math12"))][Html.text "Math12"]
-                                    , Html.button [onClick (ChangeTWO (.firstperiodGradePort, "Port10"))][Html.text "Port10"]
-                                    , Html.button [onClick (ChangeTWO (.secondperiodGradePort, "Port11"))][Html.text "Port11"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "Port12"))][Html.text "Port12"]
-                                    , Html.button [onClick (ChangeONE (.dalc, "workdayAlcohol"))][Html.text "workdayAlcohol"]
-                                    , Html.button [onClick (ChangeONE (.walc, "weekendAlcohol"))][Html.text "weekendAlcohol"]
-                                ]
-                            ]
-                            , ul[][
-                                li[][
-                                    Html.text <| "Select a data type from the third axis."
-                                    , Html.button [onClick (ChangeTHREE (.firstperiodGradeMath, "Math10"))][Html.text "Math10"]
-                                    , Html.button [onClick (ChangeTHREE (.secondperiodGradeMath, "Math11"))][Html.text "Math11"]
-                                    , Html.button [onClick (ChangeTHREE (.thirdperiodGradeMath, "Math12"))][Html.text "Math12"]
-                                    , Html.button [onClick (ChangeTHREE (.firstperiodGradePort, "Port10"))][Html.text "Port10"]
-                                    , Html.button [onClick (ChangeTHREE (.secondperiodGradePort, "Port11"))][Html.text "Port11"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "Port12"))][Html.text "Port12"]
-                                    , Html.button [onClick (ChangeONE (.dalc, "workdayAlcohol"))][Html.text "workdayAlcohol"]
-                                    , Html.button [onClick (ChangeONE (.walc, "weekendAlcohol"))][Html.text "weekendAlcohol"]
-                                ]
-                            ]
-                            , ul[][
-                                li[][
-                                    Html.text <| "Select a data type from the fourth axis."
-                                    , Html.button [onClick (ChangeFOUR (.firstperiodGradeMath, "Math10"))][Html.text "Math10"]
-                                    , Html.button [onClick (ChangeFOUR (.secondperiodGradeMath, "Math11"))][Html.text "Math11"]
-                                    , Html.button [onClick (ChangeFOUR (.thirdperiodGradeMath, "Math12"))][Html.text "Math12"]
-                                    , Html.button [onClick (ChangeFOUR (.firstperiodGradePort, "Port10"))][Html.text "Port10"]
-                                    , Html.button [onClick (ChangeFOUR (.secondperiodGradePort, "Port11"))][Html.text "Port11"]
-                                    , Html.button [onClick (ChangeONE (.thirdperiodGradePort, "Port12"))][Html.text "Port12"]
-                                    , Html.button [onClick (ChangeONE (.dalc, "workdayAlcohol"))][Html.text "workdayAlcohol"]
-                                    , Html.button [onClick (ChangeONE (.walc, "weekendAlcohol"))][Html.text "weekendAlcohol"]
-                                ]
-                             ]
+                   
                                 , parallelCoordinatesPlot 600 2 plotData
                         ]
