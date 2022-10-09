@@ -712,13 +712,18 @@ view model =
                             [ List.map
                                 (\x ->
                                     [(a x), (b x), (c x), (d x)]
-                                        |> MultiDimPoint (e x)
+                                        |> MultiDimPoint (sexLabel (e x)) (sexFlag (e x))
                                 )
                                 listStudentAcoholConsumption
                             ]
 
                         plotData = 
                             multiDimDaten l.data l.firstFUNCTION l.secondFUNCTION l.thirdFUNCTION l.fourthFUNCTION .sex l.firstNAME l.secondNAME l.thirdNAME l.fourthNAME       
-                   
-                                , parallelCoordinatesPlot 600 2 plotData
+                    in
+                    Html.div
+                        []
+                        [ stylesheet
+                        , nav l
+                        , parallelCoordinatesPlot 600 2 plotData
                         ]
+
