@@ -682,6 +682,17 @@ nav data = Html.nav
             ]
         ]
     ]
+sexLabel : String -> String
+sexLabel sex = case sex of 
+    "M" -> "männlich"
+    "F" -> "weiblich"
+    _ -> "unbekannt"
+
+sexFlag :  String -> Sex
+sexFlag sex = case sex of 
+    "M" -> M
+    "F" -> F
+    _ -> UnknownSex
 
 
 view : Model -> Html Msg
