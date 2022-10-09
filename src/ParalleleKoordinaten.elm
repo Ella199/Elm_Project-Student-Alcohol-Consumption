@@ -702,7 +702,7 @@ view model =
             Html.text "Unfortunately scatterplot StudentAcoholConsumption can not be open."
 
         Loading ->
-            Html.text "Loading StudentAcoholConsumption"
+            Html.text "Lade  Parallelen Koordinaten zum Alkoholkonsum von Schülern..."
 
         Success l ->
                     let
