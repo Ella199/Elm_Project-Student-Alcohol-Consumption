@@ -361,7 +361,63 @@ parallelCoordinatesPlot w ar model =
                                 (List.map (\a -> drawPoint a.value a.pointName a.sex model.dimDescription) dataset)
                         )
                )
+stylesheet : Html.Html Msg
+stylesheet =
+  let
+    styles = 
+        """
+        #parallel-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            margin: -1.5em -1em 1em -1em;
+            padding: 1em; 
+            padding-top: 1.5em; 
+            background: #f8f8f8;
+            border-bottom: 1px solid #dddddd;
+        }
 
+        #parallel-nav > span {
+            flex: 0 0 100%;
+        }
+
+        #parallel-nav > form {
+            display: flex;
+            gap: 3em;
+        }
+
+        #parallel-nav > form > fieldset {
+            display: flex;
+            gap: 0.5em;
+            border: none;
+            padding: 0;
+        }
+
+        #parallel-nav > form > fieldset > button {
+            border-radius: 50%;
+            background: #55bfff3b;
+            border: 2px solid #55bfff;
+            transition: background 0.2s ease;
+        }
+
+        #parallel-nav > form > fieldset > button[disabled] {
+            opacity: 0.2;
+        }
+
+        #parallel-nav > form > fieldset > button:hover {
+            background: #55bfff;
+        }
+
+        #parallel-nav > form > label {
+            flex: 0 8%;
+        }
+
+        #parallel-nav > form > select {
+            flex: 1;
+        }
+        """
+  in
+    Html.node "style" [] [ Html.text styles ]
                
 view : Model -> Html Msg
 view model =
