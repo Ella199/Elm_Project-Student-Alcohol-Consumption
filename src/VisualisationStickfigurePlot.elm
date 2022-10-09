@@ -226,6 +226,12 @@ type Msg
     | ChangeLen (String)
     | ChangeGrade (String)
 
+type Sex
+    = M
+    | F
+    | UnknownSex
+
+
 
 type alias Point =
     { pointName : String, x : Float, y : Float, z : Float, a : Float, b : Float , c : Float , d : Float , e : Float , f : Float , g : Float , h : Float , i : Float } 
