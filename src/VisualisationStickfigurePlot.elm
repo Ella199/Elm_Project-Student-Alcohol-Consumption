@@ -349,6 +349,7 @@ pointLabel sex firstperiodGradeMath secondperiodGradeMath thirdperiodGradeMath f
     Point ((sexLabel sex) ++ ", " ++ "Alkohol Wochentag: " ++  String.fromFloat dalc  ++ ", " ++ "Bildung Vater: " ++ String.fromFloat fedu ++ ", " ++ "Bildung Mutter: " ++ String.fromFloat medu ++ ", " 
         ++ "Freizeit: " ++ String.fromFloat freetime ++ "h, " ++ "Fehltage: " ++ String.fromFloat absences ++ "d") 
         (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime) (sexFlag sex)
+        
 xAxis : List Float -> Svg msg
 xAxis values = 
     Axis.bottom [ Axis.tickCount tickCount] (xScale values)
@@ -390,6 +391,7 @@ wideExtent values =
             adding result1 (0.0)       
     in
         result2
+
 stickfigureplot : XYData -> Float -> String -> Svg msg
 stickfigureplot model len grade =
 
