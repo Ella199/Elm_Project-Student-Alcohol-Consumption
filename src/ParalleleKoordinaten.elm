@@ -436,7 +436,68 @@ nav : Data -> Html Msg
 nav data = Html.nav
     [ Html.Attributes.id "parallel-nav" ]
     [ Html.span [] [ Html.text "Wechseln Sie die 4 Achsen, um verschiedene Zusammenhänge in den Parallelen Koordinaten zu erkunden." ]
-               
+    , Html.form
+        []
+        [ Html.label [] [ Html.text "1. Achse:" ]
+        , Html.fieldset
+            []
+            [ Html.button
+                [ Html.Attributes.disabled True
+                , Html.Attributes.type_ "button"
+                ]
+                [ FontAwesome.view FontAwesome.Solid.arrowUp ]
+            , Html.button
+                [ onClick (MoveAxisUp 2)
+                , Html.Attributes.type_ "button"
+                ]
+                [ FontAwesome.view FontAwesome.Solid.arrowDown ]
+            ]
+        , Html.select
+            [ Html.Events.onInput (change ChangeONE) ]
+            [ Html.optgroup 
+                [ Html.Attributes.attribute "label" "Mathematik-Note" ] 
+                [ Html.option
+                    [ Html.Attributes.value "Mathematik (10. Kl.)"
+                    , Html.Attributes.selected (data.firstNAME == "Mathematik (10. Kl.)") ]
+                    [ Html.text "Mathematik-Note in der 10. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Mathematik (11. Kl.)"
+                    , Html.Attributes.selected (data.firstNAME == "Mathematik (11. Kl.)") ]
+                    [ Html.text "Mathematik-Note in der 11. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Mathematik (12. Kl.)"
+                    , Html.Attributes.selected (data.firstNAME == "Mathematik (12. Kl.)") ]
+                    [ Html.text "Mathematik-Note in der 12. Klasse" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Portugiesisch-Note" ] 
+                [ Html.option
+                    [ Html.Attributes.value "Portugiesisch (10. Kl.)"
+                    , Html.Attributes.selected (data.firstNAME == "Portugiesisch (10. Kl.)") ]
+                    [ Html.text "Portugiesisch-Note in der 10. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Portugiesisch (11. Kl.)"
+                    , Html.Attributes.selected (data.firstNAME == "Portugiesisch (11. Kl.)") ]
+                    [ Html.text "Portugiesisch-Note in der 11. Klasse" ]
+                , Html.option
+                    [ Html.Attributes.value "Portugiesisch (12. Kl.)"
+                    , Html.Attributes.selected (data.firstNAME == "Portugiesisch (12. Kl.)") ]
+                    [ Html.text "Portugiesisch-Note in der 12. Klasse" ]
+                ]
+            , Html.optgroup 
+                [ Html.Attributes.attribute "label" "Alkoholkonsum" ] 
+                [   Html.option
+                    [ Html.Attributes.value "Alkoholkonsum (Wochentag)"
+                    , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum (Wochentag)") ]
+                    [ Html.text "Alkoholkonsum am Wochentag" ]
+                , Html.option
+                    [ Html.Attributes.value "Alkoholkonsum (Wochenende)"
+                    , Html.Attributes.selected (data.firstNAME == "Alkoholkonsum (Wochenende)") ]
+                    [ Html.text "Alkoholkonsum am Wochenende" ]
+                ]
+        ]
+    ]
+            
 view : Model -> Html Msg
 view model =
     case model of
