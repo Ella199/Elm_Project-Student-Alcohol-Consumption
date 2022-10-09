@@ -418,6 +418,21 @@ stylesheet =
         """
   in
     Html.node "style" [] [ Html.text styles ]
+
+change : ((StudentAcoholConsumption -> Float, String) -> Msg) -> String -> Msg
+change msg value =
+    case value of
+        "Mathematik (10. Kl.)" -> msg (.firstperiodGradeMath, "Mathematik (10. Kl.)")
+        "Mathematik (11. Kl.)" -> msg (.secondperiodGradeMath, "Mathematik (11. Kl.)")
+        "Mathematik (12. Kl.)" -> msg (.thirdperiodGradeMath, "Mathematik (12. Kl.)")
+        "Portugiesisch (10. Kl.)" -> msg (.firstperiodGradePort, "Portugiesisch (10. Kl.)")
+        "Portugiesisch (11. Kl.)" -> msg (.secondperiodGradePort, "Portugiesisch (11. Kl.)")
+        "Portugiesisch (12. Kl.)" -> msg (.thirdperiodGradePort, "Portugiesisch (12. Kl.)")
+        "Alkoholkonsum (Wochentag)" -> msg (.dalc, "Alkoholkonsum (Wochentag)")
+        "Alkoholkonsum (Wochenende)" -> msg (.walc, "Alkoholkonsum (Wochenende)")
+        _ -> msg (.dalc, "Alkoholkonsum (Wochentag)")
+
+
                
 view : Model -> Html Msg
 view model =
