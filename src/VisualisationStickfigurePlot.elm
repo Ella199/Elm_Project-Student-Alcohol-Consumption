@@ -61,6 +61,115 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
 
+stylesheet : Html.Html Msg
+stylesheet =
+  let
+    styles = 
+        """
+        #stickfigure-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 1em 3em;
+            margin: -1.5em -1em 1em -1em;
+            padding: 1em; 
+            padding-top: 1.5em; 
+            background: #f8f8f8;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        #stickfigure-nav > span {
+            flex: 0 0 100%;
+        }
+
+        #stickfigure-nav > form {
+            display: flex;
+            flex: 1;
+            gap: 1em;
+        }
+
+        #stickfigure-nav > form > label {
+            flex: 0 33%;
+        }
+
+        #stickfigure-nav > form > select {
+            flex: 1;
+        }
+
+        #stickfigure-nav > form > .size-selector {
+            position: relative;
+            flex: 1;
+        }
+
+        #stickfigure-nav > form > .size-selector > input {
+            width: 100%;
+        }
+
+        #stickfigure-nav > form > .size-selector > span {
+            position: absolute;
+            top: -1.7em;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border-radius: 0.3em;
+            padding: 0.3em;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+        }
+
+        #stickfigure-nav > form > .size-selector:hover > span {
+            visibility: visible;
+            opacity: 1;
+        }
+        """
+  in
+    Html.node "style" [] [ Html.text styles ]
+
+nav : Data -> Html Msg
+nav data = Html.nav
+    [ Html.Attributes.id "stickfigure-nav" ]
+    [ Html.span [] [ Html.text "Wechseln Sie die Klassenstufe, um die Mathematik- und Portugiesisch-Noten mit den weiteren Daten in der Stickfigure-Darstellung zu erkunden. Stellen Sie die Größe der Stickfigures mit dem Regler so ein, dass eine Textur sichtbar wird." ]
+    , Html.form
+        []
+        [ Html.label [] [ Html.text "Klassenstufe:" ]
+        , Html.select
+            [ Html.Events.onInput ChangeGrade ]
+            [ Html.option
+                [ Html.Attributes.value "10"
+                , Html.Attributes.selected (data.gr == "10") ]
+                [ Html.text "10. Klasse" ]
+            , Html.option
+                [ Html.Attributes.value "11"
+                , Html.Attributes.selected (data.gr == "11") ]
+                [ Html.text "11. Klasse" ]
+            , Html.option
+                [ Html.Attributes.value "12"
+                , Html.Attributes.selected (data.gr == "12") ]
+                [ Html.text "12. Klasse" ]
+            ]
+        ]
+    , Html.form
+        []
+        [ Html.label [] [ Html.text "Stickfigure-Größe:" ]
+        , Html.div 
+            [ Html.Attributes.class "size-selector" ]
+            [ Html.input 
+                [ HA.type_ "range"
+                , HA.min "2"
+                , HA.max "15"
+                , HA.value <| String.fromFloat data.len
+                , Html.Events.onInput ChangeLen
+                ]
+                []
+            , Html.span
+                [ Html.Attributes.style "left" (String.fromFloat((data.len - 2) / (15.5 - 1.5) * 100 + 4.5) ++ "%") ]
+                [ text <| String.fromFloat data.len ]
+            ]
+        ]
+    ]
+
 
 view : Model -> Html Msg
 view model =
