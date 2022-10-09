@@ -432,7 +432,10 @@ change msg value =
         "Alkoholkonsum (Wochenende)" -> msg (.walc, "Alkoholkonsum (Wochenende)")
         _ -> msg (.dalc, "Alkoholkonsum (Wochentag)")
 
-
+nav : Data -> Html Msg
+nav data = Html.nav
+    [ Html.Attributes.id "parallel-nav" ]
+    [ Html.span [] [ Html.text "Wechseln Sie die 4 Achsen, um verschiedene Zusammenhänge in den Parallelen Koordinaten zu erkunden." ]
                
 view : Model -> Html Msg
 view model =
