@@ -54,6 +54,11 @@ type alias StudentAcoholConsumption =
     , walc : Float
     }
 
+type alias MultiDimData = 
+    { dimDescription : List String
+    , data : List (List MultiDimPoint)
+    }
+
 type Sex
     = M
     | F
@@ -61,7 +66,6 @@ type Sex
 
 type alias MultiDimPoint =
     { pointName : String, sex: Sex, value : List Float }
-
 
 main =
   Browser.element
@@ -160,7 +164,7 @@ update msg model =
 
                 _ ->
                     ( model, Cmd.none )   
-         MoveAxisUp num ->
+        MoveAxisUp num ->
             case model of
                 Success m ->
                     case num of
