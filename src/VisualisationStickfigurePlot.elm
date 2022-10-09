@@ -331,6 +331,19 @@ stud2point stud =
             |> andMap (Just stud.medu)
             |> andMap (Just stud.freetime)
             |> andMap (Just stud.absences)
+
+sexLabel : String -> String
+sexLabel sex = case sex of 
+    "M" -> "männlich"
+    "F" -> "weiblich"
+    _ -> "unbekannt"
+
+sexFlag :  String -> Sex
+sexFlag sex = case sex of 
+    "M" -> M
+    "F" -> F
+    _ -> UnknownSex
+
 pointLabel : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point 
 pointLabel sex firstperiodGradeMath secondperiodGradeMath thirdperiodGradeMath firstperiodGradePort secondperiodGradePort thirdperiodGradePort dalc walc fedu medu freetime absences= 
     Point (sex ++ " (" ++ "DailyAlcCons: " ++  String.fromFloat dalc  ++ ", " ++ "Feduc: " ++ String.fromFloat fedu ++ ", " ++ "Meduc: " ++ String.fromFloat medu ++ ", " 
