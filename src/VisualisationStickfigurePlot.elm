@@ -346,9 +346,9 @@ sexFlag sex = case sex of
 
 pointLabel : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point 
 pointLabel sex firstperiodGradeMath secondperiodGradeMath thirdperiodGradeMath firstperiodGradePort secondperiodGradePort thirdperiodGradePort dalc walc fedu medu freetime absences= 
-    Point (sex ++ " (" ++ "DailyAlcCons: " ++  String.fromFloat dalc  ++ ", " ++ "Feduc: " ++ String.fromFloat fedu ++ ", " ++ "Meduc: " ++ String.fromFloat medu ++ ", " 
-        ++ "absences: " ++ String.fromFloat freetime ++ ", " ++ "freetime: " ++ String.fromFloat absences ++ ")") 
-        (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime)
+    Point ((sexLabel sex) ++ ", " ++ "Alkohol Wochentag: " ++  String.fromFloat dalc  ++ ", " ++ "Bildung Vater: " ++ String.fromFloat fedu ++ ", " ++ "Bildung Mutter: " ++ String.fromFloat medu ++ ", " 
+        ++ "Freizeit: " ++ String.fromFloat freetime ++ "h, " ++ "Fehltage: " ++ String.fromFloat absences ++ "d") 
+        (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime) (sexFlag sex)
 xAxis : List Float -> Svg msg
 xAxis values = 
     Axis.bottom [ Axis.tickCount tickCount] (xScale values)
