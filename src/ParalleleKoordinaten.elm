@@ -699,7 +699,7 @@ view : Model -> Html Msg
 view model =
     case model of
         Error ->
-            Html.text "Unfortunately scatterplot StudentAcoholConsumption can not be open."
+            Html.text "Leider konnten die Parallelen Koordinaten zum Alkoholkonsum von Schülern nicht geladen werden."
 
         Loading ->
             Html.text "Lade  Parallelen Koordinaten zum Alkoholkonsum von Schülern..."
