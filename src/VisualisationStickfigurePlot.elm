@@ -61,6 +61,7 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
 
+
 stylesheet : Html.Html Msg
 stylesheet =
   let
@@ -127,6 +128,7 @@ stylesheet =
   in
     Html.node "style" [] [ Html.text styles ]
 
+
 nav : Data -> Html Msg
 nav data = Html.nav
     [ Html.Attributes.id "stickfigure-nav" ]
@@ -170,15 +172,18 @@ nav data = Html.nav
         ]
     ]
 
-
 view : Model -> Html Msg
 view model =
     case model of
         Error ->
-            text "I cannot open the database"
+            Html.text "Leider konnte der Stickfigure-Plot zum Alkoholkonsum von Schülern nicht geladen werden."
 
         Loading ->
-            text "Loading ..."
+            Html.span
+                []
+                [ Html.text "Lade  Stickfigure-Plot zum Alkoholkonsum von Schülern... "
+                , FontAwesome.view (FontAwesome.styled [ FontAwesome.Attributes.spin ] FontAwesome.Solid.spinner)
+                ]
 
         Success l ->
             let
@@ -188,17 +193,32 @@ view model =
                 numberStudies =
                     List.length l.data
 
-            
+            in
+                div []
+                    [ stylesheet
+                    , nav l    
+                    , p
+                        []
+                        [ text "Anzahl der dargestellten Schüler und Schülerinnen: "
+                        , text <| String.fromInt numberStudies
+                        ]
+                    , stickfigureplot filteredStud l.len l.gr
+                ]
 gr : String
 gr = "12"
-type Model
- = Error
- | Loading
- | Success
+
+
+
+type alias Data =
     { data : List StudentAcoholConsumption
     , len : Float
     , gr : String
     }
+
+type Model
+ = Error
+ | Loading
+ | Success Data
 
 
 inDegree : List Float -> List Float
@@ -231,10 +251,8 @@ type Sex
     | F
     | UnknownSex
 
-
-
 type alias Point =
-    { pointName : String, x : Float, y : Float, z : Float, a : Float, b : Float , c : Float , d : Float , e : Float , f : Float , g : Float , h : Float , i : Float } 
+    { pointName : String, x : Float, y : Float, z : Float, a : Float, b : Float , c : Float , d : Float , e : Float , f : Float , g : Float , h : Float , i : Float, sex: Sex } 
 
 type alias XYData =
     { data : List Point
@@ -332,6 +350,7 @@ stud2point stud =
             |> andMap (Just stud.freetime)
             |> andMap (Just stud.absences)
 
+
 sexLabel : String -> String
 sexLabel sex = case sex of 
     "M" -> "männlich"
@@ -349,7 +368,6 @@ pointLabel sex firstperiodGradeMath secondperiodGradeMath thirdperiodGradeMath f
     Point ((sexLabel sex) ++ ", " ++ "Alkohol Wochentag: " ++  String.fromFloat dalc  ++ ", " ++ "Bildung Vater: " ++ String.fromFloat fedu ++ ", " ++ "Bildung Mutter: " ++ String.fromFloat medu ++ ", " 
         ++ "Freizeit: " ++ String.fromFloat freetime ++ "h, " ++ "Fehltage: " ++ String.fromFloat absences ++ "d") 
         (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime) (sexFlag sex)
-        
 xAxis : List Float -> Svg msg
 xAxis values = 
     Axis.bottom [ Axis.tickCount tickCount] (xScale values)
@@ -391,7 +409,6 @@ wideExtent values =
             adding result1 (0.0)       
     in
         result2
-
 stickfigureplot : XYData -> Float -> String -> Svg msg
 stickfigureplot model len grade =
 
@@ -470,12 +487,43 @@ stickfigureplot model len grade =
     -- output als svg => scatter plot
     
     svg [ viewBox 0 0 w h, TSA.width <| TST.Percent 100, TSA.height <| TST.Percent 100 ]
-        [ style [] [ TypedSvg.Core.text """
-            .line polyline { stroke: lightBlue; fill: rgba(255, 255, 255,0.3); ; stroke-width:1; }
-            .line text { display: none; }
-            .line:hover polyline { stroke: blue; stroke-width:1.5; }
-            .line:hover text { display: inline; font-size: small }
-          """ ]       
+        [ style
+            []
+            [ TypedSvg.Core.text
+                """
+                .line polyline {
+                    stroke: #dddddd;
+                    stroke-width: 1;
+                    transition: stroke 0.15s ease;
+                }
+
+                .line.sex-male polyline {
+                    stroke: #55bfff;
+                }
+
+                .line.sex-female polyline {
+                    stroke: #ff455f;
+                }
+
+                .line text {
+                    font-size: small;
+                    font-family: "Inter Tight", sans-serif;
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: opacity 0.2s ease;
+                }
+
+                .line:hover polyline {
+                    stroke: #333333;
+                    stroke-width: 2;
+                }
+
+                .line:hover text {
+                    visibility: visible;
+                    opacity: 1;
+                }
+                """
+            ]       
     -- plot x axis    
          , g[ transform [ Translate (60) (390)]]
             [
@@ -489,9 +537,9 @@ stickfigureplot model len grade =
 
                 --, fontWeight FontWeightBold
                 ]
-                [ text (if grade == "10" then "Math10"
-                else if grade == "11" then "Math11"
-                else "Math12")] -- x -- xmts
+                [ text (if grade == "10" then "Mathematik (10. Kl.)"
+                else if grade == "11" then "Mathematik (11. Kl.)"
+                else "Mathematik (12. Kl.)")] -- x -- xmts
                 ]
     -- plot y axis             
          ,g[transform [Translate(60) (60)]]
@@ -506,9 +554,9 @@ stickfigureplot model len grade =
 
                 --, fontWeight FontWeightBold
                 ]
-                [ text (if grade == "10" then "Port10"
-                else if grade == "11" then "Port11"
-                else "Port12") ] -- y -- xmts
+                [ text (if grade == "10" then "Portugiesisch (10. Kl.)"
+                else if grade == "11" then "Portugiesisch (11. Kl.)"
+                else "Portugiesisch (12. Kl.)") ] -- y -- xmts
              ]
     -- plot points and description     
          ,g [ transform [ Translate padding padding ] ]
@@ -531,12 +579,18 @@ andMapl = List.map2 (|>)
 
 stickfigure : ContinuousScale Float -> ContinuousScale Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point -> Svg msg
 stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree zDegree xyPoint  =
-        g [ class [ "line"] ]
+        g [ class 
+            [ "line"
+            , case xyPoint.sex of
+                M -> "sex-male"
+                F -> "sex-female"
+                UnknownSex -> "sex-unknown"
+            ] ]
           [
             g  
                 [ transform [ Translate (padding) padding ]
                 ]
-                [ text_ [ x  320, y -100, textAnchor AnchorMiddle ] [ Html.text xyPoint.pointName ]
+                [ text_ [ x  350, y -100, textAnchor AnchorMiddle ] [ Html.text xyPoint.pointName ]
                 ]
             , g
                 [   transform
