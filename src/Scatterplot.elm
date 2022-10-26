@@ -432,11 +432,12 @@ scatterplot model =
 
                 .point text {
                     font-family: "Inter Tight", sans-serif;
-                    fill: #000;
+                    fill: #000000;
+                    stroke-width: 4;
                     text-shadow: 1px 1px 4px #fff, 1px -1px 4px #fff, -1px 1px 4px #fff, -1px -1px 4px #fff;
                     visibility: hidden;
                     opacity: 0;
-                    transition: opacity 0.3s ease;
+                    transition: opacity 0.s ease;
                 }
 
                 .point:hover circle {
