@@ -21,13 +21,15 @@ import FontAwesome
 import FontAwesome.Solid
 import FontAwesome.Attributes
 import Json.Decode
+import Util exposing (..)
 
 type alias Data =
     { data : List StudentAcoholConsumption
     , xFunction : StudentAcoholConsumption -> Float
     , yFunction : StudentAcoholConsumption -> Float
-    , xName : String
+    , xName : String 
     , yName : String
+    , chosendata : Maybe StudentAcoholConsumption
     }
 
 type Model
@@ -37,7 +39,7 @@ type Model
 
 
 type alias StudentAcoholConsumption =
-    { sex : String
+    { sex : Sex
     , firstperiodGradeMath : Float
     , secondperiodGradeMath : Float
     , thirdperiodGradeMath : Float
@@ -51,11 +53,9 @@ type Msg
     = GotText (Result Http.Error String)
     | ChangeX (StudentAcoholConsumption -> Float, String)
     | ChangeY (StudentAcoholConsumption -> Float, String)
+    | PointChosen StudentAcoholConsumption
 
-type Sex
-    = M
-    | F
-    | UnknownSex
+
 
 type alias Point = 
     { pointName : String, x : Float, y : Float, sex: Sex}
@@ -63,7 +63,9 @@ type alias XYData =
     { xDescription : String
     , yDescription : String
     , data : List Point
+    , chosendata : Maybe Point
     }
+
 main : Program () Model Msg
 main =
   Browser.element
@@ -105,7 +107,7 @@ csvStringToData csvR =
 decodingStudentAcoholConsumption : Csv.Decode.Decoder (StudentAcoholConsumption -> a) a
 decodingStudentAcoholConsumption =
         Csv.Decode.map StudentAcoholConsumption
-            (Csv.Decode.field "sex" Ok 
+            (Csv.Decode.field "sex" (\s -> Result.fromMaybe "sex not ok" (Just (sexFlag s)))
                 
                 |> Csv.Decode.andMap (Csv.Decode.field "firstperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "secondperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
@@ -115,6 +117,7 @@ decodingStudentAcoholConsumption =
                 |> Csv.Decode.andMap (Csv.Decode.field "thirdperiodGradePort"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "dalc"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "walc"(String.toFloat >> Result.fromMaybe "error parsing string"))
+
             )
             -- hinzufügen update : Msg
 
@@ -125,34 +128,45 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .thirdperiodGradeMath, yFunction = .dalc, xName = "Alkoholkonsum (Wochentag)", yName = "Mathematik (12. Kl.)"}, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .thirdperiodGradeMath, yFunction = .dalc, xName = "Alkoholkonsum (Wochentag)", yName = "Mathematik (12. Kl.)", chosendata = Nothing}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
         ChangeX (x, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, xFunction = x, yFunction = m.yFunction, xName = a, yName = m.yName }, Cmd.none )
+                    ( Success <| { data = m.data, xFunction = x, yFunction = m.yFunction, xName = a, yName = m.yName , chosendata = m.chosendata}, Cmd.none )
+                    --( Success <| {m.data| xFunction=x, xName=a}, Cmd.none)
 
                 _ ->
                     ( model, Cmd.none )
         ChangeY (y, a) ->
             case model of
                 Success m ->
-                    ( Success <| { data = m.data, xFunction = m.xFunction, yFunction = y, xName = m.xName, yName = a }, Cmd.none )
+                    ( Success <| { data = m.data, xFunction = m.xFunction, yFunction = y, xName = m.xName, yName = a, chosendata = m.chosendata }, Cmd.none )
 
                 _ ->
                     ( model, Cmd.none )
+        PointChosen sac ->
+            case model of
+                Success m ->
+                    ( Success <| { data = m.data, xFunction = m.xFunction, yFunction = m.yFunction, xName = m.xName, yName = m.yName, chosendata = Just sac }, Cmd.none )
+
+                _ ->
+                    ( model, Cmd.none )
+
+
 
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption
 studentAcoholConsumptionList list1 =
     List.map(\t -> csvStringToData t) list1
         |> List.concat
 
-filterReducedStudentAcoholConsumption : List StudentAcoholConsumption -> (StudentAcoholConsumption -> String) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption->Float) -> String -> String -> XYData 
+{- filterReducedStudentAcoholConsumption : List StudentAcoholConsumption -> Maybe StudentAcoholConsumption -> (StudentAcoholConsumption -> String) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption->Float) -> String -> String -> XYData 
 
-filterReducedStudentAcoholConsumption studentAcoholConsumptionsliste a b c x y =
-    XYData x y (List.map (\n -> pointName n a b c x y) studentAcoholConsumptionsliste)
+filterReducedStudentAcoholConsumption studentAcoholConsumptionsliste mchosen a b c x y =
+    XYData x y (List.map (\n -> pointName n a b c x y) studentAcoholConsumptionsliste) (Maybe.map (\n -> pointName n a b c x y ) mchosen)
+ -}
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
@@ -224,10 +238,10 @@ wideExtent values =
     in
         result2
 
-sexLabel : String -> String
+sexLabel : Sex -> String
 sexLabel sex = case sex of 
-    "M" -> "männlich"
-    "F" -> "weiblich"
+    M -> "männlich"
+    F -> "weiblich"
     _ -> "unbekannt"
 
 sexFlag :  String -> Sex
@@ -236,10 +250,10 @@ sexFlag sex = case sex of
     "F" -> F
     _ -> UnknownSex
 
-pointName : StudentAcoholConsumption -> (StudentAcoholConsumption -> String) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> String -> String -> Point
+{- pointName : StudentAcoholConsumption -> (StudentAcoholConsumption -> String) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> String -> String -> Point
 pointName studentAcoholConsumption u v x y z =
     Point (sexLabel (u studentAcoholConsumption) ++ ", " ++ y ++ ": " ++ String.fromFloat (v studentAcoholConsumption) ++ ", " ++ z ++ ": " ++ String.fromFloat (x studentAcoholConsumption)) (v studentAcoholConsumption) (x studentAcoholConsumption) (sexFlag (u studentAcoholConsumption))
-
+ -}
 point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
 point scaleX scaleY yxPoint =
     g
@@ -252,29 +266,84 @@ point scaleX scaleY yxPoint =
                     UnknownSex -> "sex-unknown"
                 ]
             ,fontSize <| Px 15.0
-            ,transform
+            {- ,transform
                 [
                     Translate
-                    (Scale.convert scaleX yxPoint.x)
-                    (Scale.convert scaleY yxPoint.y)
-                ]
+                    --(Scale.convert scaleX yxPoint.x)
+                    --(Scale.convert scaleY yxPoint.y)
+                ] -}
         ]
 
         [
-            circle [cx 0, cy 0, r 5] []
-            , text_ [x 10, y -20, textAnchor AnchorMiddle] [Html.text yxPoint.pointName]
+            circle [cx (Scale.convert scaleX yxPoint.x), cy (Scale.convert scaleY yxPoint.y), r 5] []
+            , text_ [x ((w/4)+0), y -20] [Html.text yxPoint.pointName]
         ]
 
-scatterplot : XYData -> Svg msg
+
+drawpoint : ContinuousScale Float -> ContinuousScale Float -> (StudentAcoholConsumption -> Float)->String -> (StudentAcoholConsumption -> Float) ->String -> StudentAcoholConsumption -> Svg Msg
+drawpoint scaleX scaleY xfunc xname yfunc yname sac =
+    g
+        [
+            class
+                [ "point"
+                , case sac.sex of
+                    M -> "sex-male"
+                    F -> "sex-female"
+                    UnknownSex -> "sex-unknown"
+                ]
+            ,fontSize <| Px 15.0
+            {- ,transform
+                [
+                    Translate
+                    (Scale.convert scaleX (xfunc sac))
+                    (Scale.convert scaleY (yfunc sac))
+                ] -}
+        ]
+
+        [
+            circle [cx ((Scale.convert scaleX (xfunc sac))), cy ((Scale.convert scaleY (yfunc sac))), r 5] []
+            , text_ [x ((w/4)+0), y -20] [Html.text ((sexLabel sac.sex) ++ ", " ++ xname ++ ": " ++ (String.fromFloat (xfunc sac)) ++ ", " ++ yname ++ ": " ++ (String.fromFloat (yfunc sac)))]
+        ]
+drawChosenpoint : ContinuousScale Float -> ContinuousScale Float -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> Maybe StudentAcoholConsumption -> List (Svg Msg)
+drawChosenpoint scaleX scaleY xfunc yfunc msac =
+    case msac of
+        Nothing -> []
+        Just sac -> 
+            [g
+                [
+                    class
+                        [ "cpoint"
+                        , case sac.sex of
+                            M -> "sex-male"
+                            F -> "sex-female"
+                            UnknownSex -> "sex-unknown"
+                        ]
+                    ,fontSize <| Px 15.0
+                    {- ,transform
+                        [
+                            Translate
+                            (Scale.convert scaleX (xfunc sac))
+                            (Scale.convert scaleY (yfunc sac))
+                        ] -}
+                ]
+
+                [
+                    circle [cx ((Scale.convert scaleX (xfunc sac))), cy ((Scale.convert scaleY (yfunc sac))), r 5] []
+                    , text_ [x ((w/4)+0), y -20] [Html.text ((sexLabel sac.sex) ++ ", " ++ xname ++ ": " ++ (String.fromFloat (xfunc sac)) ++ ", " ++ yname ++ ": " ++ (String.fromFloat (yfunc sac)))]
+                ]
+            ]
+
+
+scatterplot : Data -> Svg Msg
 scatterplot model =
     let
         xValues : List Float
         xValues =
-            List.map .x model.data
+            List.map model.xFunction model.data
 
         yValues : List Float
         yValues =
-            List.map .y model.data
+            List.map model.yFunction model.data
 
         xScaleLocal : ContinuousScale Float
         xScaleLocal =
@@ -302,6 +371,15 @@ scatterplot model =
                 .point circle {
                     stroke: #dddddd;
                     fill: #dddddd;
+                    stroke-width: 2;
+                    stroke-opacity: 0.3;
+                    fill-opacity: 0.05;
+                    transition: fill 0.2s ease, border 0.1s ease;
+                }
+
+                .point circle {
+                    stroke: #dddddd;
+                    fill: #FFFF00;
                     stroke-width: 2;
                     stroke-opacity: 0.3;
                     fill-opacity: 0.05;
@@ -343,23 +421,25 @@ scatterplot model =
             , text_
                 [ x (Scale.convert xScaleLocal labelPosition.x)
                 , y 35
-                 , fontFamily [ "Times New Roman" ]
+                 , fontFamily [ "Helvetica", "sans-serif" ]
                 , fontSize (px 20)
                 ]
-                [ TypedSvg.Core.text model.xDescription ]
+                [ TypedSvg.Core.text model.xName ]
             ]
         , g [ transform [ Translate 60 60 ] ]
             [ yAxis yValues
             , text_
                 [ x -30
                 , y -30
-                , fontFamily [ "Times New Roman" ]
+                , fontFamily [ "Helvetica", "sans-serif" ]
                 , fontSize (px 20)
                 ]
-                [ TypedSvg.Core.text model.yDescription ]
+                [ TypedSvg.Core.text model.yName ]
             ]
         , g [ transform [ Translate padding padding ] ]
-            (List.map (point xScaleLocal yScaleLocal) model.data)
+            ((List.map (drawpoint xScaleLocal yScaleLocal model.xFunction model.xName model.yFunction model.yName) model.data)
+            ++ (drawChosenpoint xScaleLocal yScaleLocal model.xFunction model.yFunction) model.chosendata
+            )
         ]
 
 
@@ -531,14 +611,15 @@ view model =
                 ]
 
         Success l ->
-            let
-                studentAcoholConsumption =
-                    filterReducedStudentAcoholConsumption l.data .sex l.xFunction l.yFunction l.xName l.yName
+            --let
+              --  studentAcoholConsumption : XYData
+              --  studentAcoholConsumption =
+              --      filterReducedStudentAcoholConsumption l.data .sex l.xFunction l.yFunction l.xName l.yName
 
-            in 
+            --in 
             Html.div
                 []
                 [ stylesheet
                 , nav l
-                , scatterplot studentAcoholConsumption
+                , scatterplot l
                 ]
