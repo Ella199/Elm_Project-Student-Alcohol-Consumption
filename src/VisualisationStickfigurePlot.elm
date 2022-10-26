@@ -518,7 +518,8 @@ stickfigureplot liststud mchosen len grade =
                 }
 
                 .Cline polyline {
-                    stroke: #fff57f;  ----farbe ändern für angeklicte sticks
+                    stroke: #000000; 
+                    stroke-width: 4; ----farbe ändern für angeklicte sticks
                 }
 
                 .line.sex-male polyline {
