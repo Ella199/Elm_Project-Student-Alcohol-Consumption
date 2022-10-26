@@ -11,7 +11,7 @@ import ParalleleKoordinaten
 import Scatterplot
 import Scatterplot exposing (scatterplot)
 import FontAwesome.Brands
-
+import Debug
 
 
 type alias Model =
@@ -330,21 +330,45 @@ update msg model =
     case msg of        
         ScatterplotMsg scatterplotMsg ->
             let
-                (scatterplot, scatterplotCmd) = Scatterplot.update scatterplotMsg model.scatterplotModel
+                (scatterplot, scatterplotCmd) = 
+                    Scatterplot.update scatterplotMsg model.scatterplotModel
             in
-            ( { model | scatterplotModel = scatterplot }, Cmd.map ScatterplotMsg scatterplotCmd )
+            ( { model | scatterplotModel = scatterplot }, Cmd.none )
 
         ParalleleKoordinatenMsg paralleleKoordinatenMsg ->
             let
                 (paralleleKoordinaten, paralleleKoordinatenCmd) = ParalleleKoordinaten.update paralleleKoordinatenMsg model.paralleleKoordinatenModel
             in
-            ( { model | paralleleKoordinatenModel = paralleleKoordinaten }, Cmd.map ParalleleKoordinatenMsg paralleleKoordinatenCmd )
+            ( { model | paralleleKoordinatenModel = paralleleKoordinaten }, Cmd.none )
 
         VisualisationStickfigureMsg visualisationStickfigurePlotMsg ->
             let
                 (visualisationStickfigurePlot, visualisationStickfigurePlotCmd) = VisualisationStickfigurePlot.update visualisationStickfigurePlotMsg model.visualisationStickfigurePlotModel
             in
-            ( { model | visualisationStickfigurePlotModel = visualisationStickfigurePlot }, Cmd.map VisualisationStickfigureMsg visualisationStickfigurePlotCmd )
+            ( { model | visualisationStickfigurePlotModel = visualisationStickfigurePlot }, Cmd.none )
 
         SwitchView newActitve ->
-            ( { model | active = newActitve }, Cmd.none )
+            if model.active== VisualisationStickfigure then
+                case (model.scatterplotModel, model.visualisationStickfigurePlotModel) of 
+                    (Scatterplot.Success spm, VisualisationStickfigurePlot.Success sfm) ->
+                        let 
+                            chosen = sfm.chosendata 
+                            newChosen = Maybe.map 
+                                            (\x -> {    sex=x.sex,
+                                                        firstperiodGradeMath=x.firstperiodGradeMath,
+                                                        secondperiodGradeMath=x.secondperiodGradeMath,
+                                                        thirdperiodGradeMath=x.thirdperiodGradeMath,
+                                                        firstperiodGradePort=x.firstperiodGradePort,
+                                                        secondperiodGradePort=x.secondperiodGradePort,
+                                                        thirdperiodGradePort=x.thirdperiodGradePort,
+                                                        walc=x.walc,
+                                                        dalc=x.dalc
+                                                    }) chosen
+                            newmodel = {spm|chosendata=newChosen}
+
+                        in
+                        ( { model | scatterplotModel = Scatterplot.Success newmodel , active = newActitve}, Cmd.none )
+                    _ -> 
+                        ( { model | active = newActitve }, Cmd.none )
+            else
+                ( { model | active = newActitve }, Cmd.none )
