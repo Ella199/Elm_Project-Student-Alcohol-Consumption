@@ -21,6 +21,7 @@ import FontAwesome
 import FontAwesome.Solid
 import FontAwesome.Attributes
 import Json.Decode
+import Util exposing (..)
 
 w : Float
 w =
@@ -188,7 +189,7 @@ view model =
         Success l ->
             let
                 filteredStud =
-                    filterReducedStudentAcoholConsumption l.data 
+                     l.data 
 
                 numberStudies =
                     List.length l.data
@@ -202,7 +203,7 @@ view model =
                         [ text "Anzahl der dargestellten Schüler und Schülerinnen: "
                         , text <| String.fromInt numberStudies
                         ]
-                    , stickfigureplot filteredStud l.len l.gr
+                    , stickfigureplot filteredStud l.chosendata l.len l.gr
                 ]
 gr : String
 gr = "12"
@@ -213,6 +214,7 @@ type alias Data =
     { data : List StudentAcoholConsumption
     , len : Float
     , gr : String
+    , chosendata : Maybe StudentAcoholConsumption
     }
 
 type Model
@@ -225,9 +227,13 @@ inDegree : List Float -> List Float
 inDegree listvalue =
     List.map (\x -> (180 * (x - (Maybe.withDefault 0 (List.minimum listvalue)))/(((Maybe.withDefault 10000 (List.maximum listvalue))) - ((Maybe.withDefault 0 (List.minimum listvalue)))))) listvalue 
 
+inDegree2 : Float -> (Float,Float)-> Float
+inDegree2 x (min,max) =
+    (180 * (x - ((min)))/((((max))) - (((min)))))
+
 
 type alias StudentAcoholConsumption =
-    { sex : String
+    { sex : Sex
     , firstperiodGradeMath : Float
     , secondperiodGradeMath : Float
     , thirdperiodGradeMath : Float
@@ -245,17 +251,15 @@ type Msg
     = GotText (Result Http.Error String)
     | ChangeLen (String)
     | ChangeGrade (String)
+    | PointChosen (Maybe StudentAcoholConsumption)
 
-type Sex
-    = M
-    | F
-    | UnknownSex
 
 type alias Point =
     { pointName : String, x : Float, y : Float, z : Float, a : Float, b : Float , c : Float , d : Float , e : Float , f : Float , g : Float , h : Float , i : Float, sex: Sex } 
 
 type alias XYData =
     { data : List Point
+    , chosendata : Maybe Point
     }
 getCsv : (Result Http.Error String -> Msg) -> Cmd Msg
 getCsv x = 
@@ -282,7 +286,7 @@ csvStringToData csvR =
 decodingStudentAcoholConsumption : Csv.Decode.Decoder (StudentAcoholConsumption -> a) a
 decodingStudentAcoholConsumption =
         Csv.Decode.map StudentAcoholConsumption
-            (Csv.Decode.field "sex" Ok 
+            (Csv.Decode.field "sex" (\s -> Result.fromMaybe "sex not ok" (Just (sexFlag s))) 
                 
                 |> Csv.Decode.andMap (Csv.Decode.field "firstperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
                 |> Csv.Decode.andMap (Csv.Decode.field "secondperiodGradeMath"(String.toFloat >> Result.fromMaybe "error parsing string"))
@@ -303,20 +307,28 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], len=8, gr="10" }, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], len=8, gr="10", chosendata = Nothing}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
         ChangeLen v ->
             case model of
                 Success m ->
-                    (Success <| {data = m.data, len = Maybe.withDefault 0 <| String.toFloat v, gr=m.gr}, Cmd.none)
+                    (Success <| {data = m.data, len = Maybe.withDefault 0 <| String.toFloat v, gr=m.gr, chosendata = m.chosendata}, Cmd.none)
                 _ ->
                     ( model, Cmd.none )
         ChangeGrade g ->
             case model of
                 Success m ->
-                    (Success <| {data = m.data, len = m.len, gr=g}, Cmd.none)
+                    (Success <| {data = m.data, len = m.len, gr=g, chosendata = m.chosendata}, Cmd.none)
+                _ ->
+                    ( model, Cmd.none )
+
+        PointChosen sac ->
+            case model of
+                Success m ->
+                    ( Success <| { data = m.data, chosendata = sac ,len = m.len, gr=m.gr}, Cmd.none )
+
                 _ ->
                     ( model, Cmd.none )
                    
@@ -325,11 +337,11 @@ studentAcoholConsumptionList list1 =
     List.map(\t -> csvStringToData t) list1
         |> List.concat
 
-filterReducedStudentAcoholConsumption : List StudentAcoholConsumption -> XYData 
+{- filterReducedStudentAcoholConsumption : List StudentAcoholConsumption -> XYData 
 
 filterReducedStudentAcoholConsumption my_stud =
     XYData <| List.filterMap stud2point my_stud
-
+ -}
 andMap : Maybe a -> Maybe (a -> b) -> Maybe b
 andMap = Maybe.map2 (|>)
 
@@ -351,10 +363,10 @@ stud2point stud =
             |> andMap (Just stud.absences)
 
 
-sexLabel : String -> String
+sexLabel : Sex -> String
 sexLabel sex = case sex of 
-    "M" -> "männlich"
-    "F" -> "weiblich"
+    M -> "männlich"
+    F -> "weiblich"
     _ -> "unbekannt"
 
 sexFlag :  String -> Sex
@@ -363,11 +375,11 @@ sexFlag sex = case sex of
     "F" -> F
     _ -> UnknownSex
 
-pointLabel : String -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point 
+pointLabel : Sex -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point 
 pointLabel sex firstperiodGradeMath secondperiodGradeMath thirdperiodGradeMath firstperiodGradePort secondperiodGradePort thirdperiodGradePort dalc walc fedu medu freetime absences= 
     Point ((sexLabel sex) ++ ", " ++ "Alkohol Wochentag: " ++  String.fromFloat dalc  ++ ", " ++ "Bildung Vater: " ++ String.fromFloat fedu ++ ", " ++ "Bildung Mutter: " ++ String.fromFloat medu ++ ", " 
         ++ "Freizeit: " ++ String.fromFloat freetime ++ "h, " ++ "Fehltage: " ++ String.fromFloat absences ++ "d") 
-        (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime) (sexFlag sex)
+        (secondperiodGradeMath) (firstperiodGradeMath) (thirdperiodGradeMath) (firstperiodGradePort) (secondperiodGradePort) (thirdperiodGradePort) (dalc) (walc) (medu) (fedu) (absences) (freetime) ( sex)
 xAxis : List Float -> Svg msg
 xAxis values = 
     Axis.bottom [ Axis.tickCount tickCount] (xScale values)
@@ -409,43 +421,51 @@ wideExtent values =
             adding result1 (0.0)       
     in
         result2
-stickfigureplot : XYData -> Float -> String -> Svg msg
-stickfigureplot model len grade =
+stickfigureplot : List StudentAcoholConsumption -> Maybe StudentAcoholConsumption->  Float -> String -> Svg Msg
+stickfigureplot liststud mchosen len grade =
 
  -- funktionen und parameter deklarieren
     let
+
+        xfunc =
+            case grade of
+                "10" -> .firstperiodGradeMath 
+                "11" -> .secondperiodGradeMath
+                _ -> .thirdperiodGradeMath 
+        yfunc =
+            case grade of
+                "10" -> .firstperiodGradePort 
+                "11" ->  .secondperiodGradePort 
+                _ -> .thirdperiodGradePort  
         
         xValues : List Float
         xValues =
-            case grade of
-                "10" -> List.map .x model.data 
-                "11" -> List.map .y model.data
-                _ -> List.map .z model.data 
+            List.map xfunc liststud
+
         yValues : List Float
         yValues =
-            case grade of
-                "10" -> List.map .a model.data 
-                "11" -> List.map .b model.data
-                _ -> List.map .c model.data 
+            List.map yfunc liststud
+
         uValues : List Float
         uValues =
-            List.map .i model.data --u
+            List.map .freetime liststud --u
 
         vValues : List Float
         vValues =
-            List.map .e model.data --v
+            List.map .walc liststud --v
 
         pValues : List Float
         pValues =
-            List.map .f model.data --p
+            List.map .medu liststud --p
 
         qValues : List Float
         qValues =
-            List.map .h model.data --q
+            List.map .absences liststud --q
 
         zValues : List Float
         zValues =
-            List.map .g model.data --z
+            List.map .fedu liststud --z
+
         xScaleLocal : ContinuousScale Float
         xScaleLocal =
             xScale xValues
@@ -495,6 +515,10 @@ stickfigureplot model len grade =
                     stroke: #dddddd;
                     stroke-width: 1;
                     transition: stroke 0.15s ease;
+                }
+
+                .Cline polyline {
+                    stroke: #fff57f;  ----farbe ändern für angeklicte sticks
                 }
 
                 .line.sex-male polyline {
@@ -560,28 +584,58 @@ stickfigureplot model len grade =
              ]
     -- plot points and description     
          ,g [ transform [ Translate padding padding ] ]
-            (List.map (stickfigure xScaleLocal yScaleLocal len) 
-                xValues 
+            (List.map (stickfigure xScaleLocal yScaleLocal len xfunc yfunc 
+                (Maybe.withDefault 0 (List.minimum uValues), Maybe.withDefault 1000 (List.maximum uValues)) 
+                (Maybe.withDefault 0 (List.minimum vValues), Maybe.withDefault 1000 (List.maximum vValues)) 
+                (Maybe.withDefault 0 (List.minimum pValues), Maybe.withDefault 1000 (List.maximum pValues)) 
+                (Maybe.withDefault 0 (List.minimum qValues), Maybe.withDefault 1000 (List.maximum qValues)) 
+                (Maybe.withDefault 0 (List.minimum zValues), Maybe.withDefault 1000 (List.maximum zValues)))
+            liststud
+                {- xValues 
                 |> andMapl yValues
                 |> andMapl uDegree 
                 |> andMapl vDegree 
                 |> andMapl pDegree 
                 |> andMapl qDegree 
                 |> andMapl zDegree 
-                |> andMapl model.data
+                |> andMapl model.data -}
                 
             )
             -- map data with the defined variables
+        ,g [ transform [ Translate padding padding ] ]
+            (drawChosenStickfigure xScaleLocal yScaleLocal len xfunc yfunc 
+                (Maybe.withDefault 0 (List.minimum uValues), Maybe.withDefault 1000 (List.maximum uValues)) 
+                (Maybe.withDefault 0 (List.minimum vValues), Maybe.withDefault 1000 (List.maximum vValues)) 
+                (Maybe.withDefault 0 (List.minimum pValues), Maybe.withDefault 1000 (List.maximum pValues)) 
+                (Maybe.withDefault 0 (List.minimum qValues), Maybe.withDefault 1000 (List.maximum qValues)) 
+                (Maybe.withDefault 0 (List.minimum zValues), Maybe.withDefault 1000 (List.maximum zValues))
+            mchosen)
+        
         ]
 
 andMapl : List a -> List (a -> b) -> List b
 andMapl = List.map2 (|>)
 
-stickfigure : ContinuousScale Float -> ContinuousScale Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float -> Point -> Svg msg
-stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree zDegree xyPoint  =
+stickfigure : ContinuousScale Float -> ContinuousScale Float -> Float -> (StudentAcoholConsumption->Float)->(StudentAcoholConsumption->Float)-> (Float,Float) -> (Float,Float) -> (Float,Float) -> (Float,Float) -> (Float,Float) -> StudentAcoholConsumption -> Svg Msg
+stickfigure scaleX scaleY lange xfunc yfunc   (umin,umax) (vmin,vmax) (pmin,pmax) (qmin,qmax) (zmin,zmax) sacC =
+    let
+        degf : Float -> (Float,Float) -> Float
+        degf = (\x (min,max) -> (270 - (inDegree2 x (min,max))))
+
+        uDegree = degf sacC.freetime (umin,umax)
+        
+        vDegree = degf sacC.walc (vmin,vmax)
+
+        pDegree =  degf sacC.medu (pmin,pmax)
+
+        qDegree = degf sacC.absences (qmin,qmax)
+
+        zDegree = degf sacC.fedu (zmin,zmax)
+
+    in
         g [ class 
             [ "line"
-            , case xyPoint.sex of
+            , case sacC.sex of
                 M -> "sex-male"
                 F -> "sex-female"
                 UnknownSex -> "sex-unknown"
@@ -590,14 +644,17 @@ stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree 
             g  
                 [ transform [ Translate (padding) padding ]
                 ]
-                [ text_ [ x  350, y -100, textAnchor AnchorMiddle ] [ Html.text xyPoint.pointName ]
+                [ text_ [ x  350, y -100, textAnchor AnchorMiddle ]
+                    
+                    [ Html.text ((sexLabel sacC.sex) ++ ", " ++ "Alkohol Wochentag: " ++ String.fromFloat sacC.dalc  ++ ", " ++ "Bildung Vater: " ++ String.fromFloat sacC.fedu ++ ", " ++ "Bildung Mutter: " ++ String.fromFloat sacC.medu ++ ", " ++ "Freizeit: " ++ String.fromFloat sacC.freetime ++ "h, " ++ "Fehltage: " ++ String.fromFloat sacC.absences ++ "d" ) ]
                 ]
             , g
                 [   transform
                     [ Translate
-                        (Scale.convert scaleX xValues) 
-                        (Scale.convert scaleY yValues)  
+                        (Scale.convert scaleX (xfunc sacC)) 
+                        (Scale.convert scaleY (yfunc sacC))  
                     ]
+                    ,Html.Events.onClick (PointChosen (Just sacC))
                 ]
                 
                 [ polyline
@@ -627,3 +684,117 @@ stickfigure scaleX scaleY lange xValues yValues uDegree vDegree pDegree qDegree 
           ]
 
 
+drawChosenStickfigure : ContinuousScale Float -> ContinuousScale Float -> Float -> (StudentAcoholConsumption->Float)->(StudentAcoholConsumption->Float)-> (Float,Float) -> (Float,Float) -> (Float,Float) -> (Float,Float) -> (Float,Float) -> Maybe StudentAcoholConsumption -> List (Svg Msg)
+drawChosenStickfigure scaleX scaleY lange xfunc yfunc   (umin,umax) (vmin,vmax) (pmin,pmax) (qmin,qmax) (zmin,zmax) msacC =
+    
+        case msacC of 
+        Nothing -> []
+        Just sacC ->
+            let
+                degf : Float -> (Float,Float) -> Float
+                degf = (\x (min,max) -> (270 - (inDegree2 x (min,max))))
+
+                uDegree = degf sacC.freetime (umin,umax)
+                
+                vDegree = degf sacC.walc (vmin,vmax)
+
+                pDegree =  degf sacC.medu (pmin,pmax)
+
+                qDegree = degf sacC.absences (qmin,qmax)
+
+                zDegree = degf sacC.fedu (zmin,zmax)
+
+            in        
+                [g [ class 
+                    [ "Cline"
+                    , case sacC.sex of
+                        M -> "sex-male"
+                        F -> "sex-female"
+                        UnknownSex -> "sex-unknown"
+                    ] ]
+                    [
+                    g
+                        [   transform
+                            [ Translate
+                                (Scale.convert scaleX (xfunc sacC)) 
+                                (Scale.convert scaleY (yfunc sacC)) 
+                                 
+                            ]
+                            ,Html.Events.onClick (PointChosen (Nothing))
+                        ]
+                        
+                        [ polyline
+                                [ TSA.points [ ( lange/2*cos(degrees uDegree), lange/2*sin(degrees uDegree) ), ( -lange/2*cos(degrees uDegree), -lange/2*sin(degrees uDegree)) ]
+                                ]
+                                []
+                        , polyline
+                                [ TSA.points [ ( (-lange/2)*cos(degrees uDegree), (-lange/2)*sin(degrees uDegree) ), ( (-lange/2)*cos(degrees uDegree) + lange*cos(degrees vDegree), -lange/2*sin(degrees uDegree) - lange*sin(degrees vDegree) ) ]
+                                ]
+                                []
+
+                        , polyline
+                                [ TSA.points [ ( (-lange/2)*cos(degrees uDegree), (-lange/2)*sin(degrees uDegree) ), ( -lange/2*cos(degrees uDegree) - lange*cos(degrees pDegree), -lange/2*sin(degrees uDegree) - lange*sin(degrees pDegree) ) ]
+                                ]
+                                []
+
+                        , polyline
+                                [ TSA.points [ ( lange/2*cos(degrees uDegree), lange/2*sin(degrees uDegree) ), ( lange/2*cos(degrees uDegree) + lange*cos(degrees qDegree), lange/2*sin(degrees uDegree) + lange*sin(degrees qDegree) ) ]
+                                ]
+                                []
+                            
+                        , polyline
+                                [ TSA.points [ ( lange/2*cos(degrees uDegree), lange/2*sin(degrees uDegree) ), ( lange/2*cos(degrees uDegree) - lange*cos(degrees zDegree), lange/2*sin(degrees uDegree) + lange*sin(degrees zDegree) ) ]
+                                ]
+                                []
+                        ]
+                    ]
+                ]
+
+{- drawChosenpoint : ContinuousScale Float -> ContinuousScale Float -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> Maybe StudentAcoholConsumption -> List (Svg Msg)
+drawChosenpoint scaleX scaleY xfunc yfunc msac =
+    case msac of
+        Nothing -> []
+        Just sac -> 
+            [g
+                [
+                    class
+                        [ "cpoint"
+                        , case sac.sex of
+                            M -> "sex-male"
+                            F -> "sex-female"
+                            UnknownSex -> "sex-unknown"
+                        ]
+                    ,fontSize <| Px 15.0
+                    ,transform
+                        [
+                            Translate
+                            (Scale.convert scaleX (xfunc sac))
+                            (Scale.convert scaleY (yfunc sac))
+                        ]
+                ]
+
+                [ polyline
+                        [ TSA.points [ ( lange/2*cos(degrees uDegree), lange/2*sin(degrees uDegree) ), ( -lange/2*cos(degrees uDegree), -lange/2*sin(degrees uDegree)) ]
+                        ]
+                        []
+                , polyline
+                        [ TSA.points [ ( (-lange/2)*cos(degrees uDegree), (-lange/2)*sin(degrees uDegree) ), ( (-lange/2)*cos(degrees uDegree) + lange*cos(degrees vDegree), -lange/2*sin(degrees uDegree) - lange*sin(degrees vDegree) ) ]
+                        ]
+                        []
+
+                , polyline
+                        [ TSA.points [ ( (-lange/2)*cos(degrees uDegree), (-lange/2)*sin(degrees uDegree) ), ( -lange/2*cos(degrees uDegree) - lange*cos(degrees pDegree), -lange/2*sin(degrees uDegree) - lange*sin(degrees pDegree) ) ]
+                        ]
+                        []
+
+                , polyline
+                        [ TSA.points [ ( lange/2*cos(degrees uDegree), lange/2*sin(degrees uDegree) ), ( lange/2*cos(degrees uDegree) + lange*cos(degrees qDegree), lange/2*sin(degrees uDegree) + lange*sin(degrees qDegree) ) ]
+                        ]
+                        []
+                    
+                , polyline
+                        [ TSA.points [ ( lange/2*cos(degrees uDegree), lange/2*sin(degrees uDegree) ), ( lange/2*cos(degrees uDegree) - lange*cos(degrees zDegree), lange/2*sin(degrees uDegree) + lange*sin(degrees zDegree) ) ]
+                        ]
+                        []
+                ]
+            ] -}
