@@ -239,99 +239,133 @@ wideExtent values =
         result2
 
 sexLabel : Sex -> String
-sexLabel sex = case sex of 
-    M -> "männlich"
-    F -> "weiblich"
-    _ -> "unbekannt"
+sexLabel sex =
+    case sex of
+        M ->
+            "männlich"
 
-sexFlag :  String -> Sex
-sexFlag sex = case sex of 
-    "M" -> M
-    "F" -> F
-    _ -> UnknownSex
+        F ->
+            "weiblich"
+
+        _ ->
+            "unbekannt"
+
+
+sexFlag : String -> Sex
+sexFlag sex =
+    case sex of
+        "M" ->
+            M
+
+        "F" ->
+            F
+
+        _ ->
+            UnknownSex
+
+
 
 {- pointName : StudentAcoholConsumption -> (StudentAcoholConsumption -> String) -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> String -> String -> Point
-pointName studentAcoholConsumption u v x y z =
-    Point (sexLabel (u studentAcoholConsumption) ++ ", " ++ y ++ ": " ++ String.fromFloat (v studentAcoholConsumption) ++ ", " ++ z ++ ": " ++ String.fromFloat (x studentAcoholConsumption)) (v studentAcoholConsumption) (x studentAcoholConsumption) (sexFlag (u studentAcoholConsumption))
- -}
+   pointName studentAcoholConsumption u v x y z =
+       Point (sexLabel (u studentAcoholConsumption) ++ ", " ++ y ++ ": " ++ String.fromFloat (v studentAcoholConsumption) ++ ", " ++ z ++ ": " ++ String.fromFloat (x studentAcoholConsumption)) (v studentAcoholConsumption) (x studentAcoholConsumption) (sexFlag (u studentAcoholConsumption))
+-}
+
+
 point : ContinuousScale Float -> ContinuousScale Float -> Point -> Svg msg
 point scaleX scaleY yxPoint =
     g
-        [
-            class
-                [ "point"
-                , case yxPoint.sex of
-                    M -> "sex-male"
-                    F -> "sex-female"
-                    UnknownSex -> "sex-unknown"
-                ]
-            ,fontSize <| Px 15.0
-            {- ,transform
-                [
-                    Translate
-                    --(Scale.convert scaleX yxPoint.x)
-                    --(Scale.convert scaleY yxPoint.y)
-                ] -}
+        [ class
+            [ "point"
+            , case yxPoint.sex of
+                M ->
+                    "sex-male"
+
+                F ->
+                    "sex-female"
+
+                UnknownSex ->
+                    "sex-unknown"
+            ]
+        , fontSize <| Px 15.0
+
+        {- ,transform
+           [
+               Translate
+               --(Scale.convert scaleX yxPoint.x)
+               --(Scale.convert scaleY yxPoint.y)
+           ]
+        -}
+        ]
+        [ circle [ cx (Scale.convert scaleX yxPoint.x), cy (Scale.convert scaleY yxPoint.y), r 5 ] []
+        , text_ [ x ((w / 4) + 0), y -20 ] [ Html.text yxPoint.pointName ]
         ]
 
-        [
-            circle [cx (Scale.convert scaleX yxPoint.x), cy (Scale.convert scaleY yxPoint.y), r 5] []
-            , text_ [x ((w/4)+0), y -20] [Html.text yxPoint.pointName]
-        ]
 
-
-drawpoint : ContinuousScale Float -> ContinuousScale Float -> (StudentAcoholConsumption -> Float)->String -> (StudentAcoholConsumption -> Float) ->String -> StudentAcoholConsumption -> Svg Msg
+drawpoint : ContinuousScale Float -> ContinuousScale Float -> (StudentAcoholConsumption -> Float) -> String -> (StudentAcoholConsumption -> Float) -> String -> StudentAcoholConsumption -> Svg Msg
 drawpoint scaleX scaleY xfunc xname yfunc yname sac =
     g
-        [
-            class
-                [ "point"
-                , case sac.sex of
-                    M -> "sex-male"
-                    F -> "sex-female"
-                    UnknownSex -> "sex-unknown"
-                ]
-            ,fontSize <| Px 15.0
-            {- ,transform
-                [
-                    Translate
-                    (Scale.convert scaleX (xfunc sac))
-                    (Scale.convert scaleY (yfunc sac))
-                ] -}
+        [ class
+            [ "point"
+            , case sac.sex of
+                M ->
+                    "sex-male"
+
+                F ->
+                    "sex-female"
+
+                UnknownSex ->
+                    "sex-unknown"
+            ]
+        , fontSize <| Px 15.0
+
+        {- ,transform
+           [
+               Translate
+               (Scale.convert scaleX (xfunc sac))
+               (Scale.convert scaleY (yfunc sac))
+           ]
+        -}
+        ]
+        [ circle [ cx (Scale.convert scaleX (xfunc sac)), cy (Scale.convert scaleY (yfunc sac)), r 5 ] []
+        , text_ [ x ((w / 4) + 0), y -20 ] [ Html.text (sexLabel sac.sex ++ ", " ++ xname ++ ": " ++ String.fromFloat (xfunc sac) ++ ", " ++ yname ++ ": " ++ String.fromFloat (yfunc sac)) ]
         ]
 
-        [
-            circle [cx ((Scale.convert scaleX (xfunc sac))), cy ((Scale.convert scaleY (yfunc sac))), r 5] []
-            , text_ [x ((w/4)+0), y -20] [Html.text ((sexLabel sac.sex) ++ ", " ++ xname ++ ": " ++ (String.fromFloat (xfunc sac)) ++ ", " ++ yname ++ ": " ++ (String.fromFloat (yfunc sac)))]
-        ]
-drawChosenpoint : ContinuousScale Float -> ContinuousScale Float -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> Maybe StudentAcoholConsumption -> List (Svg Msg)
-drawChosenpoint scaleX scaleY xfunc yfunc msac =
+
+drawChosenpoint : ContinuousScale Float -> ContinuousScale Float -> (StudentAcoholConsumption -> Float) -> (StudentAcoholConsumption -> Float) -> Maybe StudentAcoholConsumption -> String -> String -> List (Svg Msg)
+drawChosenpoint scaleX scaleY xfunc yfunc msac xname yname =
     case msac of
-        Nothing -> []
-        Just sac -> 
-            [g
-                [
-                    class
-                        [ "cpoint"
-                        , case sac.sex of
-                            M -> "sex-male"
-                            F -> "sex-female"
-                            UnknownSex -> "sex-unknown"
-                        ]
-                    ,fontSize <| Px 15.0
-                    {- ,transform
-                        [
-                            Translate
-                            (Scale.convert scaleX (xfunc sac))
-                            (Scale.convert scaleY (yfunc sac))
-                        ] -}
-                ]
+        Nothing ->
+            []
 
-                [
-                    circle [cx ((Scale.convert scaleX (xfunc sac))), cy ((Scale.convert scaleY (yfunc sac))), r 5] []
-                    , text_ [x ((w/4)+0), y -20] [Html.text ((sexLabel sac.sex) ++ ", " ++ xname ++ ": " ++ (String.fromFloat (xfunc sac)) ++ ", " ++ yname ++ ": " ++ (String.fromFloat (yfunc sac)))]
+        Just sac ->
+            [ g
+                [ class
+                    [ "cpoint"
+                    , case sac.sex of
+                        M ->
+                            "sex-male"
+
+                        F ->
+                            "sex-female"
+
+                        UnknownSex ->
+                            "sex-unknown"
+                    ]
+                , fontSize <| Px 15.0
+
+                {- ,transform
+                   [
+                       Translate
+                       (Scale.convert scaleX (xfunc sac))
+                       (Scale.convert scaleY (yfunc sac))
+                   ]
+                -}
+                ]
+                [ circle [ cx (Scale.convert scaleX (xfunc sac)), cy (Scale.convert scaleY (yfunc sac)), r 5 ] []
+                , text_ [ x ((w / 4) + 0), y -20 ] [] --[ Html.text (sexLabel sac.sex ++ ", " ++ xname ++ ": " ++ String.fromFloat (xfunc sac) ++ ", " ++ yname ++ ": " ++ String.fromFloat (yfunc sac)) ]
                 ]
             ]
+
 
 
 scatterplot : Data -> Svg Msg
@@ -421,7 +455,7 @@ scatterplot model =
             , text_
                 [ x (Scale.convert xScaleLocal labelPosition.x)
                 , y 35
-                 , fontFamily [ "Helvetica", "sans-serif" ]
+                , fontFamily [ "Helvetica", "sans-serif" ]
                 , fontSize (px 20)
                 ]
                 [ TypedSvg.Core.text model.xName ]
@@ -437,10 +471,11 @@ scatterplot model =
                 [ TypedSvg.Core.text model.yName ]
             ]
         , g [ transform [ Translate padding padding ] ]
-            ((List.map (drawpoint xScaleLocal yScaleLocal model.xFunction model.xName model.yFunction model.yName) model.data)
-            ++ (drawChosenpoint xScaleLocal yScaleLocal model.xFunction model.yFunction) model.chosendata
+            (drawChosenpoint xScaleLocal yScaleLocal model.xFunction model.yFunction model.chosendata model.xName model.yName
+                ++ List.map (drawpoint xScaleLocal yScaleLocal model.xFunction model.xName model.yFunction model.yName) model.data
             )
         ]
+
 
 
 stylesheet : Html.Html Msg
