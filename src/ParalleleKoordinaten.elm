@@ -177,7 +177,7 @@ update msg model =
                         _ ->
                             ( model, Cmd.none )     
                 _ ->
-                    ( model, Cmd.none ) 
+                    ( model, Cmd.none )     
 
 studentAcoholConsumptionList :List String -> List StudentAcoholConsumption    
 studentAcoholConsumptionList list1 =
@@ -365,6 +365,8 @@ parallelCoordinatesPlot w ar model =
                                 (List.map (\a -> drawPoint a.value a.pointName a.sex model.dimDescription) dataset)
                         )
                )
+
+
 stylesheet : Html.Html Msg
 stylesheet =
   let
@@ -435,6 +437,7 @@ change msg value =
         "Alkoholkonsum (Wochentag)" -> msg (.dalc, "Alkoholkonsum (Wochentag)")
         "Alkoholkonsum (Wochenende)" -> msg (.walc, "Alkoholkonsum (Wochenende)")
         _ -> msg (.dalc, "Alkoholkonsum (Wochentag)")
+
 
 nav : Data -> Html Msg
 nav data = Html.nav
@@ -623,7 +626,6 @@ nav data = Html.nav
                 ]
             ]
         ]
-
     , Html.form
         []
         [ Html.label [] [ Html.text "4. Achse:" ]
@@ -686,6 +688,7 @@ nav data = Html.nav
             ]
         ]
     ]
+
 sexLabel : String -> String
 sexLabel sex = case sex of 
     "M" -> "männlich"
@@ -697,8 +700,7 @@ sexFlag sex = case sex of
     "M" -> M
     "F" -> F
     _ -> UnknownSex
-
-
+               
 view : Model -> Html Msg
 view model =
     case model of
@@ -706,7 +708,11 @@ view model =
             Html.text "Leider konnten die Parallelen Koordinaten zum Alkoholkonsum von Schülern nicht geladen werden."
 
         Loading ->
-            Html.text "Lade  Parallelen Koordinaten zum Alkoholkonsum von Schülern..."
+            Html.span
+                []
+                [ Html.text "Lade  Parallelen Koordinaten zum Alkoholkonsum von Schülern... "
+                , FontAwesome.view (FontAwesome.styled [ FontAwesome.Attributes.spin ] FontAwesome.Solid.spinner)
+                ]
 
         Success l ->
                     let
@@ -730,4 +736,3 @@ view model =
                         , nav l
                         , parallelCoordinatesPlot 600 2 plotData
                         ]
-
