@@ -10,7 +10,7 @@ In diesem Projekt wurden folgende Programmiersprachen verwendet: ELM, Java Scrip
 # Elm-Pakete 
 Um das Projekt starten zu können werden folgende Pakete benötigt: 
 "avh4/elm-color": "1.0.0",
-            "elm/browser": "1.0.2",
+"elm/browser": "1.0.2",
             "elm/core": "1.0.5",
             "elm/html": "1.0.0",
             "elm/http": "2.0.0",
@@ -23,5 +23,5 @@ Um das Projekt starten zu können werden folgende Pakete benötigt:
             "gampleman/elm-visualization": "2.3.0",
             "lattyware/elm-fontawesome": "6.0.0",
             "lovasoa/elm-csv": "1.1.7"
-# Anschauen der HTML-Webseite:
+# Anschauen der HTML-Webseite
 unter den folgenden Link finden Sie die verscheidenen Visualaisierungstechniken: file:///Users/arselaleskaj/Documents/GitHub/Elm_Project-Student-Alcohol-Consumption/index.html
