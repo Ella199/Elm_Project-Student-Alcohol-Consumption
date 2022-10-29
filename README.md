@@ -9,8 +9,8 @@ Mithilfe dieser Projektarbeit können mögliche Fragen, die das Interesse der an
 In diesem Projekt wurden folgende Programmiersprachen verwendet: ELM, Java Script,HTML, CSS und Python
 # Elm-Pakete 
 Um das Projekt starten zu können werden folgende Pakete benötigt: 
-"avh4/elm-color": "1.0.0",
-"elm/browser": "1.0.2",
+"avh4/elm-color": "1.0.0"
+"elm/browser": "1.0.2"
             "elm/core": "1.0.5",
             "elm/html": "1.0.0",
             "elm/http": "2.0.0",
