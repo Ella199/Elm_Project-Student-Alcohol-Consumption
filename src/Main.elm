@@ -249,10 +249,18 @@ body model =
                         [] 
                         [ Html.text "Herzlich wilkommen!"
                         , Html.br [] []
-                        , Html.text "Kleine Einführung in die Möglichkeiten der Visualisierung..."
                         , Html.br [] []
-                        , Html.text "Was haben wir für Daten verwendet?"
+                        , Html.br [] []
+                        , Html.text "Kleine Einführung in Untersuchung des Einflusses von Alkohol auf Schüler mithilfe verschiedener Visualisierungstechniken"
+                        , Html.br [] []
+                        , Html.text "Was haben wir für Daten verwendet? "
+                        , Html.br [] []
+                        , Html.br [] []
+                        , Html.text "---> Sowohl den Quellcode als auch die verwendeten Daten, finden Sie rechts unten. "
                         ]
+
+                        
+                        
                     , Html.p [] [ Html.text "Wählen Sie nun eine unserer Visualisierungen:" ]
                     , Html.nav
                         [ Html.Attributes.id "start-screen-nav" ]
