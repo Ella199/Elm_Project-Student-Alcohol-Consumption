@@ -261,7 +261,7 @@ body model =
 
                         
                         
-                    , Html.p [] [ Html.text "Wählen Sie nun eine unserer Visualisierungen:" ]
+                    , Html.p [] [ Html.text "Wählen Sie nun eine der Visualisierungen:" ]
                     , Html.nav
                         [ Html.Attributes.id "start-screen-nav" ]
                         [ Html.button
