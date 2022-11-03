@@ -47,12 +47,12 @@ Um das Elm Projekt im Laufen zu bringen muss der Terminalbefehl elm reactor im V
 
 Im Anschluss daran können die verscheidene Visualisierungen im Browser unter dem Link http://localhost:8000 gesehen werden.
 
-Die Webseite für die Visualisierungen wurde mithilfe des Terminalbefehls Elm make src/Main.elm ausgeführt werden.
+Die Webseite für die Visualisierungen wurde mithilfe des Terminalbefehls Elm make src/Main.elm ausgeführt.
 
 ## Anschauen der HTML-Webseite
 
 unter den folgenden Link finden Sie die verscheidenen Visualaisierungstechniken: 
-https:GitHub/Elm_Project-Student-Alcohol-Consumption/
+http:GitHub/Elm_Project-Student-Alcohol-Consumption/
 
 ## Abkürzungen
 
