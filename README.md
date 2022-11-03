@@ -8,9 +8,11 @@ Im Rahmen dieser Arbeit sind drei potenzielle Zielgruppen denkbar:
 
 Data Science-Unternehmen, Schuldirektoren und die Forschung.
 
-- Mithilfe dieser Projektarbeit können mögliche Fragen, die das Interesse der angesprochenen Zielgruppen zu diesem Thema entsprechen, beantwortet werden.
+Mithilfe dieser Projektarbeit können mögliche Fragen, die das Interesse der angesprochenen Zielgruppen zu diesem Thema entsprechen, beantwortet werden.
 
-- Die Projektarbeit beschäftigt sich mit folgenden Fragen: Werden die Abschlussnoten von den früheren erreichten Noten aus der zehnten und elften Klasse beeinflusst?
+Die Projektarbeit beschäftigt sich mit folgenden Fragen: 
+
+- Werden die Abschlussnoten von den früheren erreichten Noten aus der zehnten und elften Klasse beeinflusst?
 
 - Inwieweit beeinträchtigt der Alkoholkonsum die erreichten Schulnoten der zehnten, elften und zwölften Klasse in den Fächern Mathematik und Portugiesisch?
 
