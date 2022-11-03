@@ -411,13 +411,10 @@ scatterplot model =
                     transition: fill 0.2s ease, border 0.1s ease;
                 }
 
-                .point circle {
-                    stroke: #dddddd;
-                    fill: #FFFF00;
-                    stroke-width: 2;
-                    stroke-opacity: 0.3;
-                    fill-opacity: 0.05;
-                    transition: fill 0.2s ease, border 0.1s ease;
+                .Cpoint circle {
+                    stroke: #000000;
+                    fill: #000000;
+                    stroke-width: 0;
                 }
 
                 .point.sex-male circle {
