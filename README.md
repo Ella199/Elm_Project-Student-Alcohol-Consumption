@@ -4,17 +4,21 @@ Untersuchung des Einflusses von Alkohol auf Schüler mithilfe verschiedener Visu
 # Einführung 
 Für die bereits erwähnten Visualisierungstechniken werden Daten aus der Online-Plattform Kaggle  entnommen.
 
-Im Rahmen dieser Arbeit sind drei potenzielle Zielgruppen denkbar: Data Science-Unternehmen, Schuldirektoren und die Forschung.
+Im Rahmen dieser Arbeit sind drei potenzielle Zielgruppen denkbar: 
 
-Mithilfe dieser Projektarbeit können mögliche Fragen, die das Interesse der angesprochenen Zielgruppen zu diesem Thema entsprechen, beantwortet werden.
+Data Science-Unternehmen, Schuldirektoren und die Forschung.
 
-Die Projektarbeit beschäftigt sich mit folgenden Fragen: Werden die Abschlussnoten von den früheren erreichten Noten aus der zehnten und elften Klasse beeinflusst?
+- Mithilfe dieser Projektarbeit können mögliche Fragen, die das Interesse der angesprochenen Zielgruppen zu diesem Thema entsprechen, beantwortet werden.
 
-Inwieweit beeinträchtigt der Alkoholkonsum die erreichten Schulnoten der zehnten, elften und zwölften Klasse in den Fächern Mathematik und Portugiesisch?
+- Die Projektarbeit beschäftigt sich mit folgenden Fragen: Werden die Abschlussnoten von den früheren erreichten Noten aus der zehnten und elften Klasse beeinflusst?
 
-Welche Noten erreichen die Schüler bezogen auf das Ausmaß ihres Alkoholkonsums? 
+- Inwieweit beeinträchtigt der Alkoholkonsum die erreichten Schulnoten der zehnten, elften und zwölften Klasse in den Fächern Mathematik und Portugiesisch?
 
-Wie kann eine Kombination des Alkoholkonsums mit demographischen und soziablen Variablen die Schülerleistung beeinflussen? Wie sehen die geschlechtsspezifischen Unterschiede hinsichtlich des Zusammenhangs von Alkoholkonsum und der Abschlussnoten aus?
+- Welche Noten erreichen die Schüler bezogen auf das Ausmaß ihres Alkoholkonsums? 
+
+- Wie kann eine Kombination des Alkoholkonsums mit demographischen und soziablen Variablen die Schülerleistung beeinflussen? 
+
+- Wie sehen die geschlechtsspezifischen Unterschiede hinsichtlich des Zusammenhangs von Alkoholkonsum und der Abschlussnoten aus?
 
 # Technologien
 In diesem Projekt wurden folgende Programmiersprachen verwendet: ELM, Java Script,HTML, CSS und Python
