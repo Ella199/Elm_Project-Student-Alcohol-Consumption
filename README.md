@@ -40,8 +40,32 @@ Um das Projekt starten zu können werden folgende Pakete benötigt:
 - "gampleman/elm-visualization": "2.3.0",
 - "lattyware/elm-fontawesome": "6.0.0",
 - "lovasoa/elm-csv": "1.1.7"
+
+## ELM Code
+
+Um das Elm Projekt im Laufen zu bringen muss der Terminalbefehl elm reactor im VSC eigegeben werden. 
+
+Im Anschluss daran können die verscheidene Visualisierungen im Browser unter dem Link http://localhost:8000 gesehen werden.
+
+Die Webseite für die Visualisierungen wurde mithilfe des Terminalbefehls Elm make src/Main.elm ausgeführt werden.
+
 ## Anschauen der HTML-Webseite
+
 unter den folgenden Link finden Sie die verscheidenen Visualaisierungstechniken: 
-https://file:///Users/arselaleskaj/Documents/GitHub/Elm_Project-Student-Alcohol-Consumption/index.html"
+https:GitHub/Elm_Project-Student-Alcohol-Consumption/
+
+## Abkürzungen
+
+kl.steht für Klasse
+
+Fehltage steht für Fehltage in der Schule, wobei 2d für 2 Tage steht
+
+Freizeit steht für Freizeit nach der Schule, wobei 2h für 2 Stunden steht
+
+Bildung Vater und Mutter steht für das Bildungsniveau der Eltern
+
+Bildungsniveau: (numerisch: 0 - keine, 1 - Grundschulbildung (4. Klasse), 2 - 5. bis 9. Klasse, 3 - Sekundarschulbildung oder 4 - Hochschulbildung)
+
+Alkohol Wochentag/Wochenende steht für das Alkoholkonsum
 
 
