@@ -23,7 +23,7 @@ Die Projektarbeit beschäftigt sich mit folgenden Fragen:
 - Wie sehen die geschlechtsspezifischen Unterschiede hinsichtlich des Zusammenhangs von Alkoholkonsum und der Abschlussnoten aus?
 
 ## Technologien
-In diesem Projekt wurden folgende Programmiersprachen verwendet: ELM, Java Script,HTML, CSS und Python
+In diesem Projekt wurden folgende Programmiersprachen verwendet: ELM, Java Script, HTML, CSS, SVG und Python
 ## Elm-Pakete 
 Um das Projekt starten zu können werden folgende Pakete benötigt: 
 - "avh4/elm-color": "1.0.0",
@@ -51,7 +51,7 @@ Die Webseite für die Visualisierungen wurde mithilfe des Terminalbefehls Elm ma
 
 ## Anschauen der HTML-Webseite
 
-unter den folgenden Link finden Sie die verscheidenen Visualaisierungstechniken: 
+unter den folgenden Link finden Sie die verscheidenen Visualisierungstechniken: 
 <a href="https://file:///Users/arselaleskaj/Documents/GitHub/Elm_Project-Student-Alcohol-Consumption/Webseite/index.html"</a>
 
 ## Abkürzungen
