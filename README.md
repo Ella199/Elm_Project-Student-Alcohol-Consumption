@@ -51,7 +51,7 @@ Die Webseite für die Visualisierungen wurde mithilfe des Terminalbefehls Elm ma
 
 ## Anschauen der HTML-Webseite
 
-unter den folgenden Link finden Sie die verscheidenen Visualisierungstechniken: 
+https://ella199.github.io/Elm_Project-Student-Alcohol-Consumption/ 
 
 
 ## Abkürzungen
