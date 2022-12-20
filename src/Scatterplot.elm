@@ -128,7 +128,7 @@ update msg model =
         GotText result ->
             case result of
                 Ok fullText ->
-                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .thirdperiodGradeMath, yFunction = .dalc, xName = "Alkoholkonsum (Wochentag)", yName = "Mathematik (12. Kl.)", chosendata = Nothing}, Cmd.none )
+                    ( Success <| { data = studentAcoholConsumptionList [ fullText ], xFunction = .thirdperiodGradeMath, yFunction = .dalc, xName = "Mathematik (12. Kl.)", yName = "Alkoholkonsum (Wochentag)", chosendata = Nothing}, Cmd.none )
 
                 Err _ ->
                     ( model, Cmd.none )
